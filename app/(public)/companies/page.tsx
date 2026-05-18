@@ -196,9 +196,10 @@ function CompanyCard({ company }: { company: CompanyCardData }) {
     <div className="flex h-full flex-col rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-3 sm:p-5 backdrop-blur-xl transition hover:border-cyan-500/30">
       <div className="flex items-start gap-3">
         <Image
-          src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-            company?.name ?? ''
-          )}`}
+          // src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
+          //   company?.name ?? ''
+          // )}`}
+          src={company?.logo || ""}
           alt={company?.name ?? 'Company logo'}
           width={44}
           height={44}

@@ -51,13 +51,14 @@ const HiringCompanies = () => {
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center">
                     <Image
-                      src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(company.name)}`}
+                      src={company.logo}
                       alt={company.name}
                       width={40}
                       height={40}
                       placeholder="blur"
                       blurDataURL="/placeholders/company-blur.jpg"
                       className="w-8 h-8"
+                      unoptimized
                     />
                   </div>
 

@@ -180,13 +180,14 @@ export default async function JobDetailPage({
           >
             <div className="flex items-center gap-4 mb-6">
               <Image
-                src={`https://api.dicebear.com/7.x/identicon/svg?seed=${company.name}`}
+                src={company.logo}
                 alt={company.name}
                 width={56}
                 height={56}
                 placeholder="blur"
                 blurDataURL="/placeholders/company-blur.jpg"
                 className="rounded-2xl bg-zinc-800 p-2"
+                unoptimized
               />
 
               <div className="min-w-0">

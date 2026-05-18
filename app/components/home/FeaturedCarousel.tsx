@@ -47,7 +47,7 @@ const FeaturedCarousel = () => {
         <div className="relative group">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
-              {featuredJobs.map((job, index) => {
+              {featuredJobs.map((job) => {
                 const company = companies.find((c) => c.id === job.companyId);
                 
                 return (
@@ -71,17 +71,16 @@ const FeaturedCarousel = () => {
 
                           <div className="flex items-center gap-3">
                             <Image
-                              src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(company?.name ?? "")}`}
+                              src={company?.logo || ""}
                               alt={company?.name ?? "Company logo"}
                               width={40}
                               height={40}
-                              // sizes="40px"
                               sizes="(max-width: 640px) 40px, 40px"
-                              // priority={index < 3}
                               priority={job.id === featuredJobs[0].id}
                               placeholder="blur"
                               blurDataURL="/placeholders/company-blur.jpg"
                               className="w-10 h-10 rounded bg-zinc-800 p-1"
+                              unoptimized
                             />
 
                             <div>

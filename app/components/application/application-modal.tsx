@@ -123,7 +123,7 @@ const ApplicationModal = ({ jobTitle, jobId }: ApplicationModalProps) => {
       jobId,
       jobTitle,
       companyName: 'TechHire Partner',
-      companyLogo: '/images/company-logo.jpg',
+      companyLogo: '/images/company-logo.png',
       appliedAt: new Date().toISOString(),
       status: 'Applied',
       nextStep: 'Await recruiter review',

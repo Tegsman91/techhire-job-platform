@@ -314,7 +314,9 @@ const reviewTexts = [
 export const companies: Company[] = Array.from({ length: 50 }).map((_, i) => ({
   id: `company-${i + 1}`,
   name: `TechCorp ${i + 1}`,
-  logo: `/images/company-logos/logo-${(i % 10) + 1}.png`,
+  logo: `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
+    `TechCorp ${i + 1}`
+  )}`,
   description: "Innovative tech company building future solutions.",
   culture: "Remote-first, async communication, engineering-driven.",
   website: `https://techcorp${i + 1}.com`,

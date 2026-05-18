@@ -33,7 +33,7 @@ const JobCard = ({
     companies.find((c) => c.id === job.companyId) ?? {
       id: 'unknown',
       name: 'Unknown Company',
-      logoUrl: '',
+      logo: '',
     };
   const isSaved = savedJobs.includes(job.id);
 
@@ -77,9 +77,7 @@ const JobCard = ({
             {/* LEFT / LOGO + BADGES */}
             <div className="flex items-start gap-2 shrink-0">
               <Image
-                src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-                  company.name
-                )}`}
+                src={company.logo}
                 alt={company.name}
                 width={56}
                 height={56}
@@ -88,6 +86,7 @@ const JobCard = ({
                 placeholder="blur"
                 blurDataURL="/placeholders/company-blur.jpg"
                 className="rounded-xl bg-zinc-800 p-2"
+                unoptimized
               />
 
               {(job.featured || job.urgent) && (
