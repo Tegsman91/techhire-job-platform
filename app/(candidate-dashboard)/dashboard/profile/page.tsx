@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState, } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Cropper from 'react-easy-crop';
@@ -11,6 +11,7 @@ import { CandidateProfile, useCandidateProfileStore, } from '@/lib/store';
 import Image from 'next/image';
 import { UseFormRegisterReturn, } from 'react-hook-form';
 import Checkbox from '@/app/components/ui/Checkbox';
+import CustomSelect from '@/app/components/ui/Select';
 
 type FormValues = z.infer<typeof schema> &
   CandidateProfile;
@@ -142,6 +143,7 @@ const ProfilePage = () => {
     handleSubmit,
     setValue,
     watch,
+    control,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -374,29 +376,38 @@ const completion = useMemo(() => {
                     {bio?.length || 0}/500
                   </div>
                 </div>
-
-                <select
-                  {...register(
-                    'experienceLevel'
+                
+                <Controller
+                  name="experienceLevel"
+                  control={control}
+                  render={({ field }) => (
+                    <CustomSelect
+                      value={field.value}
+                      onValueChange={(value) =>
+                        field.onChange(value)
+                      }
+                      placeholder="Select experience level"
+                      options={[
+                        {
+                          label: 'Junior',
+                          value: 'Junior',
+                        },
+                        {
+                          label: 'Mid',
+                          value: 'Mid',
+                        },
+                        {
+                          label: 'Senior',
+                          value: 'Senior',
+                        },
+                        {
+                          label: 'Lead',
+                          value: 'Lead',
+                        },
+                      ]}
+                    />
                   )}
-                  className="w-full rounded-[1.5rem] border border-white/10 bg-black/20 p-4 outline-none"
-                >
-                  <option className="bg-[#070B14]">
-                    Junior
-                  </option>
-
-                  <option className="bg-[#070B14]">
-                    Mid
-                  </option>
-
-                  <option className="bg-[#070B14]">
-                    Senior
-                  </option>
-
-                  <option className="bg-[#070B14]">
-                    Lead
-                  </option>
-                </select>
+                />
 
                 {errors.experienceLevel && (
                   <p className="text-sm text-red-400">
@@ -577,24 +588,32 @@ const completion = useMemo(() => {
                 Work Authorization
               </h2>
 
-              <select
-                {...register(
-                  'workAuthorization'
-                )}
-                className="mt-6 w-full rounded-[1.5rem] border border-white/10 bg-black/20 p-4 outline-none"
-              >
-                <option className="bg-[#070B14]">
-                  Authorized to work
-                </option>
-
-                <option className="bg-[#070B14]">
-                  Requires sponsorship
-                </option>
-
-                <option className="bg-[#070B14]">
-                  Open to relocation
-                </option>
-              </select>
+              <div className="mt-6">
+                <Controller
+                  control={control}
+                  name="workAuthorization"
+                  render={({ field }) => (
+                    <CustomSelect
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      options={[
+                        {
+                          label: 'Authorized to work',
+                          value: 'Authorized to work',
+                        },
+                        {
+                          label: 'Requires sponsorship',
+                          value: 'Requires sponsorship',
+                        },
+                        {
+                          label: 'Open to relocation',
+                          value: 'Open to relocation',
+                        },
+                      ]}
+                    />
+                  )}
+                />
+              </div>
             </section>
 
             <button

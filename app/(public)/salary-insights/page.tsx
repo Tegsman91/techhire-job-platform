@@ -1,5 +1,6 @@
 'use client';
 
+import CustomSelect from '@/app/components/ui/Select';
 import { jobs, ExperienceLevel, locations } from '@/lib/dummy-data';
 import { useMemo, useState } from 'react';
 import {
@@ -111,55 +112,44 @@ const SalaryInsightsPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <select 
-            aria-label="Filter by role"
-            value={roleFilter} 
-            onChange={(e) => setRoleFilter(e.target.value)} 
-            className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
-          >
-            <option className="bg-[#111827] text-white">All</option>
-            {[...new Set(jobs.map((j) => j.title))].map((role) => (
-              <option 
-                key={role}
-                className="bg-[#111827] text-white"
-              >
-                {role}
-              </option>
-            ))}
-          </select>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+          <CustomSelect
+            value={roleFilter}
+            onValueChange={setRoleFilter}
+            options={[
+              { label: 'All', value: 'All' },
+              ...[...new Set(jobs.map((j) => j.title))].map((role) => ({
+                label: role,
+                value: role,
+              })),
+            ]}
+          />
 
-          <select 
-            value={experienceFilter} 
-            onChange={(e) => 
-              setExperienceFilter(e.target.value as ExperienceLevel | 'All')} 
-            className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
-          >
-            <option className="bg-[#111827] text-white">All</option>
-            <option className="bg-[#111827] text-white">
-              Junior
-            </option>
-            <option className="bg-[#111827] text-white">Mid</option>
-            <option className="bg-[#111827] text-white">
-              Senior
-            </option>
-            <option className="bg-[#111827] text-white">Lead</option>
-          </select>
+          <CustomSelect
+            value={experienceFilter}
+            onValueChange={(value) =>
+              setExperienceFilter(value as ExperienceLevel | 'All')
+            }
+            options={[
+              { label: 'All', value: 'All' },
+              { label: 'Junior', value: 'Junior' },
+              { label: 'Mid', value: 'Mid' },
+              { label: 'Senior', value: 'Senior' },
+              { label: 'Lead', value: 'Lead' },
+            ]}
+          />
 
-          <select 
-            value={locationFilter} 
-            onChange={(e) => setLocationFilter(e.target.value)} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
-          >
-            <option className="bg-[#111827] text-white">All</option>
-            {locations.map((loc) => (
-              <option 
-                key={loc}
-                className="bg-[#111827] text-white"
-              >
-                {loc}
-              </option>
-            ))}
-          </select>
+          <CustomSelect
+            value={locationFilter}
+            onValueChange={setLocationFilter}
+            options={[
+              { label: 'All', value: 'All' },
+              ...locations.map((loc) => ({
+                label: loc,
+                value: loc,
+              })),
+            ]}
+          />
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
@@ -202,8 +192,8 @@ const SalaryInsightsPage = () => {
             </h2>
 
             <div className="w-full overflow-x-auto no-scrollbar">
-              <div className="w-full min-w-0">
-                <ResponsiveContainer width="100%" height={280}>
+              <div className="w-full min-w-[320px]">
+                <ResponsiveContainer width="100%" height={320}>
                   <LineChart data={lineData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="year" />
@@ -230,13 +220,14 @@ const SalaryInsightsPage = () => {
           </div>
         </div>
 
+        
         <div className="bg-zinc-900 rounded-2xl p-6 overflow-x-auto">
           <h2 className="text-xl font-semibold mb-4">
             Salary Comparison
           </h2>
 
           <div className="overflow-x-auto w-full">
-            <table className="w-full text-left text-sm sm:text-base">
+            <table className="min-w-[650px] w-full text-left text-sm sm:text-base">
               <thead>
                 <tr className="text-gray-400 border-b border-zinc-700">
                   <th className="pb-3">Role</th>
@@ -264,20 +255,16 @@ const SalaryInsightsPage = () => {
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <select 
-              value={estimateRole} 
-              onChange={(e) => setEstimateRole(e.target.value)}
-              className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md text-white focus:outline-none focus:ring-2 focus:ring-purple-600/50"
-            >
-              {[...new Set(jobs.map((j) => j.title))].map((role) => (
-                <option 
-                  key={role}
-                  className="bg-[#111827] text-white"
-                >
-                  {role}
-                </option>
-              ))}
-            </select>
+            <CustomSelect
+              value={estimateRole}
+              onValueChange={setEstimateRole}
+              options={[
+                ...[...new Set(jobs.map((j) => j.title))].map((role) => ({
+                  label: role,
+                  value: role,
+                })),
+              ]}
+            />
 
             <input
               type="number"

@@ -33,7 +33,7 @@ const HiringCompanies = () => {
           Companies Hiring Now
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative"
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pb-2 relative"
         >
           {topCompanies.map((company) => (
             <Link 
@@ -42,14 +42,24 @@ const HiringCompanies = () => {
               className="group block"
             >
               <div 
-                className="h-full rounded-xl p-5 
-                flex flex-col gap-4 bg-[#0A0A0F]
-                transition-all duration-300 ease-out
-                hover:-translate-y-2 hover:scale-[1.02]
-                hover:shadow-[0_0_40px_rgba(6,182,212,0.25)]"
+                className="
+                  h-full rounded-2xl p-5
+                  flex flex-col gap-4
+                  bg-white/[0.04]
+                  border border-white/10
+                  backdrop-blur-xl
+                  shadow-[0_8px_30px_rgba(0,0,0,0.35)]
+                  transition-all duration-300 ease-out
+                  hover:-translate-y-2
+                  hover:scale-[1.02]
+                  hover:border-cyan-400/30
+                  hover:bg-white/[0.06]
+                  hover:shadow-[0_0_40px_rgba(6,182,212,0.18)]
+                "
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shadow-inner"
+                  >
                     <Image
                       src={company.logo}
                       alt={company.name}

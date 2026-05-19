@@ -5,6 +5,7 @@ import { useJobFilters } from "@/lib/store";
 import { useMemo, useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import JobCard from "./job-card";
+import CustomSelect from "../ui/Select";
 
 
 const PAGE_SIZE = 10;
@@ -225,16 +226,22 @@ const JobResults = () => {
         </p>
 
         <div className="flex flex-wrap gap-3">
-          <select
+          <CustomSelect
             value={filters.sort}
-            onChange={(e) => setFilter("sort", e.target.value)}
-            aria-label="Sort jobs by"
-            className="bg-zinc-900 border border-zinc-700 text-white px-3 py-2 rounded-md
-            focus:outline-none focus:ring-1 focus:ring-cyan-500"
-          >
-            <option value="recent">Most Recent</option>
-            <option value="salary">Highest Salary</option>
-          </select>
+            onValueChange={(value) =>
+              setFilter('sort', value)
+            }
+            options={[
+              {
+                label: 'Most Recent',
+                value: 'recent',
+              },
+              {
+                label: 'Highest Salary',
+                value: 'salary',
+              },
+            ]}
+          />
 
           <button
             onClick={() => setFilter("view", "grid")}

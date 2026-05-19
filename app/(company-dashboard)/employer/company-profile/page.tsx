@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useDropzone } from 'react-dropzone';
@@ -31,6 +31,7 @@ import Button from '@/app/components/ui/Button';
 import { type CompanyProfile, useCompanyProfileStore } from '@/lib/store';
 import Cropper, { Area } from 'react-easy-crop';
 import getCroppedImg from '@/lib/getCroppedImg';
+import CustomSelect from '@/app/components/ui/Select';
 
 const techOptions = [
   'React',
@@ -151,6 +152,7 @@ const CompanyProfilePage = () => {
     handleSubmit,
     watch,
     setValue,
+    control,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -397,29 +399,42 @@ const CompanyProfilePage = () => {
                   label="Company Size"
                   error={errors.companySize?.message}
                 >
-                  <select
-                    {...register('companySize')}
-                    className="input"
-                  >
-                    <option value="" className="bg-[#0A0A0F]">
-                      Select Size
-                    </option>
-                    <option value="1-10" className="bg-[#0A0A0F]">
-                      1-10
-                    </option>
-                    <option value="11-50" className="bg-[#0A0A0F]">
-                      11-50
-                    </option>
-                    <option value="51-200" className="bg-[#0A0A0F]">
-                      51-200
-                    </option>
-                    <option value="201-500" className="bg-[#0A0A0F]">
-                      201-500
-                    </option>
-                    <option value="500+" className="bg-[#0A0A0F]">
-                      500+
-                    </option>
-                  </select>
+                  <Controller
+                    name="companySize"
+                    control={control}
+                    render={({ field }) => (
+                      <CustomSelect
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        options={[
+                          {
+                            label: 'Select Size',
+                            value: 'placeholder',
+                          },
+                          {
+                            label: '1-10',
+                            value: '1-10',
+                          },
+                          {
+                            label: '11-50',
+                            value: '11-50',
+                          },
+                          {
+                            label: '51-200',
+                            value: '51-200',
+                          },
+                          {
+                            label: '201-500',
+                            value: '201-500',
+                          },
+                          {
+                            label: '500+',
+                            value: '500+',
+                          },
+                        ]}
+                      />
+                    )}
+                  />
                 </InputField>
 
                 <InputField

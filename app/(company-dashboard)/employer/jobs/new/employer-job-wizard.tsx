@@ -21,6 +21,7 @@ import {
 import { EmployerJobItem, useEmployerJobsStore } from '@/lib/store';
 import Checkbox from '@/app/components/ui/Checkbox';
 import SalaryRange from '@/app/components/jobs/salary-range';
+import CustomSelect from '@/app/components/ui/Select';
 
 const schema = z.object({
   title: z.string().min(3),
@@ -419,16 +420,23 @@ const EmployerJobWizard = () => {
                   />
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-2">
-                  <select 
-                    {...register('locationType')}
-                    className="rounded-2xl border border-white/10 bg-black/40 p-4 outline-none focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] transition"
-                  >
-                    <option className="bg-[#0A0A0F]">Remote</option>
-                    <option className="bg-[#0A0A0F]">Hybrid</option>
-                    <option className="bg-[#0A0A0F]">On-site</option>
-                  </select>
-                  
+                <div className="grid gap-4 md:grid-cols-2">                
+                  <Controller
+                    name="locationType"
+                    control={control}
+                    render={({ field }) => (
+                      <CustomSelect
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        placeholder="Select location type"
+                        options={[
+                          { label: 'Remote', value: 'Remote' },
+                          { label: 'Hybrid', value: 'Hybrid' },
+                          { label: 'On-site', value: 'On-site' },
+                        ]}
+                      />
+                    )}
+                  />
                   
                   <input 
                     {...register('city')}
@@ -440,38 +448,40 @@ const EmployerJobWizard = () => {
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
-                  <select 
-                    {...register('employmentType')}
-                    className="rounded-2xl border border-white/10 bg-black/40 p-4 outline-none focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] transition"
-                  >
-                    <option className="bg-[#0A0A0F]">
-                      Full-Time
-                    </option>
-                    <option className="bg-[#0A0A0F]">
-                      Part-Time
-                    </option>
-                    <option className="bg-[#0A0A0F]">
-                      Contract
-                    </option>
-                  </select>
+                  <Controller
+                    name="employmentType"
+                    control={control}
+                    render={({ field }) => (
+                      <CustomSelect
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        placeholder="Select employment type"
+                        options={[
+                          { label: 'Full-Time', value: 'Full-Time' },
+                          { label: 'Part-Time', value: 'Part-Time' },
+                          { label: 'Contract', value: 'Contract' },
+                        ]}
+                      />
+                    )}
+                  />
 
-                  <select 
-                    {...register('experienceLevel')}
-                    className="rounded-2xl border border-white/10 bg-black/40 p-4 outline-none focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] transition"
-                  >
-                    <option className="bg-[#0A0A0F]">
-                      Junior
-                    </option>
-                    <option className="bg-[#0A0A0F]">
-                      Mid
-                    </option>
-                    <option className="bg-[#0A0A0F]">
-                      Senior
-                    </option>
-                    <option className="bg-[#0A0A0F]">
-                      Lead
-                    </option>
-                  </select>
+                  <Controller
+                    name="experienceLevel"
+                    control={control}
+                    render={({ field }) => (
+                      <CustomSelect
+                        value={field.value}
+                        onValueChange={(value) => field.onChange(value)}
+                        placeholder="Select experience level"
+                        options={[
+                          { label: 'Junior', value: 'Junior' },
+                          { label: 'Mid', value: 'Mid' },
+                          { label: 'Senior', value: 'Senior' },
+                          { label: 'Lead', value: 'Lead' },
+                        ]}
+                      />
+                    )}
+                  />
                 </div>
               </>
             )}

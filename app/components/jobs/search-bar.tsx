@@ -63,7 +63,7 @@ const SearchBar = () => {
     const titles = jobs.map((job) => job.title);
     const skills = jobs.flatMap((job) => job.skills);
     return [...new Set([...titles, ...skills])];
-  }, [jobs]);
+  }, []);
 
    const locationOptions = useMemo(() => {
     return [...new Set(locations)];
@@ -105,7 +105,7 @@ const SearchBar = () => {
           ? ("job" as const)
           : ("skill" as const),
       }));
-  }, [debouncedJob, jobOptions, jobs]);
+  }, [debouncedJob, jobOptions]);
 
   const locationSuggestions = useMemo(() => {
     if (!debouncedLocation.trim()) return [];

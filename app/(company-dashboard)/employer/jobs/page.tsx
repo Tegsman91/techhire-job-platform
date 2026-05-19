@@ -219,7 +219,14 @@ function JobCard({
   onClose: () => void;
 }) {
   return (
-    <div className="group relative rounded-2xl border border-white/10 bg-white/[0.03] p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-5 hover:border-cyan-400/30 hover:bg-white/[0.05] transition"
+    <div
+      className="
+        group relative rounded-2xl border border-white/10
+        bg-white/[0.03] p-4 sm:p-5
+        flex flex-col md:flex-row
+        md:items-center md:justify-between
+        gap-5 overflow-hidden
+      "
     >
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.15),transparent_60%)]" />
 
@@ -233,7 +240,9 @@ function JobCard({
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold">{job.title}</h3>
+          <h3 className="text-lg font-semibold break-words">
+            {job.title}
+          </h3>
 
           <span
             className={clsx(
@@ -250,7 +259,7 @@ function JobCard({
             Posted {new Date(job.createdAt).toDateString()}
           </p>
 
-          <div className="flex items-center gap-4 mt-2 text-xs text-white/50">
+          <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-white/50">
             <span>👁 {job.viewsCount} views</span>
             <span>📄 {job.applicationsCount} applications</span>
           </div>
@@ -258,20 +267,38 @@ function JobCard({
       </div>
 
       {/* RIGHT */}
-      <div className="flex items-center gap-3">
-        <Button size="sm" variant="outline" onClick={onEdit} leftIcon={<Pencil size={14} />}>
+      <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+        <Button 
+          size="sm" 
+          variant="outline" 
+          onClick={onEdit} 
+          leftIcon={<Pencil size={14} />}
+        >
           Edit
         </Button>
 
-        <Button size="sm" variant="ghost" onClick={onView} leftIcon={<Eye size={14} />}>
+        <Button 
+          size="sm" 
+          variant="ghost" 
+          onClick={onView} 
+          leftIcon={<Eye size={14} />}
+        >
           View
         </Button>
 
-        <Button size="sm" variant="danger" onClick={onClose} leftIcon={<X size={14} />}>
+        <Button 
+          size="sm" 
+          variant="danger" 
+          onClick={onClose} 
+          leftIcon={<X size={14} />}
+        >
           Close
         </Button>
 
-        <Button size="sm" variant="secondary" leftIcon={<Zap size={14} />}
+        <Button 
+          size="sm" 
+          variant="secondary" 
+          leftIcon={<Zap size={14} />}
         >
           Boost
         </Button>

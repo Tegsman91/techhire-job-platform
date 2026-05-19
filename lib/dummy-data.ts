@@ -134,7 +134,6 @@ export const skillsPool = [
   "TypeScript",
   "Python",
   "Docker",
-  "Kubernetes",
   "AWS",
   "PostgreSQL",
   "MongoDB",

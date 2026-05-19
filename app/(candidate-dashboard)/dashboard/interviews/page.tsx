@@ -125,7 +125,8 @@ const InterviewsPage = () => {
     <div className="min-h-screen overflow-x-hidden bg-[#0A0A0F] text-white px-4 py-8 sm:px-6">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* Header */}
-        <section className="rounded-[2rem] border border-cyan-500/20 bg-white/[0.04] p-6 sm:p-8 backdrop-blur-2xl">
+        <section className="rounded-[2rem] overflow-hidden border border-cyan-500/20 bg-white/[0.04] p-6 sm:p-8 backdrop-blur-2xl">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h1 className="text-3xl font-bold sm:text-4xl">

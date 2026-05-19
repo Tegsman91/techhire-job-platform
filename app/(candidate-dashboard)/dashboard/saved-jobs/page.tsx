@@ -9,6 +9,7 @@ import {
 import { jobs } from '@/lib/dummy-data';
 import JobCard from '@/app/components/jobs/job-card';
 import ApplicationModal from "@/app/components/application/application-modal";
+import CustomSelect from '@/app/components/ui/Select';
 
 const SavedJobsPage = () => {
   const savedJobs = useSavedJobsStore(
@@ -134,73 +135,66 @@ const SavedJobsPage = () => {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <select
+              <CustomSelect
                 value={selectedCategory}
-                onChange={(e) =>
-                  setSelectedCategory(
-                    e.target.value
-                  )
-                }
-                className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm outline-none transition focus:border-cyan-400"
-              >
-                <option value="All" className="bg-[#070B14]">
-                  All Categories
-                </option>
+                onValueChange={setSelectedCategory}
+                options={[
+                  {
+                    label: 'All Categories',
+                    value: 'All',
+                  },
+                  {
+                    label: 'Frontend',
+                    value: 'Frontend',
+                  },
+                  {
+                    label: 'Backend',
+                    value: 'Backend',
+                  },
+                  {
+                    label: 'Design',
+                    value: 'Design',
+                  },
+                ]}
+              />
 
-                <option value="Frontend" className="bg-[#070B14]">
-                  Frontend
-                </option>
-
-                <option value="Backend" className="bg-[#070B14]">
-                  Backend
-                </option>
-
-                <option value="Design" className="bg-[#070B14]">
-                  Design
-                </option>
-              </select>
-
-              <select
+              <CustomSelect
                 value={selectedLocation}
-                onChange={(e) =>
-                  setSelectedLocation(
-                    e.target.value
-                  )
-                }
-                className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
-              >
-                <option value="All" className="bg-[#070B14]">
-                  All Locations
-                </option>
+                onValueChange={setSelectedLocation}
+                options={[
+                  {
+                    label: 'All Locations',
+                    value: 'All',
+                  },
+                  {
+                    label: 'Remote',
+                    value: 'Remote',
+                  },
+                  {
+                    label: 'Lagos',
+                    value: 'Lagos',
+                  },
+                  {
+                    label: 'London',
+                    value: 'London',
+                  },
+                ]}
+              />
 
-                <option value="Remote" className="bg-[#070B14]">
-                  Remote
-                </option>
-
-                <option value="Lagos" className="bg-[#070B14]">
-                  Lagos
-                </option>
-
-                <option value="London" className="bg-[#070B14]">
-                  London
-                </option>
-              </select>
-
-              <select
+              <CustomSelect
                 value={sortBy}
-                onChange={(e) =>
-                  setSortBy(e.target.value)
-                }
-                className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
-              >
-                <option value="recent" className="bg-[#070B14]">
-                  Most Recent
-                </option>
-
-                <option value="salary" className="bg-[#070B14]">
-                  Salary High-Low
-                </option>
-              </select>
+                onValueChange={setSortBy}
+                options={[
+                  {
+                    label: 'Most Recent',
+                    value: 'recent',
+                  },
+                  {
+                    label: 'Salary High-Low',
+                    value: 'salary',
+                  },
+                ]}
+              />
             </div>
           </div>
         </section>

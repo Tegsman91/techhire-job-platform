@@ -6,6 +6,7 @@ import { Star, X, ThumbsUp, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Review } from '@/lib/dummy-data';
 import Button from '@/app/components/ui/Button';
+import CustomSelect from '../ui/Select';
 
 type Props = {
   companyId: string;
@@ -232,7 +233,7 @@ const EmployeeReviewsSection = ({ companyId, reviews }: Props) => {
         </div>
 
         <div className="flex flex-col gap-3 w-full">
-          <select
+          {/* <select
             value={ratingFilter}
             onChange={(e) => setRatingFilter(e.target.value)}
             className="w-full rounded-2xl border border-cyan-500/20 bg-black/30 px-4 py-3 text-sm text-cyan-200 backdrop-blur-xl focus:outline-none focus:border-cyan-400"
@@ -246,9 +247,27 @@ const EmployeeReviewsSection = ({ companyId, reviews }: Props) => {
             <option value="4-5" className="bg-[#0A0A0F]">
               4-5 Stars
             </option>
-          </select>
+          </select> */}
+          <CustomSelect
+            value={ratingFilter}
+            onValueChange={setRatingFilter}
+            options={[
+              {
+                label: 'All Ratings',
+                value: 'all',
+              },
+              {
+                label: '5 Stars',
+                value: '5',
+              },
+              {
+                label: '4-5 Stars',
+                value: '4-5',
+              },
+            ]}
+          />
 
-          <select
+          {/* <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
             className="w-full rounded-2xl border border-cyan-500/20 bg-black/30 px-4 py-3 text-sm text-cyan-200 backdrop-blur-xl focus:outline-none focus:border-cyan-400"
@@ -261,7 +280,21 @@ const EmployeeReviewsSection = ({ companyId, reviews }: Props) => {
                 {role}
               </option>
             ))}
-          </select>
+          </select> */}
+          <CustomSelect
+            value={roleFilter}
+            onValueChange={setRoleFilter}
+            options={[
+              {
+                label: 'All Roles',
+                value: 'all',
+              },
+              ...roles.map((role) => ({
+                label: role,
+                value: role,
+              })),
+            ]}
+          />
         </div>
       </div>
 

@@ -116,7 +116,8 @@ const EmployerDashboardPage = () => {
     <main className="relative min-h-screen overflow-x-hidden bg-[#0A0A0F] px-3 py-5 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* Header */}
-        <section className="rounded-[2rem] border border-cyan-500/20 bg-white/[0.03] p-6 sm:p-8 backdrop-blur-2xl shadow-[0_0_40px_rgba(6,182,212,0.08)]">
+        <section className="rounded-[2rem] overflow-hidden border border-cyan-500/20 bg-white/[0.03] p-6 sm:p-8 backdrop-blur-2xl shadow-[0_0_40px_rgba(6,182,212,0.08)]">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
           <h1 className="text-3xl sm:text-5xl font-extrabold neon-cyan tracking-tight">
             Employer Dashboard
           </h1>

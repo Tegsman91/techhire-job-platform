@@ -18,6 +18,7 @@ import {
 } from '@/lib/store';
 import Button from '@/app/components/ui/Button';
 import CandidateDetailModal from '@/app/components/employer/candidate-detail-modal';
+import CustomSelect from '@/app/components/ui/Select';
 
 const columns = [
   {
@@ -154,12 +155,12 @@ const EmployerApplicationsPage = () => {
               </p>
             </div>
 
-            <div className="flex w-fit items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] p-2">
+            <div className="flex w-full sm:w-fit items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] p-2">
               <button
                 onClick={() => setView('kanban')}
                 aria-pressed={view === 'kanban'}
                 className={clsx(
-                  'flex flex-1 sm:flex-none items-center justify-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 transition',
+                  'flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 transition',
                   view === 'kanban'
                     ? 'bg-cyan-500/20 text-cyan-300'
                     : 'text-white/60 hover:bg-white/5'
@@ -187,75 +188,47 @@ const EmployerApplicationsPage = () => {
 
         {/* FILTERS */}
         <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl">
-          <div className="grid gap-4 md:grid-cols-3">
-            <select
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <CustomSelect
               value={selectedJob}
-              onChange={(e) =>
-                setSelectedJob(e.target.value)
-              }
-              className="rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-cyan-400/40"
-            >
-              {uniqueJobs.map((job) => (
-                <option
-                  key={job}
-                  value={job}
-                  className="bg-[#0A0A0F]"
-                >
-                  {job}
-                </option>
-              ))}
-            </select>
+              onValueChange={setSelectedJob}
+              options={uniqueJobs.map((job) => ({
+                label: job,
+                value: job,
+              }))}
+            />
 
-            <select
+            <CustomSelect
               value={selectedStatus}
-              onChange={(e) =>
-                setSelectedStatus(e.target.value)
-              }
-              className="rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-cyan-400/40"
-            >
-              <option
-                value="All"
-                className="bg-[#0A0A0F]"
-              >
-                All Statuses
-              </option>
+              onValueChange={setSelectedStatus}
+              options={[
+                {
+                  label: 'All Statuses',
+                  value: 'All',
+                },
+                ...columns.map((status) => ({
+                  label: status.label,
+                  value: status.value,
+                })),
+              ]}
+            />
 
-              {columns.map((status) => (
-                <option
-                  key={status.value}
-                  value={status.value}
-                  className="bg-[#0A0A0F]"
-                >
-                  {status.label}
-                </option>
-              ))}
-            </select>
-
-            <select
+            <CustomSelect
               value={sortBy}
-              onChange={(e) =>
-                setSortBy(
-                  e.target.value as
-                    | 'recent'
-                    | 'name'
-                )
+              onValueChange={(value) =>
+                setSortBy(value as 'recent' | 'name')
               }
-              className="rounded-2xl border border-white/10 bg-black/40 px-4 py-3 outline-none focus:border-cyan-400/40"
-            >
-              <option
-                value="recent"
-                className="bg-[#0A0A0F]"
-              >
-                Most Recent
-              </option>
-
-              <option
-                value="name"
-                className="bg-[#0A0A0F]"
-              >
-                Candidate Name
-              </option>
-            </select>
+              options={[
+                {
+                  label: 'Most Recent',
+                  value: 'recent',
+                },
+                {
+                  label: 'Candidate Name',
+                  value: 'name',
+                },
+              ]}
+            />
           </div>
         </section>
 

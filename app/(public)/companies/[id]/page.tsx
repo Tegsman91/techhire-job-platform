@@ -77,12 +77,11 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
               <div className="w-fit rounded-[1.5rem] border border-white/10 bg-black/40 p-4 shadow-[0_0_30px_rgba(6,182,212,0.12)]">
                 <Image
-                  src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-                    company.name
-                  )}`}
+                  src={company.logo}
                   alt={company.name}
                   width={100}
                   height={110}
+                  unoptimized
                   className="h-20 w-20 sm:h-24 sm:w-24"
                 />
               </div>
@@ -231,6 +230,7 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
                   height={72}
                   placeholder="blur"
                   blurDataURL="/placeholders/company-blur.jpg"
+                  unoptimized
                   className="mx-auto h-16 w-16 rounded-2xl object-cover"
                 />
 

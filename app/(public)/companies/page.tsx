@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Search, MapPin, Users, Briefcase, BadgeCheck } from 'lucide-react';
 import { companies, jobs, locations } from '@/lib/dummy-data';
 import Link from 'next/link';
+import CustomSelect from '@/app/components/ui/Select';
 
 type Industry =
   | 'Fintech'
@@ -96,7 +97,8 @@ const CompaniesPage = () => {
     <div className="min-h-screen bg-[#0A0A0F] px-4 py-6 text-white sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl space-y-6 sm:space-y-8">
         {/* Header */}
-        <section className="rounded-[2rem] border border-cyan-500/20 bg-white/[0.04] p-4 sm:p-6 backdrop-blur-xl">
+        <section className="rounded-[2rem] overflow-hidden border border-cyan-500/20 bg-white/[0.04] p-4 sm:p-6 backdrop-blur-xl">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
           <h1 className="text-3xl font-bold sm:text-4xl">
             Companies
           </h1>
@@ -141,22 +143,15 @@ const CompaniesPage = () => {
                 options: ['All', ...locations],
               },
             ].map((filter, idx) => (
-              <div
+              <CustomSelect
                 key={idx}
-                className="rounded-2xl border border-white/10 bg-black/20 px-3"
-              >
-                <select
-                  value={filter.value}
-                  onChange={(e) => filter.setter(e.target.value)}
-                  className="w-full bg-transparent py-3 text-white outline-none"
-                >
-                  {filter.options.map((option) => (
-                    <option key={option} value={option} className="bg-[#0A0A0F]">
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                value={filter.value}
+                onValueChange={filter.setter}
+                options={filter.options.map((option) => ({
+                  label: option,
+                  value: option,
+                }))}
+              />
             ))}
           </div>
 
@@ -196,9 +191,6 @@ function CompanyCard({ company }: { company: CompanyCardData }) {
     <div className="flex h-full flex-col rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-3 sm:p-5 backdrop-blur-xl transition hover:border-cyan-500/30">
       <div className="flex items-start gap-3">
         <Image
-          // src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-          //   company?.name ?? ''
-          // )}`}
           src={company?.logo || ""}
           alt={company?.name ?? 'Company logo'}
           width={44}
@@ -206,6 +198,7 @@ function CompanyCard({ company }: { company: CompanyCardData }) {
           placeholder="blur"
           blurDataURL="/placeholders/company-blur.jpg"
           className="h-11 w-11 shrink-0 rounded-xl bg-zinc-800 p-1"
+          unoptimized
         />
 
         <div className="min-w-0 flex-1">
