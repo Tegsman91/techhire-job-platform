@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { Toaster } from "react-hot-toast"; 
+import { Toaster } from "react-hot-toast";
+import { Providers } from "./providers/theme-provider";
 import "./globals.css";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,21 +31,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {children}
+      <body className="min-h-full flex flex-col bg-white text-black dark:bg-[#070B14] dark:text-white transition-colors duration-300">
+        <Providers>
+          {children}
 
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            style: {
-              background: "transparent",
-              boxShadow: "none",
-              pointerEvents: "auto",
-            },
-          }}
-        />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: "transparent",
+                boxShadow: "none",
+                pointerEvents: "auto",
+              },
+            }}
+          />
+        </Providers>
       </body>
     </html>
   );

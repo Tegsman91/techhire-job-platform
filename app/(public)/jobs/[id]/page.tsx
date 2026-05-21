@@ -217,7 +217,7 @@ export default async function JobDetailPage({
               View Company Profile
             </Link>
 
-            <div className="mt-6">
+            <div className="hidden lg:block mt-4">
               <ApplicationModal 
                 jobTitle={job.title} 
                 jobId={job.id}
@@ -228,7 +228,9 @@ export default async function JobDetailPage({
 
         {/* SIMILAR JOBS */}
         <section>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6">Similar Jobs</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6">
+            Similar Jobs
+          </h2>
 
           <div className="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 no-scrollbar">
             {similarJobs.map((similarJob) => (
