@@ -39,7 +39,7 @@ const FeaturedCarousel = () => {
   }, [emblaApi]);
 
   return (
-    <section className="mt-16 py-12 bg-[#0A0A0F]">
+    <section className="mt-16 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="relative z-20 text-2xl sm:text-3xl font-bold mb-6 text-white">
           Featured Opportunities

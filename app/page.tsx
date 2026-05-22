@@ -9,6 +9,7 @@ import HiringCompanies from "./components/home/HiringCompanies";
 import HowItWorks from "./components/home/HowItWorks";
 import Badge from "./components/ui/Badge";
 import SearchBar from "./components/jobs/search-bar";
+import HomeSearchBar from "./components/home/home-search-bar";
 
 export default function HomePage() {
   const [filters, setFilters] = useState<string[]>([]);
@@ -37,16 +38,8 @@ export default function HomePage() {
       <div className="absolute inset-0 bg-linear-to-b from-black/60 to-black/90 z-0" />
 
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-20 space-y-8">
-        <h1 className="text-4xl sm:text-6xl font-bold bg-linear-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-          Find Your Next Tech Role
-        </h1>
-
-        <p className="text-gray-400 text-lg">
-          15,250+ opportunities at top tech companies
-        </p>
-
         <div className="w-full max-w-2xl">
-          <SearchBar />
+          <HomeSearchBar />
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 relative z-10">
