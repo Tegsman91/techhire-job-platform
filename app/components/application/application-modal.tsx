@@ -11,7 +11,7 @@ import Modal, { ModalHeader } from '../ui/Modal';
 import Textarea from '../ui/Textarea';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
-import { useApplicationsStore } from '@/lib/store';
+import { useApplicationsStore, useUserStore } from '@/lib/store';
 
 const applicationSchema = z.object({
   fullName: z.string().min(2, { message: 'Full name is required' }),
@@ -55,6 +55,12 @@ const ApplicationModal = ({ jobTitle, jobId }: ApplicationModalProps) => {
   const [resumeError, setResumeError] = useState<string | null>(null);
 
   const addApplication = useApplicationsStore((state) => state.addApplication);
+
+  const login = useUserStore((state) => state.login);
+
+  const addNotification = useUserStore(
+    (state) => state.addNotification
+  );
 
   const {
     register,
@@ -138,6 +144,25 @@ const ApplicationModal = ({ jobTitle, jobId }: ApplicationModalProps) => {
         fitReason: data.fitReason,
         resumeName: resumeFile.name,
       },
+    });
+
+    // AUTO LOGIN
+    login({
+      name: data.fullName,
+      email: data.email,
+    });
+
+    // CREATE NOTIFICATION
+    addNotification({
+      id: crypto.randomUUID(),
+
+      company: 'TechHire Partner',
+
+      message: `Your application for ${jobTitle} was received successfully.`,
+
+      read: false,
+
+      createdAt: new Date().toISOString(),
     });
 
     confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });

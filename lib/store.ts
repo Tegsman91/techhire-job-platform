@@ -913,3 +913,83 @@ export const useJobAlertsStore =
       }
     )
   );
+
+/* ================= NOTIFICATION STORE ================= */
+
+type Notification = {
+  id: string;
+  company: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+};
+
+type UserState = {
+  isLoggedIn: boolean;
+
+  user: {
+    name: string;
+    email: string;
+  } | null;
+
+  notifications: Notification[];
+
+  login: (payload: {
+    name: string;
+    email: string;
+  }) => void;
+
+  logout: () => void;
+
+  addNotification: (
+    notification: Notification
+  ) => void;
+
+  markAllAsRead: () => void;
+};
+
+export const useUserStore = create<UserState>()(
+  persist(
+    (set) => ({
+      isLoggedIn: false,
+
+      user: null,
+
+      notifications: [],
+
+      login: (payload) =>
+        set({
+          isLoggedIn: true,
+          user: payload,
+        }),
+
+      logout: () =>
+        set({
+          isLoggedIn: false,
+          user: null,
+          notifications: [],
+        }),
+
+      addNotification: (notification) =>
+        set((state) => ({
+          notifications: [
+            notification,
+            ...state.notifications,
+          ],
+        })),
+
+      markAllAsRead: () =>
+        set((state) => ({
+          notifications: state.notifications.map(
+            (n) => ({
+              ...n,
+              read: true,
+            })
+          ),
+        })),
+    }),
+    {
+      name: "techhire-user",
+    }
+  )
+);

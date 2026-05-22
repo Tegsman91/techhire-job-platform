@@ -228,7 +228,7 @@ const SearchBar = () => {
         </Popover.Root>
 
         {/* LOCATION INPUT */}
-        <Popover.Root
+        {/* <Popover.Root
           open={activeDropdown === "location" && locationSuggestions.length > 0}
         >
           <Popover.Anchor asChild>
@@ -273,7 +273,7 @@ const SearchBar = () => {
               />
             </Popover.Content>
           </Popover.Portal>
-        </Popover.Root>
+        </Popover.Root> */}
 
         {/* BUTTON */}
         <button

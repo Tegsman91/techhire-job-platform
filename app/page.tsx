@@ -39,7 +39,7 @@ export default function HomePage() {
 
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-20 space-y-8">
         <div className="w-full max-w-2xl">
-          <HomeSearchBar />
+          <SearchBar />
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 relative z-10">
