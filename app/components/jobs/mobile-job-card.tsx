@@ -132,14 +132,7 @@ const MobileJobCard = ({
             </div>
 
             {/* META */}
-            <div
-              className="
-                mt-3
-                flex flex-wrap
-                items-center gap-3
-                text-[11px]
-                text-gray-400
-              "
+            <div className="mt-3 flex flex-wrap items-center gap-3 text-[11px] text-gray-400"
             >
               <span className="flex items-center gap-1">
                 <MapPin size={12} />

@@ -9,9 +9,10 @@ const HomeSearchBar = () => {
   const router = useRouter();
 
   const handleSearch = () => {
-    if (!query.trim()) return;
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) return;
 
-    router.push(`/jobs?q=${query}`);
+    router.push(`/jobs?q=${trimmedQuery}`);
   };
 
   return (
@@ -36,6 +37,7 @@ const HomeSearchBar = () => {
             }
           }}
           placeholder="Search jobs, skills, companies..."
+          aria-label="Search jobs, skills, companies"
           className="
             flex-1 bg-transparent
             text-sm text-white

@@ -3,9 +3,13 @@
 import { jobs } from "@/lib/dummy-data";
 import { useJobFilters } from "@/lib/store";
 import { useMemo, useEffect, useState, useRef } from "react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import * as Dialog from "@radix-ui/react-dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import JobCard from "./job-card";
 import CustomSelect from "../ui/Select";
+import JobFilters from "./JobFilters";
 
 
 const PAGE_SIZE = 10;
@@ -29,11 +33,14 @@ const JobResults = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const currentQuery = searchParams.toString();
+  const searchQuery = searchParams.get("q") || "";
+
   const [page, setPage] = useState(1);
   const [debouncedLocation, setDebouncedLocation] = useState(filters.location);
 
-  const currentQuery = searchParams.toString();
-  const searchQuery = searchParams.get("q") || "";
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState(searchQuery);
 
   const hydratedRef = useRef(false);
 
@@ -130,7 +137,7 @@ const JobResults = () => {
 
       return true;
     });
-  }, [jobs, filters, searchQuery]);
+  }, [filters, searchQuery]);
   
   // ---------------- SORT ----------------
   const sortedJobs = useMemo(() => {
@@ -220,52 +227,204 @@ const JobResults = () => {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-gray-300">
-          {sortedJobs.length}+ jobs found
-        </p>
+      <div className="space-y-4">
+        {/* MOBILE SEARCH */}
+        <div className="flex lg:hidden items-center gap-3">
+          <div className="relative flex-1">
+            <Search
+              size={18}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+            />
 
-        <div className="flex flex-wrap gap-3">
-          <CustomSelect
-            value={filters.sort}
-            onValueChange={(value) =>
-              setFilter('sort', value)
-            }
-            options={[
-              {
-                label: 'Most Recent',
-                value: 'recent',
-              },
-              {
-                label: 'Highest Salary',
-                value: 'salary',
-              },
-            ]}
-          />
+            <input
+              value={mobileSearch}
+              onChange={(e) => setMobileSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const params = new URLSearchParams(searchParams.toString());
 
-          <button
-            onClick={() => setFilter("view", "grid")}
-            className={`px-3 py-1 rounded-md text-sm transition
-              ${filters.view === "grid"
-                ? "bg-cyan-500 text-black"
-                : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"}
-            `}
-          >
-            Grid
-          </button>
+                  if (mobileSearch.trim()) {
+                    params.set("q", mobileSearch);
+                  } else {
+                    params.delete("q");
+                  }
 
-          <button
-            onClick={() => setFilter("view", "list")}
-            className={`px-3 py-1 rounded-md text-sm transition
-              ${filters.view === "list"
-                ? "bg-cyan-500 text-black"
-                : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"}
-            `}
-          >
-            List
-          </button>
+                  router.push(`/jobs?${params.toString()}`);
+                }
+              }}
+              placeholder="Search jobs"
+              className="
+                w-full rounded-xl
+                border border-white/10
+                bg-[#101522]
+                py-3 pl-11 pr-14
+                text-sm text-white
+                placeholder:text-gray-500
+                outline-none
+              "
+            />
+
+            <button
+              onClick={() => setMobileFiltersOpen(true)}
+              className="
+                absolute right-2 top-1/2
+                -translate-y-1/2
+                rounded-lg
+                bg-cyan-500
+                p-2
+                text-black
+              "
+            >
+              <SlidersHorizontal size={16} />
+            </button>
+          </div>
+        </div>
+
+        {/* TOP BAR */}
+        <div className="flex items-center justify-between">
+          <p className="text-gray-300 mt-3 xl:mt-0 text-sm sm:text-base">
+            {sortedJobs.length}+ jobs found
+          </p>
+
+          {/* DESKTOP CONTROLS */}
+          <div className="hidden lg:flex flex-wrap gap-3">
+            <CustomSelect
+              value={filters.sort}
+              onValueChange={(value) =>
+                setFilter('sort', value)
+              }
+              options={[
+                {
+                  label: 'Most Recent',
+                  value: 'recent',
+                },
+                {
+                  label: 'Highest Salary',
+                  value: 'salary',
+                },
+              ]}
+            />
+
+            <button
+              onClick={() => setFilter("view", "grid")}
+              className={`px-3 py-1 rounded-md text-sm transition
+                ${filters.view === "grid"
+                  ? "bg-cyan-500 text-black"
+                  : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"}
+              `}
+            >
+              Grid
+            </button>
+
+            <button
+              onClick={() => setFilter("view", "list")}
+              className={`px-3 py-1 rounded-md text-sm transition
+                ${filters.view === "list"
+                  ? "bg-cyan-500 text-black"
+                  : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"}
+              `}
+            >
+              List
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* MOBILE FILTER MODAL */}
+      <Dialog.Root
+        open={mobileFiltersOpen}
+        onOpenChange={setMobileFiltersOpen}
+      >
+        <Dialog.Portal>
+          <Dialog.Overlay
+            className="
+              fixed inset-0 z-40
+              bg-black/60 backdrop-blur-sm
+              data-[state=open]:animate-[fadeIn_200ms_ease-out]
+              data-[state=closed]:animate-[fadeOut_200ms_ease-in]
+            "
+          />
+
+          <Dialog.Content
+            className="
+              mobile-filter-scroll
+              fixed bottom-0 left-0 right-0 z-50 max-h-[85vh] overflow-y-auto rounded-t-3xl border-t border-white/10 bg-[#0A0A0F] p-5
+              data-[state=open]:animate-[slideUp_300ms_ease-out]
+              data-[state=closed]:animate-[slideDown_250ms_ease-in]
+            "
+          >
+            <div className="mb-5 flex items-center justify-between">
+              <Dialog.Title className="text-lg font-semibold text-white">
+                Filters
+              </Dialog.Title>
+
+              <Dialog.Close className="text-sm text-gray-400">
+                Close
+              </Dialog.Close>
+            </div>
+
+            <Dialog.Description>
+              <VisuallyHidden>
+                Job filters modal
+              </VisuallyHidden>
+            </Dialog.Description>
+
+            {/* SORT */}
+            <div className="mb-5">
+              <CustomSelect
+                value={filters.sort}
+                onValueChange={(value) =>
+                  setFilter("sort", value)
+                }
+                options={[
+                  {
+                    label: "Most Recent",
+                    value: "recent",
+                  },
+                  {
+                    label: "Highest Salary",
+                    value: "salary",
+                  },
+                ]}
+              />
+            </div>
+
+            {/* VIEW TOGGLE */}
+            <div className="mb-6 flex gap-2">
+              <button
+                onClick={() => setFilter("view", "grid")}
+                className={`
+                  flex-1 rounded-lg py-2 text-sm
+                  ${
+                    filters.view === "grid"
+                      ? "bg-cyan-500 text-black"
+                      : "bg-zinc-800 text-gray-400"
+                  }
+                `}
+              >
+                Grid
+              </button>
+
+              <button
+                onClick={() => setFilter("view", "list")}
+                className={`
+                  flex-1 rounded-lg py-2 text-sm
+                  ${
+                    filters.view === "list"
+                      ? "bg-cyan-500 text-black"
+                      : "bg-zinc-800 text-gray-400"
+                  }
+                `}
+              >
+                List
+              </button>
+            </div>
+
+            {/* FILTERS */}
+            <JobFilters />
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
 
       {/* JOB LIST */}
       {paginatedJobs.length === 0 ? (

@@ -49,10 +49,46 @@ const config: Config = {
             transform: "translateX(0) scale(1)",
           },
         },
+
+        fadeIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+
+        fadeOut: {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
+
+        slideUp: {
+          from: {
+            transform: "translateY(100%)",
+            opacity: "0",
+          },
+          to: {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+        },
+
+        slideDown: {
+          from: {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+          to: {
+            transform: "translateY(100%)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         scan: "scan 2s linear infinite",
         slideInBounce: "slideInBounce 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+        fadeIn: "fadeIn 0.25s ease-out",
+        fadeOut: "fadeOut 0.25s ease-in",
+        slideUp: "slideUp 0.3s ease-out",
+        slideDown: "slideDown 0.25s ease-in",
       },
       backgroundImage: {
         grid:
