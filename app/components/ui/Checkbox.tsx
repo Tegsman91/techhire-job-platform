@@ -18,7 +18,7 @@ export default function Checkbox({
   'aria-label': ariaLabel,
 }: CheckboxProps) {
   return (
-    <label className="flex items-center gap-3 cursor-pointer">
+    <label className="flex cursor-pointer items-center gap-3">
       <CheckboxPrimitive.Root
         checked={checked}
         onCheckedChange={(val) => {
@@ -27,18 +27,28 @@ export default function Checkbox({
         }}
         aria-label={!label ? ariaLabel : undefined}
         className={clsx(
-          "w-3.5 h-3.5 rounded-sm border border-white/20 flex items-center justify-center transition-all duration-200",
-          "data-[state=checked]:bg-primary data-[state=checked]:shadow-[0_0_10px_#06B6D4]",
-          "focus:outline-none focus-visible:shadow-[0_0_10px_#06B6D4]"
+          `flex h-4 w-4 items-center justify-center
+          rounded-sm border transition-all duration-200
+          border-black/20 dark:border-white/20
+          bg-white dark:bg-[#0A0A0F]
+          data-[state=checked]:border-cyan-500
+          data-[state=checked]:bg-cyan-500
+          dark:data-[state=checked]:shadow-[0_0_10px_#06B6D4]
+          focus:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-cyan-500/40
+          `
         )}
       >
         <CheckboxPrimitive.Indicator>
-          <Check className="w-2.5 h-2.5 text-cyan-400" />
+          <Check className="h-3 w-3 text-black dark:text-cyan-400" />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
 
       {label && (
-        <span className="text-xs text-white font-mono">{label}</span>
+        <span className="font-mono text-xs text-[var(--text-primary)]">
+          {label}
+        </span>
       )}
     </label>
   );

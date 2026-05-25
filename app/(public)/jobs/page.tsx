@@ -24,7 +24,7 @@ const JobsPage = () => {
   return (
     <div className="max-w-7xl lg:mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
       <div className="flex lg:flex-row gap-6">
-        <aside className="hidden lg:block lg:w-1/4 pr-6 border-r border-white/5">
+        <aside className="hidden lg:block lg:w-1/4 pr-6 border-r border-black/20 dark:border-white/5">
           <JobFilters />
         </aside>
 

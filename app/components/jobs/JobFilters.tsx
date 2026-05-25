@@ -38,11 +38,16 @@ const JobFilters = () => {
 
   return (
     <div 
-      className="sticky top-3 h-fit p-4 border border-white/10 bg-[#0A0A0F] space-y-6 text-sm"
+      className="
+        sticky top-3 h-fit p-4 space-y-6 text-sm border
+        border-black/30 dark:border-white/10
+        bg-white dark:bg-[#0A0A0F]
+        text-[var(--text-primary)]
+      "
     >
       {/* Job Type */}
-      <div className="space-y-3 border-b border-white/5 pb-4">
-        <p className="text-xs uppercase tracking-wider text-gray-300 mb-2"
+      <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
+        <p className="text-xs uppercase tracking-wider font-semibold text-[var(--text-secondary)] mb-2"
         >
           Job Type
         </p>
@@ -67,8 +72,8 @@ const JobFilters = () => {
       </div>
 
       {/* Experience */}
-      <div className="space-y-3 border-b border-white/5 pb-4">
-        <p className="text-xs uppercase tracking-wider text-gray-300 mb-2"
+      <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
+        <p className="text-xs uppercase tracking-wider font-semibold text-[var(--text-secondary)] mb-2"
         >
           Experience
         </p>
@@ -93,8 +98,8 @@ const JobFilters = () => {
       </div>
 
        {/* Employment */}
-      <div className="space-y-3 border-b border-white/5 pb-4">
-        <p className="text-xs uppercase tracking-wider text-gray-300 mb-2"
+      <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
+        <p className="text-xs uppercase tracking-wider font-semibold text-[var(--text-secondary)] mb-2"
         >
           Employment
         </p>
@@ -119,8 +124,8 @@ const JobFilters = () => {
       </div>
 
       {/* Salary Slider */}
-      <div className="space-y-3 border-b border-white/5 pb-4">
-        <p className="text-xs uppercase tracking-wider text-gray-300 mb-2"
+      <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
+        <p className="text-xs uppercase tracking-wider font-semibold text-[var(--text-secondary)] mb-2"
         >
           Salary Range
         </p>
@@ -137,7 +142,12 @@ const JobFilters = () => {
             }}
           >
             {/* Track */}
-            <Slider.Track className="bg-zinc-800 relative grow rounded-full h-1">
+            <Slider.Track
+              className="
+                relative grow rounded-full h-1
+                bg-black/10 dark:bg-zinc-800
+              "
+            >
               <Slider.Range className="absolute bg-cyan-500 rounded-full h-full shadow-[0_0_10px_#06B6D4]" />
             </Slider.Track>
 
@@ -156,7 +166,7 @@ const JobFilters = () => {
             />
           </Slider.Root>
 
-          <div className="text-gray-400 text-sm">
+          <div className="text-[var(--text-secondary)] text-sm">
             ₦{filters.salary[0].toLocaleString()} — ₦
             {filters.salary[1].toLocaleString()}
           </div>
@@ -164,8 +174,8 @@ const JobFilters = () => {
       </div>
 
        {/* Skills */}
-      <div className="space-y-3 border-b border-white/5 pb-4">
-        <p className="text-xs uppercase tracking-wider text-gray-300 mb-2"
+      <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
+        <p className="text-xs uppercase tracking-wider font-semibold text-[var(--text-secondary)] mb-2"
         >
           Skills
         </p>
@@ -183,7 +193,12 @@ const JobFilters = () => {
                 className={`px-2 py-1 rounded text-xs border transition ${
                   active
                     ? "bg-cyan-500 text-black border-cyan-500"
-                    : "bg-zinc-800 hover:bg-zinc-700 text-gray-300 border-zinc-700"
+                    : `
+                        bg-black/[0.04] dark:bg-zinc-800
+                        hover:bg-black/[0.08] dark:hover:bg-zinc-700
+                        text-[var(--text-secondary)]
+                        border-black/10 dark:border-zinc-700
+                      `
                 }`}
               >
                 {skill}
@@ -194,8 +209,8 @@ const JobFilters = () => {
       </div>
 
        {/* Location */}
-      <div className="space-y-3 border-b border-white/5 pb-4">
-        <p className="text-xs uppercase tracking-wider text-gray-300 mb-2"
+      <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
+        <p className="text-xs uppercase tracking-wider font-semibold text-[var(--text-secondary)] mb-2"
         >
           Location
         </p>
@@ -219,9 +234,11 @@ const JobFilters = () => {
           }}
           placeholder="Search location..."
           className="
-            w-full px-3 py-2 rounded-md
-            bg-zinc-900 border border-zinc-700
-            text-white placeholder-gray-500
+            w-full rounded-md px-3 py-2
+            bg-white dark:bg-zinc-900
+            border border-black/10 dark:border-zinc-700
+            text-[var(--text-primary)]
+            placeholder:text-[var(--text-dim)]
             focus:outline-none focus:ring-1 focus:ring-cyan-500
           "
           role="combobox"
@@ -234,7 +251,11 @@ const JobFilters = () => {
           <div
             id="location-suggestions"
             role="listbox"
-            className="mt-2 bg-zinc-900 rounded border border-zinc-700"
+            className="
+              mt-2 rounded border
+              bg-white dark:bg-zinc-900
+              border-black/10 dark:border-zinc-700
+            "
           >
             {(() => {
               const filteredLocations = locations.filter((loc) =>
@@ -278,8 +299,8 @@ const JobFilters = () => {
       </div>
 
       {/* Posted */}
-      <div className="space-y-3 border-b border-white/5 pb-4">
-        <p className="text-xs uppercase tracking-wider text-gray-300 mb-2"
+      <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
+        <p className="text-xs uppercase tracking-wider font-semibold text-[var(--text-secondary)] mb-2"
         >
           Posted
         </p>

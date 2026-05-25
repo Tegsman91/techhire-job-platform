@@ -2,11 +2,9 @@
 
 import { companies, Job } from '@/lib/dummy-data';
 import { useSavedJobsStore } from '@/lib/store';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
-import Badge from '../ui/Badge';
 import { Bookmark, BriefcaseBusiness, Clock3, MapPin, } from 'lucide-react';
 
 interface JobCardProps {
@@ -36,8 +34,6 @@ const MobileJobCard = ({
       logo: '',
     };
   const isSaved = savedJobs.includes(job.id);
-
-  const isRemote = (job.location || "").toLowerCase() === "remote";
 
   const postedDaysAgo = useMemo(() => {
     return Math.floor(

@@ -25,11 +25,13 @@ export default function RadioGroup({
   const baseId = useId();
   const labelId = `${baseId}-label`;
 
-
   return (
     <div className="w-full">
       {label && (
-        <p id={labelId} className="mb-2 text-sm font-mono text-gray-400">
+        <p
+          id={labelId}
+          className="mb-2 font-mono text-sm text-[var(--text-secondary)]"
+        >
           {label}
         </p>
       )}
@@ -48,17 +50,32 @@ export default function RadioGroup({
               <RadioGroupPrimitive.Item
                 id={id}
                 value={opt.value}
-                className={clsx(
-                  "w-3.5 h-3.5 rounded-full border border-white/20 flex items-center justify-center transition-all",
-                  "data-[state=checked]:border-primary data-[state=checked]:shadow-[0_0_10px_#06B6D4]"
-                )}
+                className={clsx(`
+                  flex h-4 w-4 items-center justify-center
+                  rounded-full border transition-all duration-200
+                  border-black/20 dark:border-white/20
+                  bg-white dark:bg-[#0A0A0F]
+                  data-[state=checked]:border-cyan-500
+                  dark:data-[state=checked]:shadow-[0_0_10px_#06B6D4]
+                  focus:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-cyan-500/40
+                `)}
               >
-                <RadioGroupPrimitive.Indicator className="w-3 h-3 rounded-full bg-[#06B6D4]" />
+                <RadioGroupPrimitive.Indicator
+                  className="
+                    h-2 w-2 rounded-full
+                    bg-cyan-500
+                  "
+                />
               </RadioGroupPrimitive.Item>
 
               <label
                 htmlFor={id}
-                className="text-xs text-white font-mono cursor-pointer"
+                className="
+                  cursor-pointer font-mono text-xs
+                  text-[var(--text-primary)]
+                "
               >
                 {opt.label}
               </label>

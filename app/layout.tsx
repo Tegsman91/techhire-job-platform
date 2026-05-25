@@ -34,7 +34,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-black dark:bg-[#070B14] dark:text-white transition-colors duration-300">
+      <body className="min-h-full flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
         <Providers>
           {children}
 

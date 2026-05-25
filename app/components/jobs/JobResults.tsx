@@ -282,9 +282,53 @@ const JobResults = () => {
 
         {/* TOP BAR */}
         <div className="flex items-center justify-between">
-          <p className="text-gray-300 mt-3 xl:mt-0 text-sm sm:text-base">
-            {sortedJobs.length}+ jobs found
-          </p>
+          <div className="flex flex-col items-start gap-2">
+            {/* ACTIVE JOB TYPE FILTERS */}
+            {[
+              ...filters.jobType.map((item) => ({
+                value: item,
+                type: "jobType" as const,
+              })),
+
+              ...filters.experience.map((item) => ({
+                value: item,
+                type: "experience" as const,
+              })),
+
+              ...filters.employment.map((item) => ({
+                value: item,
+                type: "employment" as const,
+              })),
+
+              ...filters.skills.map((item) => ({
+                value: item,
+                type: "skills" as const,
+              })),
+            ].map((item) => (
+              <span
+                key={`${item.type}-${item.value}`}
+                onClick={() =>
+                  setFilter(
+                    item.type,
+                    filters[item.type].filter((t) => t !== item.value)
+                  )
+                }
+                className="
+                  cursor-pointer rounded-full px-2.5 py-1
+                  lg:text-lg text-sm font-medium
+                  bg-cyan-500/10 text-cyan-600
+                  dark:text-cyan-400
+                  border border-cyan-500/20
+                "
+              >
+                <span className="mr-2">{item.value}</span>×
+              </span>
+            ))}
+
+            <p className="text-[var(--text-secondary)] xl:mt-0 text-sm sm:text-base">
+              {sortedJobs.length}+ jobs found
+            </p>
+          </div>
 
           {/* DESKTOP CONTROLS */}
           <div className="hidden lg:flex flex-wrap gap-3">
@@ -310,7 +354,7 @@ const JobResults = () => {
               className={`px-3 py-1 rounded-md text-sm transition
                 ${filters.view === "grid"
                   ? "bg-cyan-500 text-black"
-                  : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"}
+                  : "dark:bg-zinc-800 border border-gray-400  dark:border-gray-400/20 text-[var(--text-secondary)] dark:hover:bg-zinc-700 hover:bg-zinc-100"}
               `}
             >
               Grid
@@ -321,7 +365,7 @@ const JobResults = () => {
               className={`px-3 py-1 rounded-md text-sm transition
                 ${filters.view === "list"
                   ? "bg-cyan-500 text-black"
-                  : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"}
+                  : "dark:bg-zinc-800 border border-gray-400 dark:border-gray-400/20 text-[var(--text-secondary)] dark:hover:bg-zinc-700 hover:bg-zinc-100"}
               `}
             >
               List
@@ -459,10 +503,10 @@ const JobResults = () => {
           onClick={() => setPage((p) => Math.max(p - 1, 1))}
           disabled={safePage === 1}
           className="
-            px-3 py-1 rounded-md text-sm
-            bg-zinc-800 text-white
+            px-3 py-1 rounded-md text-sm border border-gray-500 dark:border-gray-500/20 text-[var(--text-secondary)]
+            dark:bg-zinc-800 dark:text-white
             disabled:opacity-40 disabled:cursor-not-allowed
-            hover:bg-zinc-700 transition
+            dark:hover:bg-zinc-700 hover:bg-zinc-200 transition
           "
         >
           Prev
@@ -481,8 +525,8 @@ const JobResults = () => {
                   px-3 py-1 rounded-md text-sm transition
                   ${
                     safePage === pageNumber
-                      ? "bg-cyan-500 text-black"
-                      : "bg-zinc-800 text-white hover:bg-zinc-700"
+                      ? "dark:bg-cyan-500 bg-zinc-800 text-white dark:text-black"
+                      : " text-black border dark:bg-zinc-800 dark:text-white border-gray-500 dark:border-gray-500/20 hover:dark:bg-zinc-700 hover:bg-zinc-200"
                   }
                 `}
               >
@@ -495,10 +539,10 @@ const JobResults = () => {
           onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
           disabled={page >= totalPages || totalPages === 0}
           className="
-            px-3 py-1 rounded-md text-sm
-            bg-zinc-800 text-white
+            px-3 py-1 rounded-md text-sm border border-gray-500 dark:border-gray-500/20 text-[var(--text-secondary)]
+            dark:bg-zinc-800 dark:text-white
             disabled:opacity-40 disabled:cursor-not-allowed
-            hover:bg-zinc-700 transition
+            dark:hover:bg-zinc-700 hover:bg-zinc-200 transition
           "
         >
           Next

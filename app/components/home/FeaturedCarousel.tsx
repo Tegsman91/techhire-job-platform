@@ -41,7 +41,7 @@ const FeaturedCarousel = () => {
   return (
     <section className="mt-16 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="relative z-20 text-2xl sm:text-3xl font-bold mb-6 text-white">
+        <h2 className="relative z-20 text-zinc-700 text-2xl sm:text-3xl font-bold mb-6 dark:text-white">
           Featured Opportunities
         </h2>
         <div className="relative group">
@@ -63,7 +63,8 @@ const FeaturedCarousel = () => {
                           "hover:shadow-[0_0_25px_#06B6D4] transition"
                         )}
                       >
-                        <div className="h-full flex flex-col justify-between gap-3 rounded-xl p-4 bg-[#0A0A0F]"
+                        <div
+                          className="h-full flex flex-col justify-between gap-3 rounded-xl p-4 bg-white dark:bg-[#0A0A0F] border border-black/5 dark:border-white/5 shadow-sm dark:shadow-none"
                         >
                           <Badge variant="featured" className="w-fit">
                             Featured
@@ -79,25 +80,30 @@ const FeaturedCarousel = () => {
                               priority={job.id === featuredJobs[0].id}
                               placeholder="blur"
                               blurDataURL="/placeholders/company-blur.jpg"
-                              className="w-10 h-10 rounded bg-zinc-800 p-1"
+                              className="
+                                w-10 h-10 rounded p-1
+                                bg-black/20 dark:bg-zinc-800
+                              "
                               unoptimized
                             />
 
                             <div>
-                              <p className="text-sm text-white">
+                              <p className="text-sm text-[var(--text-primary)]"
+                              >
                                 {company?.name}
                               </p>
-                              <p className="text-xs text-gray-400">
+
+                              <p className="text-xs text-[var(--text-secondary)]">
                                 {job.location}
                               </p>
                             </div>
                           </div>
 
-                          <h3 className="text-lg font-bold text-white">
+                          <h3 className="text-lg font-bold text-[var(--text-primary)]">
                             {job.title}
                           </h3>
 
-                          <p className="text-sm text-gray-400">
+                          <p className="text-sm text-[var(--text-secondary)]">
                             {job.salary}
                           </p>
 
@@ -121,7 +127,17 @@ const FeaturedCarousel = () => {
           
           <button
             onClick={() => emblaApi?.scrollPrev()}
-            className="absolute pointer-events-none z-10 left-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition group-hover:pointer-events-auto bg-black/50 hover:bg-black/80 p-2 rounded-full"
+            className="
+              absolute pointer-events-none z-10
+              left-0 top-1/2 -translate-y-1/2
+              opacity-0 group-hover:opacity-100
+              transition group-hover:pointer-events-auto
+              bg-white/90 dark:bg-black/50
+              hover:bg-white dark:hover:bg-black/80
+              text-black dark:text-white
+              border border-black/10 dark:border-white/10
+              p-2 rounded-full
+            "
           >
             <ChevronLeft /> 
           </button>
@@ -129,7 +145,17 @@ const FeaturedCarousel = () => {
           <button
             onClick={() => emblaApi?.scrollNext()}
             aria-label="Previous slide"
-            className="absolute pointer-events-none z-10 right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto transition bg-black/50 hover:bg-black/80 p-2 rounded-full"
+            className="
+              absolute pointer-events-none z-10
+              right-0 top-1/2 -translate-y-1/2
+              opacity-0 group-hover:opacity-100
+              transition group-hover:pointer-events-auto
+              bg-white/90 dark:bg-black/50
+              hover:bg-white dark:hover:bg-black/80
+              text-black dark:text-white
+              border border-black/10 dark:border-white/10
+              p-2 rounded-full
+            "
           >
             <ChevronRight />
           </button>

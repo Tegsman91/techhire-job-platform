@@ -29,29 +29,40 @@ export default function CustomSelect({
   return (
     <div className="w-full">
       {label && (
-        <p id={labelId} className="mb-2 text-sm font-mono text-gray-400">
+        <p
+          id={labelId}
+          className="mb-2 text-sm font-mono text-[var(--text-secondary)]"
+        >
           {label}
         </p>
       )}
 
-      <Select.Root 
-        value={value || undefined} 
+      <Select.Root
+        value={value || undefined}
         onValueChange={onValueChange}
       >
-        <Select.Trigger 
-          // className="flex items-center justify-between w-full px-4 py-3 rounded-lg bg-[#0A0A0F]/60 border border-white/10 text-white outline-none transition-all focus:shadow-[0_0_10px_#06B6D4]" 
+        <Select.Trigger
           className="
             flex w-full items-center justify-between
-            rounded-2xl border border-white/10
-            bg-black/20 px-4 py-3
-            text-white outline-none transition-all
+            rounded-2xl
+            border border-[var(--border-primary)]
+            bg-[var(--surface-primary)]
+            px-4 py-3
+            text-[var(--text-primary)]
+            outline-none
+            backdrop-blur-xl
+            transition-all
             focus:border-cyan-400/50
             focus:shadow-[0_0_12px_rgba(34,211,238,0.15)]
-          "       
+          "
           aria-labelledby={label ? labelId : undefined}
         >
           <Select.Value placeholder={placeholder || 'Select option'} />
-          <ChevronDown size={16} />
+
+          <ChevronDown
+            size={16}
+            className="text-[var(--text-secondary)]"
+          />
         </Select.Trigger>
 
         <Select.Portal>
@@ -59,9 +70,9 @@ export default function CustomSelect({
             position="popper"
             sideOffset={6}
             className="
-              z-50 overflow-hidden rounded-xl
-              border border-white/10
-              bg-[#18181B]
+              z-50 overflow-hidden rounded-2xl
+              border border-[var(--border-primary)]
+              bg-[var(--bg-secondary)]
               shadow-2xl
               backdrop-blur-xl
               min-w-[var(--radix-select-trigger-width)]
@@ -72,9 +83,19 @@ export default function CustomSelect({
                 <Select.Item
                   key={opt.value}
                   value={opt.value}
-                  className="p-2 rounded cursor-pointer hover:bg-white/10 focus:bg-white/10 outline-none"
+                  className="
+                    rounded-xl px-3 py-2
+                    cursor-pointer
+                    outline-none
+                    transition-colors
+                    text-[var(--text-primary)]
+                    hover:bg-[var(--surface-secondary)]
+                    focus:bg-[var(--surface-secondary)]
+                  "
                 >
-                  <Select.ItemText>{opt.label}</Select.ItemText>
+                  <Select.ItemText>
+                    {opt.label}
+                  </Select.ItemText>
                 </Select.Item>
               ))}
             </Select.Viewport>

@@ -94,21 +94,21 @@ const CompaniesPage = () => {
   }, [search, industry, companySize, location, sortBy]);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] px-4 py-6 text-white sm:px-6 lg:px-8">
+    <div className="min-h-screen px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl space-y-6 sm:space-y-8">
         {/* Header */}
-        <section className="rounded-[2rem] overflow-hidden border border-cyan-500/20 bg-white/[0.04] p-4 sm:p-6 backdrop-blur-xl">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
+       <section className="rounded-[2rem] overflow-hidden border border-cyan-500/20 bg-white/[0.04] p-4 sm:p-6 backdrop-blur-xl">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/30 via-purple-500/10 dark:from-cyan-500/10 dark:via-purple-500/5 to-transparent" />
           <h1 className="text-3xl font-bold sm:text-4xl">
             Companies
           </h1>
-          <p className="mt-2 text-gray-400">
+          <p className="mt-2 text-secondary">
             Explore top employers hiring across industries.
           </p>
         </section>
 
         {/* Search + Filters */}
-        <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-4 sm:p-5 backdrop-blur-xl">
+        <section className="card rounded-[2rem] p-4 sm:p-5">
           <div className="grid gap-4 lg:grid-cols-5">
             {/* Search */}
             <div className="relative lg:col-span-2">
@@ -116,12 +116,13 @@ const CompaniesPage = () => {
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400"
                 size={18}
               />
+
               <input
                 type="text"
                 placeholder="Search company..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full rounded-2xl border border-white/10 bg-black/20 py-3 pl-12 pr-4 text-white placeholder:text-gray-500 outline-none transition focus:border-cyan-400/50"
+                className="input py-3 pl-12 pr-4"
               />
             </div>
 
@@ -163,7 +164,7 @@ const CompaniesPage = () => {
                 className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                   sortBy === option
                     ? 'bg-cyan-500 text-black'
-                    : 'border border-white/10 bg-white/5 text-gray-300'
+                    : 'border border-[var(--border-primary)] bg-[var(--surface-secondary)] text-secondary'
                 }`}
               >
                 {option}
@@ -188,7 +189,7 @@ export default CompaniesPage
 
 function CompanyCard({ company }: { company: CompanyCardData }) {
   return (
-    <div className="flex h-full flex-col rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-3 sm:p-5 backdrop-blur-xl transition hover:border-cyan-500/30">
+    <div className="flex h-full flex-col rounded-[1.5rem] border border-gray-400 dark:border-white/10 dark:bg-white/[0.04] p-3 sm:p-5 backdrop-blur-xl transition hover:dark:border-cyan-500/30 hover:border-gray-600">
       <div className="flex items-start gap-3">
         <Image
           src={company?.logo || ""}
@@ -197,7 +198,7 @@ function CompanyCard({ company }: { company: CompanyCardData }) {
           height={44}
           placeholder="blur"
           blurDataURL="/placeholders/company-blur.jpg"
-          className="h-11 w-11 shrink-0 rounded-xl bg-zinc-800 p-1"
+          className="h-11 w-11 shrink-0 rounded-xl bg-zinc-700 p-1"
           unoptimized
         />
 
@@ -212,18 +213,18 @@ function CompanyCard({ company }: { company: CompanyCardData }) {
             )}
           </div>
 
-          <p className="text-[11px] text-gray-400 sm:text-sm">
+          <p className="text-[11px] text-secondary sm:text-sm">
             {company.industry}
           </p>
         </div>
       </div>
 
-      <p className="mt-3 line-clamp-2 text-xs leading-5 text-gray-300 sm:mt-4 sm:text-sm">
+      <p className="mt-3 line-clamp-2 text-xs leading-5 text-secondary sm:mt-4 sm:text-sm">
         {company.description}
       </p>
 
       {/* Stats */}
-      <div className="mt-4 grid gap-2 text-[11px] text-gray-400 sm:text-sm">
+      <div className="mt-4 grid gap-2 text-[11px] text-secondary sm:text-sm">
         <div className="flex items-center gap-2">
           <Users size={14} className="shrink-0" />
           <span>{company.employees} employees</span>

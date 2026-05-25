@@ -25,8 +25,7 @@ function SuggestionDropdown({
   return (
     <div
       className="
-        mt-2 w-full rounded-2xl border border-white/10
-        bg-[#111118] backdrop-blur-xl
+        mt-2 w-full rounded-2xl border bg-[var(--bg-secondary)] border-[var(--border-primary)] backdrop-blur-xl
         shadow-[0_10px_40px_rgba(0,0,0,0.45)]
         overflow-hidden z-50
       "
@@ -41,13 +40,13 @@ function SuggestionDropdown({
             flex items-center justify-between
             ${
               selectedIndex === index
-                ? "bg-cyan-500/15 text-cyan-300"
-                : "text-white hover:bg-white/5"
+                ? "suggestion-active"
+                : "text-[var(--text-primary)] hover:bg-[var(--surface-secondary)]"
             }
           `}
         >
           <span>{item.label}</span>
-          <span className="text-xs text-gray-500 uppercase">
+          <span className="text-xs text-[var(--text-dim)] uppercase">
             {item.type}
           </span>
         </button>
@@ -176,17 +175,20 @@ const SearchBar = () => {
   return (
     <div
       className="
-        w-full rounded-3xl border border-white/10
-        bg-white/5 backdrop-blur-2xl
+        w-full rounded-3xl
+        border border-[var(--border-primary)]
+        bg-surface
+        backdrop-blur-2xl
         p-3 sm:p-4
-        shadow-[0_0_30px_rgba(6,182,212,0.12)]
+        shadow-[0_0_30px_rgba(0,0,0,0.2)]
+        dark:shadow-[0_0_30px_rgba(6,182,212,0.12)]
       "
     >
       <div className="flex flex-col lg:flex-row gap-3">
         <Popover.Root open={activeDropdown === "job" && jobSuggestions.length > 0}>
           <Popover.Anchor asChild>
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-4 h-4" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 dark:text-cyan-400 text-gray-500 w-4 h-4" />
 
               <input
                 ref={jobInputRef}
@@ -200,11 +202,16 @@ const SearchBar = () => {
                 onKeyDown={handleKeyDown}
                 placeholder="Job title or skill"
                 className="
-                  w-full rounded-2xl bg-[#0A0A0F]
-                  border border-white/10
+                  w-full rounded-2xl
+                  bg-[var(--bg-primary)]
+                  border border-[var(--border-primary)]
                   pl-11 pr-4 py-4
-                  text-white placeholder-gray-500
-                  outline-none focus:border-cyan-500"
+                  text-[var(--text-primary)]
+                  placeholder:text-[var(--text-dim)]
+                  outline-none
+                  transition-colors
+                  focus:border-cyan-500
+                "
               />
             </div>
           </Popover.Anchor>
@@ -228,12 +235,12 @@ const SearchBar = () => {
         </Popover.Root>
 
         {/* LOCATION INPUT */}
-        {/* <Popover.Root
+        <Popover.Root
           open={activeDropdown === "location" && locationSuggestions.length > 0}
         >
           <Popover.Anchor asChild>
-            <div className="relative flex-1">
-              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 w-4 h-4" />
+            <div className="relative flex-1 hidden lg:block">
+              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-cyan-400 w-4 h-4" />
 
               <input
                 ref={locationInputRef}
@@ -247,11 +254,15 @@ const SearchBar = () => {
                 onKeyDown={handleKeyDown}
                 placeholder="Location"
                 className="
-                  w-full rounded-2xl bg-[#0A0A0F]
-                  border border-white/10
+                  w-full rounded-2xl
+                  bg-[var(--bg-primary)]
+                  border border-[var(--border-primary)]
                   pl-11 pr-4 py-4
-                  text-white placeholder-gray-500
-                  outline-none focus:border-cyan-500
+                  text-[var(--text-primary)]
+                  placeholder:text-[var(--text-dim)]
+                  outline-none
+                  transition-colors
+                  focus:border-cyan-500
                 "
               />
             </div>
@@ -273,7 +284,7 @@ const SearchBar = () => {
               />
             </Popover.Content>
           </Popover.Portal>
-        </Popover.Root> */}
+        </Popover.Root>
 
         {/* BUTTON */}
         <button

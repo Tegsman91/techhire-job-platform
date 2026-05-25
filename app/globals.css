@@ -1,34 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  /* Backgrounds */
-  --bg-deep: #0a0a0f;
-  --bg-dark: #18181b;
-  --bg-slate: #27272a;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  /* Brand Colors */
-  --color-primary: #06b6d4; /* neon cyan */
-  --color-secondary: #a855f7; /* electric purple */
-  --color-accent: #ec4899; /* hot pink */
+:root {
+  /* LIGHT MODE */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f5;
+  --bg-tertiary: #e4e4e7;
+
+  --surface-primary: rgba(255,255,255,0.9);
+  --surface-secondary: rgba(255,255,255,0.7);
+
+  --border-primary: rgba(0,0,0,0.5);
+  --border-secondary: rgba(0,0,0,0.05);
+
+  --text-primary: #09090b;
+  --text-secondary: #3f3f46;
+  --text-dim: #71717a;
+
+  /* BRAND */
+  --color-primary: #06b6d4;
+  --color-secondary: #a855f7;
+  --color-accent: #ec4899;
   --color-success: #10b981;
   --color-warning: #f97316;
 
-  /* Text */
-  --text-white: #ffffff;
-  --text-light: #e4e4e7;
-  --text-dim: #71717a;
+  /* GRADIENTS */
+  --gradient-cyan-purple:
+    linear-gradient(90deg, #06b6d4, #a855f7);
 
-  /* Gradients */
-  --gradient-cyan-purple: linear-gradient(90deg, #06b6d4, #a855f7);
-  --gradient-pink-orange: linear-gradient(90deg, #ec4899, #f97316);
-  --gradient-dark-fade: linear-gradient(to bottom, #0a0a0f, transparent);
+  --gradient-pink-orange:
+    linear-gradient(90deg, #ec4899, #f97316);
+}
+
+.dark {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #101522;
+  --bg-tertiary: #18181b;
+
+  --surface-primary: rgba(0,0,0,0.45);
+  --surface-secondary: rgba(255,255,255,0.05);
+
+  --border-primary: rgba(255,255,255,0.1);
+  --border-secondary: rgba(255,255,255,0.05);
+
+  --text-primary: #ffffff;
+  --text-secondary: #e4e4e7;
+  --text-dim: #71717a;
 }
 
 body {
   width: 100%;
-  background-color: var(--bg-deep);
-  color: var(--text-light);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-inter);
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 body[data-scroll-locked] {
@@ -100,12 +129,43 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .input {
   width: 100%;
   border-radius: 1rem;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(0,0,0,0.25);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  backdrop-filter: blur(12px);
   padding: 0.9rem 1rem;
-  color: white;
   outline: none;
   transition: all 0.3s ease;
+}
+
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.border-primary {
+  border-color: var(--border-primary);
+}
+
+.surface {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  backdrop-filter: blur(18px);
 }
 
 .input:focus {
@@ -163,15 +223,48 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .bg-grid {
   background-image: linear-gradient(
-      rgba(255, 255, 255, 0.05) 1px,
+      rgba(0, 0, 0, 0.06) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.05) 1px,
+      rgba(0, 0, 0, 0.06) 1px,
       transparent 1px
     );
   background-size: 40px 40px;
+}
+
+.dark .bg-grid {
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px
+    );
+}
+
+.suggestion-active {
+  background: rgba(6, 182, 212, 0.12);
+  color: #155e75 !important;
+}
+
+.dark .suggestion-active {
+  background: rgba(6, 182, 212, 0.15);
+  color: #67e8f9 !important;
+}
+
+.card {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  backdrop-filter: blur(18px);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .bg-circuit {
@@ -237,11 +330,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .bg-surface {
-  background-color: var(--bg-dark);
+  background: var(--surface-primary);
 }
 
-.bg-slate {
-  background-color: var(--bg-slate);
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
 }
 
 @keyframes shake {

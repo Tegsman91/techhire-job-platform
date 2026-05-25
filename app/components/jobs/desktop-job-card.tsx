@@ -64,7 +64,7 @@ const DesktopJobCard = ({
         >
           <div
             className={`
-              bg-[#0A0A0F] rounded-2xl
+              bg-[var(--surface-primary)] dark:bg-[#0A0A0F] rounded-2xl backdrop-blur-xl
               group-hover:shadow-[0_0_30px_rgba(6,182,212,0.25)]
               transition-all duration-300 relative
               ${
@@ -85,7 +85,7 @@ const DesktopJobCard = ({
                 priority={priority}
                 placeholder="blur"
                 blurDataURL="/placeholders/company-blur.jpg"
-                className="rounded-xl bg-zinc-800 p-2"
+                className="rounded-xl bg-black/30 dark:bg-zinc-800 p-2"
                 unoptimized
               />
 
@@ -109,16 +109,16 @@ const DesktopJobCard = ({
             {/* CENTER / CONTENT */}
             <div className="flex-1 min-w-0 space-y-3">
               <div>
-                <h3 className="text-white font-bold text-base sm:text-lg truncate">
+                <h3 className="text-[var(--text-primary)] font-bold text-base sm:text-lg truncate">
                   {job.title}
                 </h3>
 
-                <p className="text-gray-400 text-sm">
+                <p className="text-[var(--text-secondary)] text-sm">
                   {company.name}
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 text-sm text-gray-400">
+              <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--text-secondary)]">
                 <span className="flex items-center gap-1">
                   <MapPin size={14} />
                   {job.location}
@@ -132,7 +132,7 @@ const DesktopJobCard = ({
               </div>
 
               <div className="mt-auto space-y-3">
-                <p className="text-cyan-400 font-medium text-sm">
+                <p className="text-cyan-700 dark:text-cyan-400 font-medium text-sm">
                   {job.salary}
                 </p>
 
@@ -144,7 +144,7 @@ const DesktopJobCard = ({
                   ))}
                 </div>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-[var(--text-secondary)]">
                   {postedDaysAgo === 0
                     ? "Posted today"
                     : `${postedDaysAgo} day${postedDaysAgo > 1 ? "s" : ""} ago`}
@@ -178,8 +178,8 @@ const DesktopJobCard = ({
                     p-2 rounded-full transition
                     ${
                       isSaved
-                        ? "bg-cyan-500/20 text-cyan-400"
-                        : "bg-zinc-800 text-gray-400 hover:text-white"
+                        ? "bg-gray-500/30 text-gray-600 dark:bg-cyan-500/20 dark:text-cyan-400"
+                        : "bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
                     }
                   `}
                 >

@@ -75,9 +75,9 @@ const Connector = () => (
 
 const HowItWorks = () => {
   return (
-    <section className="py-16 bg-[#0A0A0F]">
+    <section className="py-16 transition-colors duration-300">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="relative text-2xl sm:text-3xl font-bold text-white mb-10">
+        <h2 className="relative text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-10">
           How It Works
         </h2>
 
@@ -87,7 +87,9 @@ const HowItWorks = () => {
               value="job-seekers"
               className="
                 px-4 py-2 rounded-lg text-sm font-medium
-                bg-zinc-800 text-white
+                bg-[var(--surface-primary)]
+                text-[var(--text-primary)]
+                border border-[var(--border-primary)]
                 data-[state=active]:bg-linear-to-r
                 data-[state=active]:from-cyan-500
                 data-[state=active]:to-purple-500
@@ -99,7 +101,8 @@ const HowItWorks = () => {
             <Tabs.Trigger
               value="employers"
               className="px-4 py-2 rounded-lg text-sm font-medium
-              bg-zinc-800 text-white
+              bg-[var(--surface-primary)] text-[var(--text-primary)]
+                border border-[var(--border-primary)]
               data-[state=active]:bg-linear-to-r
               data-[state=active]:from-pink-500
               data-[state=active]:to-orange-500"

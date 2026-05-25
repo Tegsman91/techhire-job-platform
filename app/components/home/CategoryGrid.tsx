@@ -23,7 +23,7 @@ const CategoryGrid = () => {
   return (
     <section className="py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="relative text-2xl sm:text-3xl font-bold text-white mb-8">
+        <h2 className="relative text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-white mb-8">
           Explore by Category
         </h2>
 
@@ -51,26 +51,41 @@ const CategoryGrid = () => {
                   </div>
                 </div>
 
-                <div className="relative bg-[#0A0A0F] rounded-xl p-5 flex items-center gap-4 h-full
-                group-hover:shadow-[0_0_50px_rgba(168,85,247,0.35)]
-                transition"
+                <div
+                  className="
+                    relative rounded-xl p-5
+                    flex items-center gap-4 h-full
+                    bg-white dark:bg-[#0A0A0F]
+                    border border-black/5 dark:border-white/5
+                    shadow-sm dark:shadow-none
+                    group-hover:shadow-[0_0_50px_rgba(168,85,247,0.35)]
+                    transition
+                  "
                 >
-                  <div className="
-                    p-3 rounded-lg 
-                    bg-linear-to-br from-zinc-800 to-zinc-900 
-                    text-[#06B6D4]
-                    group-hover:text-white
-                    group-hover:bg-linear-to-br group-hover:from-[#06B6D4]/20 group-hover:to-[#A855F7]/20 group-hover:shadow-[0_0_8px_rgba(6,182,212,0.5)]
-                    transition-all duration-300
-                  ">
+                  <div
+                    className="
+                      p-3 rounded-lg
+                      bg-linear-to-br
+                      from-black/5 to-black/10
+                      dark:from-zinc-800 dark:to-zinc-900
+                      text-cyan-600 dark:text-[#06B6D4]
+                      group-hover:text-zinc-600
+                      group-hover:dark:text-white
+                      group-hover:bg-linear-to-br
+                      group-hover:from-[#06B6D4]/20
+                      group-hover:to-[#A855F7]/20
+                      group-hover:shadow-[0_0_8px_rgba(6,182,212,0.5)]
+                      transition-all duration-300
+                    "
+                  >
                     <Icon size={22} />
                   </div>
 
                   <div>
-                    <p className="text-white font-semibold">
+                    <p className="text-[var(--text-primary)] font-semibold">
                       {cat.value}
                     </p>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-[var(--text-secondary)]">
                       {count > 0 ? `${count.toLocaleString()} jobs` : "No openings yet"}
                     </p>
                   </div>
