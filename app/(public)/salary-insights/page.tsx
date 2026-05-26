@@ -32,13 +32,6 @@ const parseSalary = (salary: string): number => {
   return Number(upper.replace(/[^\d]/g, ''));
 };
 
-const formatCompactSalary = (value: number) => {
-  if (value >= 1_000_000) {
-    return `₦${(value / 1_000_000).toFixed(1)}M`;
-  }
-  return `₦${Math.round(value / 1000)}k`;
-};
-
 const SalaryInsightsPage = () => {
   const [roleFilter, setRoleFilter] = useState('All');
   const [experienceFilter, setExperienceFilter] = useState<ExperienceLevel | 'All'>('All');
@@ -55,7 +48,7 @@ const SalaryInsightsPage = () => {
       if (locationFilter !== 'All' && job.location !== locationFilter) return false;
       return true;
     });
-  }, [jobs, roleFilter, experienceFilter, locationFilter]);
+  }, [roleFilter, experienceFilter, locationFilter]);
 
   const barData = useMemo(() => {
     const grouped = filteredJobs.reduce((acc, job) => {
@@ -95,10 +88,17 @@ const SalaryInsightsPage = () => {
 
     const base = parseSalary(match.salary);
     return base + estimateYears * 150000;
-  }, [jobs, estimateRole, estimateYears]);
+  }, [estimateRole, estimateYears]);
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#050510] via-[#0A0A14] to-[#101826] text-white px-4 sm:px-6 py-8 overflow-x-hidden"
+    <div
+      className="
+        min-h-screen overflow-x-hidden bg-gradient-to-br
+        from-[#F8FAFC] via-[#EEF2FF] to-[#E2E8F0]
+        dark:from-[#050510] dark:via-[#0A0A14] dark:to-[#101826]
+        text-zinc-900 dark:text-white
+        px-4 sm:px-6 py-8 transition-colors duration-300
+      "
     >
       <div className="w-full max-w-7xl mx-auto space-y-10"
       >
@@ -107,7 +107,7 @@ const SalaryInsightsPage = () => {
           >
             Salary Insights
           </h1>
-          <p className="text-gray-400 mt-2">
+          <p className="text-zinc-600 dark:text-gray-400 mt-2">
             Explore realistic salary trends across roles, locations, and experience.
           </p>
         </div>
@@ -153,7 +153,17 @@ const SalaryInsightsPage = () => {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-cyan-500/20 bg-white/5 backdrop-blur-xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.12)] min-w-0 w-full max-w-full overflow-hidden">
+          <div 
+            className="
+              rounded-3xl border border-zinc-200
+              dark:border-cyan-500/20 bg-white/5 
+              backdrop-blur-xl p-6 
+              shadow-[0_10px_40px_rgba(0,0,0,0.06)]
+              dark:shadow-[0_0_30px_rgba(6,182,212,0.12)]
+              transition-colors duration-300
+              min-w-0 w-full max-w-full overflow-hidden
+            "
+          >
             <h2 className="text-xl font-semibold mb-4">
               Average Salary by Role   
             </h2>
@@ -167,10 +177,25 @@ const SalaryInsightsPage = () => {
                     <Tooltip
                       cursor={{ fill: "rgba(255,255,255,0.04)" }}
                       contentStyle={{
-                        backgroundColor: "#111827",
-                        border: "1px solid rgba(255,255,255,0.08)",
+                        backgroundColor:
+                          typeof document !== "undefined" &&
+                          document.documentElement.classList.contains("dark")
+                            ? "#111827"
+                            : "#ffffff",
+
+                        border:
+                          typeof document !== "undefined" &&
+                          document.documentElement.classList.contains("dark")
+                            ? "1px solid rgba(255,255,255,0.08)"
+                            : "1px solid rgba(0,0,0,0.08)",
+
                         borderRadius: "12px",
-                        color: "#fff",
+
+                        color:
+                          typeof document !== "undefined" &&
+                          document.documentElement.classList.contains("dark")
+                            ? "#fff"
+                            : "#18181b",
                       }}
                     />
                     <Bar
@@ -185,7 +210,16 @@ const SalaryInsightsPage = () => {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-cyan-500/20 bg-white/5 backdrop-blur-xl p-6 shadow-[0_0_30px_rgba(6,182,212,0.12)] min-w-0"
+          <div 
+            className="
+              rounded-3xl border border-zinc-200
+              dark:border-cyan-500/20 bg-white/5 
+              backdrop-blur-xl p-6 
+              shadow-[0_10px_40px_rgba(0,0,0,0.06)]
+              dark:shadow-[0_0_30px_rgba(6,182,212,0.12)]
+              transition-colors duration-300
+              min-w-0
+            "
           >
             <h2 className="text-xl font-semibold mb-4">
               Salary Growth
@@ -201,10 +235,25 @@ const SalaryInsightsPage = () => {
                     <Tooltip
                       cursor={{ fill: "rgba(255,255,255,0.04)" }}
                       contentStyle={{
-                        backgroundColor: "#111827",
-                        border: "1px solid rgba(255,255,255,0.08)",
+                        backgroundColor:
+                          typeof document !== "undefined" &&
+                          document.documentElement.classList.contains("dark")
+                            ? "#111827"
+                            : "#ffffff",
+
+                        border:
+                          typeof document !== "undefined" &&
+                          document.documentElement.classList.contains("dark")
+                            ? "1px solid rgba(255,255,255,0.08)"
+                            : "1px solid rgba(0,0,0,0.08)",
+
                         borderRadius: "12px",
-                        color: "#fff",
+
+                        color:
+                          typeof document !== "undefined" &&
+                          document.documentElement.classList.contains("dark")
+                            ? "#fff"
+                            : "#18181b",
                       }}
                     />
                     <Line
@@ -221,7 +270,15 @@ const SalaryInsightsPage = () => {
         </div>
 
         
-        <div className="bg-zinc-900 rounded-2xl p-6 overflow-x-auto">
+        <div
+          className="
+            rounded-2xl p-6 overflow-x-auto
+            bg-white dark:bg-zinc-900
+            border border-zinc-200 dark:border-zinc-800
+            shadow-sm dark:shadow-none
+            transition-colors duration-300
+          "
+        >
           <h2 className="text-xl font-semibold mb-4">
             Salary Comparison
           </h2>
@@ -229,7 +286,7 @@ const SalaryInsightsPage = () => {
           <div className="overflow-x-auto w-full">
             <table className="min-w-[650px] w-full text-left text-sm sm:text-base">
               <thead>
-                <tr className="text-gray-400 border-b border-zinc-700">
+                <tr className="text-zinc-500 dark:text-gray-400 border-b border-zinc-200 dark:border-zinc-700">
                   <th className="pb-3">Role</th>
                   <th>Average</th>
                   <th>Range</th>
@@ -237,7 +294,10 @@ const SalaryInsightsPage = () => {
               </thead>
               <tbody>
                 {barData.map((row) => (
-                  <tr key={row.role} className="border-b border-zinc-800">
+                  <tr 
+                    key={row.role} 
+                    className="border-b border-zinc-100 dark:border-zinc-800"
+                  >
                     <td className="py-3">{row.role}</td>
                     <td>₦{row.avgSalary.toLocaleString()}</td>
                     <td>{row.range}</td>
@@ -248,7 +308,16 @@ const SalaryInsightsPage = () => {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-purple-500/20 bg-white/5 backdrop-blur-xl p-6 shadow-[0_0_30px_rgba(168,85,247,0.12)] space-y-4"
+        <div 
+          className="
+            rounded-3xl border border-zinc-200
+            dark:border-cyan-500/20 bg-white/5 
+            backdrop-blur-xl p-6 
+            shadow-[0_10px_40px_rgba(0,0,0,0.06)]
+            dark:shadow-[0_0_30px_rgba(6,182,212,0.12)]
+            transition-colors duration-300
+            space-y-4
+          "
         >
           <h2 className="text-xl font-semibold">
             Your Estimated Salary
@@ -272,7 +341,18 @@ const SalaryInsightsPage = () => {
               aria-label="Years of experience"
               value={estimateYears}
               onChange={(e) => setEstimateYears(Math.max(0, Number(e.target.value) || 0))}
-              className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md text-white focus:outline-none focus:ring-2 focus:ring-purple-600/50"
+              className="
+                rounded-2xl
+                border border-zinc-200 dark:border-white/10
+                bg-white dark:bg-white/5
+                px-4 py-3
+                backdrop-blur-md
+                text-zinc-900 dark:text-white
+                placeholder:text-zinc-400 dark:placeholder:text-zinc-500
+                focus:outline-none
+                focus:ring-2 focus:ring-purple-600/50
+                transition-colors duration-300
+              "
             />
           </div>
 

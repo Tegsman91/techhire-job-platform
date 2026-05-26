@@ -88,7 +88,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
-  color: rgba(255,255,255,0.35);
+  color: var(--text-dim);
   pointer-events: none;
   height: 0;
 }
@@ -96,7 +96,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ProseMirror {
   white-space: pre-wrap;
   outline: none;
-  color: rgba(255,255,255,0.9);
+  color: var(--text-primary);
   line-height: 1.6;
 }
 
@@ -331,10 +331,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .bg-surface {
   background: var(--surface-primary);
-}
-
-.bg-secondary {
-  background-color: var(--bg-secondary);
 }
 
 .bg-tertiary {

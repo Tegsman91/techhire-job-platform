@@ -186,7 +186,7 @@ const CompanyProfilePage = () => {
     editorProps: {
       attributes: {
         class:
-          'min-h-[220px] px-1 sm:px-2 outline-none text-white leading-relaxed',
+          'min-h-[220px] px-1 sm:px-2 outline-none text-slate-800 dark:text-white leading-relaxed',
       },
     },
   });
@@ -197,8 +197,6 @@ const CompanyProfilePage = () => {
     if (!file) return;
 
     const preview = URL.createObjectURL(file);
-
-    // setLogoPreview(preview);
 
     setCropImage(preview);
   }, []);
@@ -296,11 +294,18 @@ const CompanyProfilePage = () => {
   };
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#0A0A0F] px-4 py-6 text-white sm:px-6 lg:px-8">
+    <main className="min-h-screen overflow-x-hidden dark:bg-[#0A0A0F] dark:text-white bg-slate-50 text-slate-900 px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl space-y-6">
         {/* HEADER */}
-        <section className="relative overflow-hidden rounded-[2rem] border border-cyan-500/20 bg-white/[0.03] p-6 sm:p-8 backdrop-blur-2xl shadow-[0_0_40px_rgba(34,211,238,0.08)]">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
+        <section
+          className="
+            relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-6 sm:p-8 shadow-[0_10px_40px_rgba(15,23,42,0.06)] dark:border-cyan-500/20
+            dark:bg-white/[0.03] dark:shadow-[0_0_40px_rgba(34,211,238,0.08)] backdrop-blur-2xl
+          "
+        >
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent dark:from-cyan-500/10 dark:via-purple-500/5"
+          />
 
           <div className="relative z-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -308,7 +313,7 @@ const CompanyProfilePage = () => {
                 Company Profile
               </h1>
 
-              <p className="mt-3 max-w-2xl text-white/60">
+              <p className="mt-3 max-w-2xl text-slate-600 dark:text-white/60">
                 Customize your employer brand, showcase company culture,
                 and attract top talent.
               </p>
@@ -344,9 +349,9 @@ const CompanyProfilePage = () => {
           {/* LEFT */}
           <div className="space-y-6">
             {/* BASIC INFO */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
+            <section className="rounded-[2rem] border border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
               <div className="mb-6 flex items-center gap-3">
-                <div className="rounded-2xl bg-cyan-500/15 p-3 text-cyan-300">
+                <div className="rounded-2xl bg-cyan-500/15 p-3 dark:text-cyan-300 text-cyan-600">
                   <Building2 size={20} />
                 </div>
 
@@ -355,7 +360,7 @@ const CompanyProfilePage = () => {
                     Basic Information
                   </h2>
 
-                  <p className="text-sm text-white/50">
+                  <p className="text-sm text-slate-500 dark:text-white/50">
                     Your public employer profile details.
                   </p>
                 </div>
@@ -368,7 +373,7 @@ const CompanyProfilePage = () => {
                 >
                   <input
                     {...register('companyName')}
-                    className="input"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-500/40 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/40"
                     placeholder="Company Name"
                   />
                 </InputField>
@@ -379,7 +384,7 @@ const CompanyProfilePage = () => {
                 >
                   <input
                     {...register('tagline')}
-                    className="input"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-500/40 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/40"
                     placeholder="Innovating the future"
                   />
                 </InputField>
@@ -390,7 +395,7 @@ const CompanyProfilePage = () => {
                 >
                   <input
                     {...register('industry')}
-                    className="input"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-500/40 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/40"
                     placeholder="Technology"
                   />
                 </InputField>
@@ -443,7 +448,7 @@ const CompanyProfilePage = () => {
                 >
                   <input
                     {...register('foundedYear')}
-                    className="input"
+                    className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-500/40 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/40"
                     placeholder="2020"
                   />
                 </InputField>
@@ -455,24 +460,12 @@ const CompanyProfilePage = () => {
                   <div className="relative">
                     <Globe
                       size={18}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/40"
                     />
 
                     <input
                       {...register('website')}
-                      className="
-                        w-full
-                        rounded-2xl
-                        border border-white/10
-                        bg-black/30
-                        py-3
-                        pl-12
-                        pr-4
-                        text-white
-                        outline-none
-                        transition
-                        focus:border-cyan-400/40
-                      "
+                      className="w-full rounded-2xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-400/40 dark:border-white/10 dark:bg-black/30 dark:text-white"
                       placeholder="https://company.com"
                     />
                   </div>
@@ -481,19 +474,19 @@ const CompanyProfilePage = () => {
             </section>
             
             {/* ABOUT */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
+            <section className="rounded-[2rem] border border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
               <div className="mb-5">
                 <h2 className="text-xl font-bold sm:text-2xl">
                   About Company
                 </h2>
 
-                <p className="mt-1 text-sm text-white/50">
+                <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                   Showcase your mission, culture, and story.
                 </p>
               </div>
 
-              <div className="rounded-3xl border border-white/10 bg-black/20 p-5">
-                <div className="mb-4 flex flex-wrap gap-2 overflow-x-auto border-b border-white/10 pb-4">
+              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 dark:border-white/10 dark:bg-black/20">
+                <div className="mb-4 flex flex-wrap gap-2 overflow-x-auto border-b border-slate-300 dark:border-white/10 pb-4">
                   <button
                     type="button"
                     onClick={() =>
@@ -536,13 +529,13 @@ const CompanyProfilePage = () => {
             </section>
 
             {/* CULTURE & PERKS */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
+            <section className="rounded-[2rem] border border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
               <div className="mb-5">
                 <h2 className="text-xl font-bold sm:text-2xl">
                   Culture & Perks
                 </h2>
 
-                <p className="mt-1 text-sm text-white/50">
+                <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                   Highlight what makes your company special.
                 </p>
               </div>
@@ -560,7 +553,7 @@ const CompanyProfilePage = () => {
                         'flex items-center justify-between rounded-2xl border p-4 text-left transition-all duration-300',
                         active
                           ? 'border-cyan-500/30 bg-cyan-500/10'
-                          : 'border-white/10 bg-white/[0.03] hover:border-cyan-500/20'
+                          : 'border-slate-300 bg-white dark:border-white/10 dark:bg-white/[0.03]'
                       )}
                     >
                       <span>{perk}</span>
@@ -588,13 +581,13 @@ const CompanyProfilePage = () => {
             </section>
 
             {/* TECH STACK */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
+            <section className="rounded-[2rem] border border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
               <div className="mb-5">
                 <h2 className="text-xl font-bold sm:text-2xl">
                   Tech Stack
                 </h2>
 
-                <p className="mt-1 text-sm text-white/50">
+                <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                   Select technologies your team uses.
                 </p>
               </div>
@@ -611,8 +604,8 @@ const CompanyProfilePage = () => {
                       className={clsx(
                         'rounded-full border px-3 py-2 text-xs sm:px-4 sm:text-sm transition-all duration-300',
                         active
-                          ? 'border-cyan-500/20 bg-cyan-500/10 text-cyan-300'
-                          : 'border-white/10 bg-white/[0.03] text-white/70 hover:border-cyan-500/20'
+                          ? 'border-cyan-500/20 bg-cyan-500/10 dark:text-cyan-300 text-cyan-700'
+                          : 'border-slate-300 bg-white text-slate-700 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/70'
                       )}
                     >
                       {tech}
@@ -632,13 +625,13 @@ const CompanyProfilePage = () => {
           {/* RIGHT */}
           <div className="space-y-6">
             {/* LOGO */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
+            <section className="rounded-[2rem] border border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
               <div className="mb-5">
                 <h2 className="text-xl font-bold sm:text-2xl">
                   Company Logo
                 </h2>
 
-                <p className="mt-1 text-sm text-white/50">
+                <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                   Upload your company logo.
                 </p>
               </div>
@@ -649,14 +642,14 @@ const CompanyProfilePage = () => {
                   'cursor-pointer rounded-[2rem] border border-dashed p-5 sm:p-8 text-center transition-all duration-300',
                   isLogoDragging
                     ? 'border-cyan-400 bg-cyan-500/10'
-                    : 'border-white/10 bg-black/20 hover:border-cyan-500/20'
+                    : 'border-slate-300 bg-slate-50 dark:border-white/10 dark:bg-black/20'
                 )}
               >
                 <input {...getLogoInputProps()} />
 
                 {logoPreview ? (
                   <div className="space-y-4">
-                    <div className="mx-auto h-28 w-28 overflow-hidden rounded-3xl border border-white/10 bg-black/30">
+                    <div className="mx-auto h-28 w-28 overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-white/10 dark:bg-black/30">
                       <Image
                         src={logoPreview}
                         alt="Company Logo"
@@ -668,7 +661,7 @@ const CompanyProfilePage = () => {
                       />
                     </div>
 
-                    <p className="text-sm text-white/50">
+                    <p className="text-sm text-slate-500 dark:text-white/50">
                       Drag and drop to replace logo
                     </p>
                   </div>
@@ -683,7 +676,7 @@ const CompanyProfilePage = () => {
                         Upload Company Logo
                       </p>
 
-                      <p className="mt-1 text-sm text-white/50">
+                      <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                         PNG, JPG up to 5MB
                       </p>
                     </div>
@@ -693,13 +686,13 @@ const CompanyProfilePage = () => {
             </section>
 
             {/* SOCIALS */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
+            <section className="rounded-[2rem] border border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
               <div className="mb-5">
                 <h2 className="text-xl font-bold sm:text-2xl">
                   Social Links
                 </h2>
 
-                <p className="mt-1 text-sm text-white/50">
+                <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                   Connect your online presence.
                 </p>
               </div>
@@ -729,19 +722,19 @@ const CompanyProfilePage = () => {
             </section>
 
             {/* GALLERY */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
+            <section className="rounded-[2rem] border border-slate-200 bg-white dark:border-white/10 dark:bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6">
               <div className="mb-5 flex items-start justify-between gap-4">
                 <div>
                   <h2 className="text-xl font-bold sm:text-2xl">
                     Company Gallery
                   </h2>
 
-                  <p className="mt-1 text-sm text-white/50">
+                  <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                     Upload office photos and team culture shots.
                   </p>
                 </div>
 
-                <div className="rounded-2xl bg-cyan-500/10 p-3 text-cyan-300">
+                <div className="rounded-2xl bg-cyan-500/10 p-3 text-cyan-600 dark:text-cyan-300">
                   <ImagePlus size={22} />
                 </div>
               </div>
@@ -752,13 +745,13 @@ const CompanyProfilePage = () => {
                   'cursor-pointer rounded-[2rem] border border-dashed p-5 sm:p-8 text-center transition-all duration-300',
                   isGalleryDragging
                     ? 'border-cyan-400 bg-cyan-500/10'
-                    : 'border-white/10 bg-black/20 hover:border-cyan-500/20'
+                    : 'border-slate-300 bg-slate-50 dark:border-white/10 dark:bg-black/20'
                 )}
               >
                 <input {...getGalleryInputProps()} />
 
                 <div className="space-y-3">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-300">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-500/10 dark:text-cyan-300 text-cyan-600">
                     <Plus size={28} />
                   </div>
 
@@ -767,7 +760,7 @@ const CompanyProfilePage = () => {
                       Upload Office Photos
                     </p>
 
-                    <p className="mt-1 text-sm text-white/50">
+                    <p className="mt-1 text-sm text-slate-500 dark:text-white/50">
                       Drag & drop multiple images
                     </p>
                   </div>
@@ -873,7 +866,7 @@ function InputField({
 }) {
   return (
     <div>
-      <label className="mb-2 block text-sm font-medium text-white/70">
+      <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-white/70">
         {label}
       </label>
 
@@ -902,27 +895,14 @@ function SocialInput({
   return (
     <div>
       <div className="relative min-w-0">
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-300">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-600 dark:text-cyan-300">
           {icon}
         </div>
 
         <input
           {...register}
           placeholder={placeholder}
-          className="
-            w-full
-            rounded-2xl
-            border border-white/10
-            bg-black/30
-            text-sm sm:text-base
-            py-3
-            pl-12
-            pr-4
-            text-white
-            outline-none
-            transition
-            focus:border-cyan-400/40
-          "
+          className="w-full rounded-2xl border border-slate-300 bg-white text-sm sm:text-base py-3 pl-12 pr-4 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-400/40 dark:border-white/10 dark:bg-black/30 dark:text-white"
         />
       </div>
 
@@ -939,6 +919,6 @@ const toolbarButton = (active?: boolean) =>
   clsx(
     'rounded-xl border px-3 py-2 text-xs sm:px-4 sm:text-sm transition-all duration-300',
     active
-      ? 'border-cyan-500/20 bg-cyan-500/10 text-cyan-300'
-      : 'border-white/10 bg-white/[0.03] text-white/70 hover:border-cyan-500/20'
+      ? 'border-cyan-500/30 bg-cyan-500/10 text-cyan-600 dark:text-cyan-300'
+      : 'border-slate-300 bg-white text-slate-700 hover:border-cyan-500/30 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/70'
   );

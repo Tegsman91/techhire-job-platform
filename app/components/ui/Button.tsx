@@ -32,22 +32,23 @@ const sizeStyles: Record<Size, string> = {
 
 const variantStyles: Record<Variant, string> = {
   primary: `
-    bg-cyan-500 text-black
-    hover:shadow-[0_0_20px_rgba(6,182,212,0.45)]
-
+    bg-slate-900 text-white
+    hover:bg-slate-800
+    hover:shadow-[0_10px_30px_rgba(15,23,42,0.15)]
     dark:bg-[var(--color-primary)]
     dark:text-black
+    dark:hover:shadow-[0_0_20px_rgba(6,182,212,0.45)]
     dark:shadow-neon
   `,
 
   secondary: `
     bg-purple-500 text-white
     hover:shadow-[0_0_20px_rgba(168,85,247,0.35)]
-
     dark:bg-[var(--color-secondary)]
     dark:text-white
     dark:shadow-neon-pink
   `,
+
 
   danger: `
     bg-red-500 text-white
@@ -58,7 +59,6 @@ const variantStyles: Record<Variant, string> = {
     bg-zinc-100 text-zinc-700
     border border-zinc-200
     hover:bg-zinc-200
-
     dark:bg-white/5
     dark:text-white/80
     dark:border-white/10

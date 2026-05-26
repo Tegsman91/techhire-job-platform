@@ -28,19 +28,19 @@ const ResourcesPage = () => {
   }, [selectedCategory]);
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#070B14] px-4 py-10 text-white sm:px-6 lg:px-8">
+    <main className="min-h-screen overflow-x-hidden bg-[#F8FAFC] dark:bg-[#070B14] px-4 py-10 text-zinc-900 dark:text-white sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="mx-auto max-w-7xl">
         {/* HERO */}
         <section className="text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">
+          <p className="text-sm uppercase tracking-[0.3em] text-cyan-600 dark:text-cyan-300">
             Resources
           </p>
 
-          <h1 className="mt-4 text-4xl font-black sm:text-6xl">
+          <h1 className="mt-4 text-4xl font-black text-zinc-900 dark:text-white sm:text-6xl">
             Career Insights & Tech Trends
           </h1>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg text-white/60">
+          <p className="mx-auto mt-6 max-w-3xl text-lg text-zinc-600 dark:text-white/60">
             Explore interview strategies, resume tips, industry trends,
             and practical advice to grow your tech career.
           </p>
@@ -56,8 +56,14 @@ const ResourcesPage = () => {
               }
               className={`rounded-full px-5 py-3 text-sm font-semibold transition-all duration-300 ${
                 selectedCategory === category
-                  ? "bg-cyan-400 text-black"
-                  : "border border-white/10 bg-white/5 text-white hover:border-cyan-400/40"
+                  ? "bg-cyan-500 text-white dark:text-black shadow-[0_0_12px_rgba(6,182,212,0.25)]"
+                  : `
+                      border border-zinc-200 dark:border-white/10
+                      bg-white dark:bg-white/5
+                      text-zinc-700 dark:text-white
+                      hover:border-cyan-400/40
+                      hover:bg-cyan-50 dark:hover:bg-white/10
+                    `
               }`}
             >
               {category}
