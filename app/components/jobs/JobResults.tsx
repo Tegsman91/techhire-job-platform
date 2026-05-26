@@ -255,12 +255,15 @@ const JobResults = () => {
               placeholder="Search jobs"
               className="
                 w-full rounded-xl
-                border border-white/10
-                bg-[#101522]
+                border border-zinc-300 dark:border-white/10
+                bg-white dark:bg-[#101522]
                 py-3 pl-11 pr-14
-                text-sm text-white
-                placeholder:text-gray-500
+                text-sm text-zinc-900 dark:text-white
+                placeholder:text-zinc-400 dark:placeholder:text-gray-500
                 outline-none
+                focus:border-cyan-500
+                dark:focus:border-cyan-400
+                transition-colors
               "
             />
 
@@ -392,17 +395,21 @@ const JobResults = () => {
           <Dialog.Content
             className="
               mobile-filter-scroll
-              fixed bottom-0 left-0 right-0 z-50 max-h-[85vh] overflow-y-auto rounded-t-3xl border-t border-white/10 bg-[#0A0A0F] p-5
+              fixed bottom-0 left-0 right-0 z-50
+              max-h-[85vh] overflow-y-auto rounded-t-3xl
+              border-t border-zinc-200 dark:border-white/10
+              bg-white dark:bg-[#0A0A0F] p-5
+              text-zinc-900 dark:text-white
               data-[state=open]:animate-[slideUp_300ms_ease-out]
               data-[state=closed]:animate-[slideDown_250ms_ease-in]
             "
           >
             <div className="mb-5 flex items-center justify-between">
-              <Dialog.Title className="text-lg font-semibold text-white">
+              <Dialog.Title className="text-lg font-semibold text-[var(--text-secondary)]">
                 Filters
               </Dialog.Title>
 
-              <Dialog.Close className="text-sm text-gray-400">
+              <Dialog.Close className="text-sm text-[var(--text-secondary)]">
                 Close
               </Dialog.Close>
             </div>
@@ -442,7 +449,7 @@ const JobResults = () => {
                   ${
                     filters.view === "grid"
                       ? "bg-cyan-500 text-black"
-                      : "bg-zinc-800 text-gray-400"
+                      : "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-gray-400"
                   }
                 `}
               >
@@ -456,7 +463,7 @@ const JobResults = () => {
                   ${
                     filters.view === "list"
                       ? "bg-cyan-500 text-black"
-                      : "bg-zinc-800 text-gray-400"
+                      : "bg-zinc-300 dark:bg-zinc-800 text-zinc-700 dark:text-gray-400"
                   }
                 `}
               >

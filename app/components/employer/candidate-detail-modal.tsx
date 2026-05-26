@@ -16,7 +16,7 @@ import {
   ShieldX,
   StickyNote,
 } from 'lucide-react';
-import { FaLinkedin, FaLinkedinIn } from 'react-icons/fa';
+import { FaLinkedin } from 'react-icons/fa';
 
 import Button from '@/app/components/ui/Button';
 import {

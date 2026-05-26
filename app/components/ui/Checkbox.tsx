@@ -27,13 +27,15 @@ export default function Checkbox({
         }}
         aria-label={!label ? ariaLabel : undefined}
         className={clsx(
-          `flex h-4 w-4 items-center justify-center
+          `
+          flex h-4 w-4 items-center justify-center
           rounded-sm border transition-all duration-200
           border-black/20 dark:border-white/20
           bg-white dark:bg-[#0A0A0F]
+          data-[state=checked]:bg-cyan-500/10
           data-[state=checked]:border-cyan-500
-          data-[state=checked]:bg-cyan-500
-          dark:data-[state=checked]:shadow-[0_0_10px_#06B6D4]
+          shadow-none
+          dark:data-[state=checked]:shadow-[0_0_10px_rgba(6,182,212,0.7)]
           focus:outline-none
           focus-visible:ring-2
           focus-visible:ring-cyan-500/40
@@ -41,7 +43,7 @@ export default function Checkbox({
         )}
       >
         <CheckboxPrimitive.Indicator>
-          <Check className="h-3 w-3 text-black dark:text-cyan-400" />
+          <Check className="h-3 w-3 text-cyan-400" />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
 

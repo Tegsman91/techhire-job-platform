@@ -20,7 +20,11 @@ const renderStars = (rating: number) => {
     <Star
       key={i}
       size={16}
-      className={i < Math.round(rating) ? 'fill-yellow-400 text-yellow-400' : 'text-white/20'}
+      className={
+        i < Math.round(rating)
+          ? 'fill-yellow-400 text-yellow-400'
+          : 'text-black/15 dark:text-white/20'
+      }
     />
   ));
 };
@@ -98,240 +102,287 @@ const EmployeeReviewsSection = ({ companyId, reviews }: Props) => {
    const roles = Array.from(new Set(companyReviews.map((r) => r.role)));
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-cyan-500/20 
-    bg-[linear-gradient(135deg,rgba(6,182,212,0.10),rgba(168,85,247,0.08),rgba(10,10,15,0.95))] 
-    p-8 backdrop-blur-2xl shadow-[0_0_10px_rgba(6,182,212,0.08)] space-y-6"
+    <section
+      className="
+        relative rounded-[2rem]
+        border border-black/10 dark:border-cyan-500/20
+        bg-white
+        dark:bg-[#0A0A0F]
+        p-8
+        backdrop-blur-2xl
+        shadow-sm dark:shadow-[0_0_10px_rgba(6,182,212,0.08)]
+      "
+      style={{
+        backgroundImage:
+          'radial-gradient(circle at top left, rgba(6,182,212,0.16), transparent 35%), radial-gradient(circle at bottom right, rgba(168,85,247,0.14), transparent 40%)',
+      }}
     >
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        <div>
-          <h2 className="text-3xl font-bold neon-cyan tracking-tight">
-            Employee Reviews
-          </h2>
-          <div className="flex items-center gap-3 mt-3">
-            <span className="text-5xl font-bold text-cyan-400">
-              {averageRating.toFixed(1)}
-            </span>
-            <div className="flex gap-1">
-              {renderStars(averageRating)}
+      {/* <div
+        className="
+          absolute inset-0 z-0 pointer-events-none hidden dark:block
+          bg-[radial-gradient(circle_at_top_left,rgba(6,182,212,0.18),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.16),transparent_45%)]
+        "
+      /> */}
+
+      <div className="relative z-10 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            <h2 className="text-3xl font-bold text-cyan-700 dark:text-cyan-400 tracking-tight">
+              Employee Reviews
+            </h2>
+            <div className="flex items-center gap-3 mt-3">
+              <span className="text-5xl font-bold text-cyan-700 dark:text-cyan-400">
+                {averageRating.toFixed(1)}
+              </span>
+              <div className="flex gap-1">
+                {renderStars(averageRating)}
+              </div>
+              <span className="text-[var(--text-secondary)]">
+                ({companyReviews.length} reviews)
+              </span>
             </div>
-            <span className="text-white/60">
-              ({companyReviews.length} reviews)
-            </span>
+          </div>
+
+          <Dialog.Root open={open} onOpenChange={(isOpen) => {
+            setOpen(isOpen);
+            if (!isOpen) {
+              setErrors({});
+              setForm({ role: '', rating: 0, text: '' });
+            }
+          }}>
+            <Dialog.Trigger asChild>
+              <Button>Write a Review</Button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm overflow-y-auto" />
+
+              <Dialog.Content
+                className="
+                  fixed left-1/2 top-1/2
+                  w-[95%] max-w-xl
+                  -translate-x-1/2 -translate-y-1/2
+                  rounded-[2rem]
+                  border border-black/10 dark:border-cyan-500/20
+                  bg-white dark:bg-black/40
+                  p-6 sm:p-8
+                  text-[var(--text-primary)]
+                  backdrop-blur-2xl
+                  shadow-xl dark:shadow-[0_0_40px_rgba(6,182,212,0.12)]
+                  overflow-hidden
+                "
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-purple-500/[0.03] to-transparent dark:from-cyan-500/10 dark:via-purple-500/5 pointer-events-none"
+                />
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-6">
+                    <Dialog.Title className="text-2xl font-bold text-cyan-700 dark:text-cyan-400">
+                      Write a Review
+                    </Dialog.Title>
+
+                    <Dialog.Close asChild>
+                      <button>
+                        <X size={18} />
+                      </button>
+                    </Dialog.Close>
+                  </div>
+
+                  <Dialog.Description className="mb-6 text-xs text-[var(--text-secondary)] mt-[-15px]">
+                    Share your experience working at this company.
+                  </Dialog.Description>
+
+                  <div className="space-y-4">
+                    <input
+                      placeholder="Your role"
+                      value={form.role}
+                      onChange={(e) => setForm({ ...form, role: e.target.value })}
+                      className="
+                        w-full rounded-2xl
+                        border border-black/10 dark:border-cyan-500/20
+                        bg-black/[0.03] dark:bg-black/30
+                        px-4 py-3
+                        text-[var(--text-primary)]
+                        placeholder:text-[var(--text-dim)]
+                        backdrop-blur-xl
+                        outline-none
+                        transition
+                        focus:border-cyan-400
+                        focus:shadow-[0_0_12px_rgba(6,182,212,0.2)]
+                      "
+                    />
+                    {errors.role && 
+                      <p className="text-xs text-red-400 mt-[-15px]">
+                        {errors.role}
+                      </p>
+                    }
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-[var(--text-primary)]">
+                        Rating
+                      </label>
+                      <div className="flex gap-1">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <button
+                            key={i}
+                            type="button"
+                            onClick={() => setForm({ ...form, rating: i + 1 })}
+                            className="focus:outline-none"
+                          >
+                            <Star
+                              size={24}
+                              className={
+                                i < form.rating 
+                                  ? 'fill-yellow-400 text-yellow-400'
+                                  : 'text-black/15 dark:text-white/20'
+                              }
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    {errors.rating && 
+                      <p className="text-xs text-red-400 mt-[-15px]">
+                        {errors.rating}
+                      </p>
+                    }
+
+                    <textarea
+                      placeholder="Your review"
+                      rows={5}
+                      value={form.text}
+                      onChange={(e) => setForm({ ...form, text: e.target.value })}
+                      className="
+                        w-full rounded-2xl
+                        border border-black/10 dark:border-cyan-500/20
+                        bg-black/[0.03] dark:bg-black/30
+                        px-4 py-3
+                        text-[var(--text-primary)]
+                        placeholder:text-[var(--text-dim)]
+                        backdrop-blur-xl
+                        outline-none resize-none
+                        transition 
+                        focus:border-cyan-400
+                        focus:shadow-[0_0_12px_rgba(6,182,212,0.2)]
+                      "
+                    />
+                    {errors.text && 
+                      <p className="text-xs text-red-400 mt-[-15px]">
+                        {errors.text}
+                      </p>
+                    }
+
+                    <Button onClick={handleSubmit}>
+                      Submit Review
+                    </Button>
+                  </div>
+                </div>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[1.7fr_1fr] items-start"
+        >
+          <div className="space-y-4">
+            {breakdown.map((item) => (
+              <div key={item.label}>
+                <div className="flex justify-between text-sm mb-2">
+                  <span>{item.label}</span>
+                  <span>{item.value}/5</span>
+                </div>
+                <div className="h-3 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${(item.value / 5) * 100}%` }}
+                    className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 shadow-[0_0_14px_rgba(6,182,212,0.35)]"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col gap-3 w-full">
+            <CustomSelect
+              value={ratingFilter}
+              onValueChange={setRatingFilter}
+              options={[
+                {
+                  label: 'All Ratings',
+                  value: 'all',
+                },
+                {
+                  label: '5 Stars',
+                  value: '5',
+                },
+                {
+                  label: '4-5 Stars',
+                  value: '4-5',
+                },
+              ]}
+            />
+
+            <CustomSelect
+              value={roleFilter}
+              onValueChange={setRoleFilter}
+              options={[
+                {
+                  label: 'All Roles',
+                  value: 'all',
+                },
+                ...roles.map((role) => ({
+                  label: role,
+                  value: role,
+                })),
+              ]}
+            />
           </div>
         </div>
 
-        <Dialog.Root open={open} onOpenChange={(isOpen) => {
-          setOpen(isOpen);
-          if (!isOpen) {
-            setErrors({});
-            setForm({ role: '', rating: 0, text: '' });
-          }
-        }}>
-          <Dialog.Trigger asChild>
-            <Button>Write a Review</Button>
-          </Dialog.Trigger>
-          <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 bg-black/70 overflow-y-auto" />
-
-            <Dialog.Content className="fixed left-1/2 top-1/2 w-[95%] max-w-xl -translate-x-1/2 -translate-y-1/2 rounded-[2rem] border border-cyan-500/20 bg-black/40 p-6 sm:p-8 backdrop-blur-2xl shadow-[0_0_40px_rgba(6,182,212,0.12)] overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent pointer-events-none" />
-
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-6">
-                  <Dialog.Title className="text-2xl font-bold text-cyan-400">
-                    Write a Review
-                  </Dialog.Title>
-                  <Dialog.Close asChild>
-                    <button><X size={18} /></button>
-                  </Dialog.Close>
-                </div>
-
-                <Dialog.Description className="mb-6 text-xs text-cyan-200/70 mt-[-15px]">
-                  Share your experience working at this company.
-                </Dialog.Description>
-
-                <div className="space-y-4">
-                  <input
-                    placeholder="Your role"
-                    value={form.role}
-                    onChange={(e) => setForm({ ...form, role: e.target.value })}
-                    className="w-full rounded-2xl border border-cyan-500/20 bg-black/30 px-4 py-3 text-white placeholder:text-white/40 backdrop-blur-xl outline-none transition focus:border-cyan-400 focus:shadow-[0_0_12px_rgba(6,182,212,0.2)]"
-                  />
-                  {errors.role && 
-                    <p className="text-xs text-red-400 mt-[-15px]">
-                      {errors.role}
-                    </p>
-                  }
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Rating
-                    </label>
-                    <div className="flex gap-1">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <button
-                          key={i}
-                          type="button"
-                          onClick={() => setForm({ ...form, rating: i + 1 })}
-                          className="focus:outline-none"
-                        >
-                          <Star
-                            size={24}
-                            className={i < form.rating ? 'fill-yellow-400 text-yellow-400' : 'text-white/20'}
-                          />
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  {errors.rating && 
-                    <p className="text-xs text-red-400 mt-[-15px]">
-                      {errors.rating}
-                    </p>
-                  }
-
-                  <textarea
-                    placeholder="Your review"
-                    rows={5}
-                    value={form.text}
-                    onChange={(e) => setForm({ ...form, text: e.target.value })}
-                    className="w-full rounded-2xl border border-cyan-500/20 resize-none bg-black/30 px-4 py-3 text-white placeholder:text-white/40 backdrop-blur-xl outline-none transition focus:border-cyan-400 focus:shadow-[0_0_12px_rgba(6,182,212,0.2)]"
-                  />
-                  {errors.text && 
-                    <p className="text-xs text-red-400 mt-[-15px]">
-                      {errors.text}
-                    </p>
-                  }
-
-                  <Button onClick={handleSubmit}>
-                    Submit Review
-                  </Button>
-                </div>
-              </div>
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
-      </div>
-
-      <div className="grid gap-6 lg:grid-cols-[1.7fr_1fr] items-start"
-      >
         <div className="space-y-4">
-          {breakdown.map((item) => (
-            <div key={item.label}>
-              <div className="flex justify-between text-sm mb-2">
-                <span>{item.label}</span>
-                <span>{item.value}/5</span>
+          {visibleReviews.map((review) => (
+            <div 
+              key={review.id} 
+              className="
+                rounded-3xl border border-black/10 dark:border-cyan-500/15
+                bg-black/[0.02] dark:bg-black/20 p-5 backdrop-blur-xl
+                shadow-sm dark:shadow-[0_0_20px_rgba(6,182,212,0.04)]
+                hover:border-cyan-400/30
+                transition-all
+              "
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <p className="font-semibold">
+                    Anonymous {review.role}
+                  </p>
+                  <div className="flex gap-1 mt-1">
+                    {renderStars(review.rating)}
+                  </div>
+                </div>
+                <span className="text-sm text-[var(--text-dim)]">
+                  {new Date(review.date).toLocaleDateString()}
+                </span>
               </div>
-              <div className="h-3 rounded-full bg-white/10 overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${(item.value / 5) * 100}%` }}
-                  className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 shadow-[0_0_14px_rgba(6,182,212,0.35)]"
-                />
+
+              <p className="text-[var(--text-secondary)]">
+                {review.text}
+              </p>
+
+              <div className="flex items-center gap-2 mt-4 text-sm text-cyan-700 dark:text-cyan-300/70">
+                <ThumbsUp size={14} /> {review.helpfulVotes} helpful votes
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-col gap-3 w-full">
-          {/* <select
-            value={ratingFilter}
-            onChange={(e) => setRatingFilter(e.target.value)}
-            className="w-full rounded-2xl border border-cyan-500/20 bg-black/30 px-4 py-3 text-sm text-cyan-200 backdrop-blur-xl focus:outline-none focus:border-cyan-400"
+        {visibleCount < filteredReviews.length && (
+          <Button 
+            onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}
           >
-            <option value="all" className="bg-[#0A0A0F]">
-              All Ratings
-            </option>
-            <option value="5" className="bg-[#0A0A0F]">
-              5 Stars
-            </option>
-            <option value="4-5" className="bg-[#0A0A0F]">
-              4-5 Stars
-            </option>
-          </select> */}
-          <CustomSelect
-            value={ratingFilter}
-            onValueChange={setRatingFilter}
-            options={[
-              {
-                label: 'All Ratings',
-                value: 'all',
-              },
-              {
-                label: '5 Stars',
-                value: '5',
-              },
-              {
-                label: '4-5 Stars',
-                value: '4-5',
-              },
-            ]}
-          />
-
-          {/* <select
-            value={roleFilter}
-            onChange={(e) => setRoleFilter(e.target.value)}
-            className="w-full rounded-2xl border border-cyan-500/20 bg-black/30 px-4 py-3 text-sm text-cyan-200 backdrop-blur-xl focus:outline-none focus:border-cyan-400"
-          >
-            <option value="all" className="bg-[#0A0A0F]">
-              All Roles
-            </option>
-            {roles.map((role) => (
-              <option key={role} value={role} className="bg-[#0A0A0F]">   
-                {role}
-              </option>
-            ))}
-          </select> */}
-          <CustomSelect
-            value={roleFilter}
-            onValueChange={setRoleFilter}
-            options={[
-              {
-                label: 'All Roles',
-                value: 'all',
-              },
-              ...roles.map((role) => ({
-                label: role,
-                value: role,
-              })),
-            ]}
-          />
-        </div>
+            Load More <ChevronDown size={16} />
+          </Button>
+        )}
       </div>
-
-      <div className="space-y-4">
-        {visibleReviews.map((review) => (
-          <div 
-            key={review.id} 
-            className="rounded-3xl border border-cyan-500/15 bg-black/20 p-5 backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.04)] hover:border-cyan-400/30 transition-all"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <p className="font-semibold">
-                  Anonymous {review.role}
-                </p>
-                <div className="flex gap-1 mt-1">
-                  {renderStars(review.rating)}
-                </div>
-              </div>
-              <span className="text-sm text-white/50">
-                {new Date(review.date).toLocaleDateString()}
-              </span>
-            </div>
-
-            <p className="text-white/80">{review.text}</p>
-
-            <div className="flex items-center gap-2 mt-4 text-sm text-cyan-300/70">
-              <ThumbsUp size={14} /> {review.helpfulVotes} helpful votes
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {visibleCount < filteredReviews.length && (
-        <Button onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}>
-          Load More <ChevronDown size={16} />
-        </Button>
-      )}
     </section>
   )
 }

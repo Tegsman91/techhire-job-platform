@@ -220,7 +220,7 @@ const titleToCategory: Record<string, JobCategory> = {
 const deriveCategoryFromTitle = (title: string): JobCategory =>
   titleToCategory[title] ?? ("Backend" as JobCategory);
 
-const physicalLocations = ["Abuja", "Jos", "Ibadan", "Lagos", "V.I", "Lekki", "Ikeja"];
+const physicalLocations = ["Abuja", "Jos", "Ibadan", "Lagos", "V.Island", "Lekki", "Ikeja"];
 
 export const locations = ["Remote", ...physicalLocations];
 

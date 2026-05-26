@@ -189,69 +189,118 @@ const ApplicationModal = ({ jobTitle, jobId }: ApplicationModalProps) => {
       >
         Apply Now
       </Button>
-      
+
       <Modal open={open} onOpenChange={setOpen} size="md">
         <ModalHeader>Apply for {jobTitle}</ModalHeader>
 
         {submitted ? (
           <div className="py-12 text-center space-y-4">
-            <Sparkles className="mx-auto text-cyan-400" size={42} />
-            <h3 className="text-2xl font-bold text-white">
+            <Sparkles
+              className="mx-auto text-cyan-500 dark:text-cyan-400"
+              size={42}
+            />
+
+            <h3 className="text-2xl font-bold text-zinc-900 dark:text-white">
               Application Submitted!
             </h3>
-            <p className="text-gray-400">
+
+            <p className="text-zinc-600 dark:text-gray-400">
               Your application has been saved successfully.
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+
             <div className="grid md:grid-cols-2 gap-4">
-              <Input label="Full Name" {...register('fullName')} error={errors.fullName?.message} />
-              <Input label="Email" type="email" {...register('email')} error={errors.email?.message} />
+              <Input
+                label="Full Name"
+                {...register('fullName')}
+                error={errors.fullName?.message}
+              />
+
+              <Input
+                label="Email"
+                type="email"
+                {...register('email')}
+                error={errors.email?.message}
+              />
             </div>
 
-            <Input label="Phone Number" {...register('phone')} error={errors.phone?.message} />
+            <Input
+              label="Phone Number"
+              {...register('phone')}
+              error={errors.phone?.message}
+            />
 
+            {/* RESUME DROPZONE */}
             <div
               {...getRootProps()}
-              className={`rounded-2xl border-2 border-dashed p-6 text-center cursor-pointer transition ${
-                isDragActive ? 'border-cyan-400 bg-cyan-400/10' : 'border-white/10 bg-white/5'
-              }`}
+              className={`
+                rounded-2xl border-2 border-dashed p-6
+                text-center cursor-pointer transition-all duration-300
+                ${
+                  isDragActive
+                    ? 'border-cyan-500 bg-cyan-500/10 dark:border-cyan-400 dark:bg-cyan-400/10'
+                    : `
+                      border-zinc-300 dark:border-white/10
+                      bg-zinc-100 dark:bg-white/5
+                      hover:border-cyan-400/50
+                      hover:bg-cyan-50 dark:hover:bg-white/10
+                    `
+                }
+              `}
             >
               <input {...getInputProps()} />
+
               {resumeFile ? (
                 <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <FileText className="text-cyan-400" size={18} />
-                    <span>{resumeFile.name}</span>
+                  <div className="flex items-center gap-2 min-w-0">
+                    <FileText
+                      className="text-cyan-600 dark:text-cyan-400 shrink-0"
+                      size={18}
+                    />
+
+                    <span className="truncate text-zinc-700 dark:text-zinc-200">
+                      {resumeFile.name}
+                    </span>
                   </div>
+
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       setResumeFile(null);
                     }}
+                    className="
+                      rounded-lg p-1.5 transition
+                      text-zinc-500 hover:text-red-500
+                      hover:bg-red-500/10
+                    "
                   >
                     <Trash2 size={18} />
                   </button>
                 </div>
               ) : (
-                <p className="text-gray-400">
+                <p className="text-zinc-500 dark:text-gray-400">
                   Drag & drop resume (PDF/DOCX)
                 </p>
               )}
             </div>
 
-            {resumeError && 
-            <p className="text-red-400 text-sm">
-              {resumeError}
-            </p>
-            }
+            {resumeError && (
+              <p className="text-red-500 dark:text-red-400 text-sm">
+                {resumeError}
+              </p>
+            )}
 
             <button
               type="button"
               onClick={handleUseProfileResume}
-              className="text-sm text-cyan-400 hover:underline"
+              className="
+                text-sm font-medium transition
+                text-cyan-600 dark:text-cyan-400
+                hover:underline
+              "
             >
               Use Profile Resume
             </button>
@@ -263,13 +312,23 @@ const ApplicationModal = ({ jobTitle, jobId }: ApplicationModalProps) => {
               {...register('coverLetter')}
               error={errors.coverLetter?.message}
             />
-            <p className="text-xs text-gray-400 mt-[-22px] text-right">
+
+            <p className="text-xs text-zinc-500 dark:text-gray-400 mt-[-22px] text-right">
               {coverLetter.length}/1200
             </p>
 
             <div className="grid md:grid-cols-2 gap-4">
-              <Input label="LinkedIn URL" {...register('linkedin')} error={errors.linkedin?.message} />
-              <Input label="Portfolio URL" {...register('portfolio')} error={errors.portfolio?.message} />
+              <Input
+                label="LinkedIn URL"
+                {...register('linkedin')}
+                error={errors.linkedin?.message}
+              />
+
+              <Input
+                label="Portfolio URL"
+                {...register('portfolio')}
+                error={errors.portfolio?.message}
+              />
             </div>
 
             <Textarea
@@ -279,18 +338,30 @@ const ApplicationModal = ({ jobTitle, jobId }: ApplicationModalProps) => {
               {...register('fitReason')}
               error={errors.fitReason?.message}
             />
-            <p className="text-xs text-gray-400 mt-[-22px] text-right">  {fitReason.length}/500</p>
+
+            <p className="text-xs text-zinc-500 dark:text-gray-400 mt-[-22px] text-right">
+              {fitReason.length}/500
+            </p>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full rounded-2xl bg-cyan-500 px-5 py-3 font-semibold text-black transition hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] disabled:opacity-60"
+              className="
+                w-full rounded-2xl px-5 py-3
+                font-semibold transition-all duration-300
+                bg-cyan-500 text-black
+                hover:shadow-[0_0_20px_rgba(34,211,238,0.45)]
+                disabled:opacity-60
+
+                dark:bg-cyan-500
+                dark:text-black
+              "
             >
               {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </button>
           </form>
         )}
-      </Modal >
+      </Modal>
     </>
   )
 }

@@ -65,17 +65,33 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
   ].filter((link) => link.href);
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#0A0A0F] px-4 py-2 text-white sm:px-4 lg:px-8 no-scrollbar">
+    <main className="min-h-screen overflow-x-hidden bg-[#F8FAFC] dark:bg-[#0A0A0F] px-4 py-2 text-[var(--text-primary)] sm:px-4 lg:px-8 no-scrollbar">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12),transparent_35%),radial-gradient(circle_at_top_left,rgba(168,85,247,0.10),transparent_30%)]" />
 
       <div className="mx-auto w-full max-w-7xl py-4 space-y-8">
-        <section className="relative overflow-hidden rounded-[2rem] border border-cyan-500/20 bg-white/[0.04] p-5 sm:p-8 backdrop-blur-2xl shadow-[0_0_40px_rgba(34,211,238,0.08)]"
+        <section
+          className="
+            relative overflow-hidden rounded-[2rem]
+            border border-black/10 dark:border-cyan-500/20
+            bg-white dark:bg-white/[0.04]
+            p-5 sm:p-8
+            backdrop-blur-2xl
+            shadow-sm dark:shadow-[0_0_40px_rgba(34,211,238,0.08)]
+          "
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/30 via-purple-500/10 dark:from-cyan-500/10 dark:via-purple-500/5 to-transparent" />
 
           <div className="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-              <div className="w-fit rounded-[1.5rem] border border-white/10 bg-black/40 p-4 shadow-[0_0_30px_rgba(6,182,212,0.12)]">
+              <div
+                className="
+                  w-fit rounded-[1.5rem]
+                  border border-black/10 dark:border-white/10
+                  bg-black/[0.07] dark:bg-black/40
+                  p-4
+                  shadow-sm dark:shadow-[0_0_30px_rgba(6,182,212,0.12)]
+                "
+              >
                 <Image
                   src={company.logo}
                   alt={company.name}
@@ -95,16 +111,16 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
                   )}
                 </div>
 
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight neon-cyan leading-tight">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
                   {company.name}
                 </h1>
 
-                <p className="mt-3 max-w-2xl text-base text-gray-400 sm:text-lg">
+                <p className="mt-3 max-w-2xl text-base text-[var(--text-secondary)] sm:text-lg">
                   {company.description}
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-3">
-                  <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-300">
+                  <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-700 dark:text-cyan-300">
                     {company.industry}
                   </span>
                 </div>
@@ -115,8 +131,12 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
           </div>
         </section>
 
-        <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 sm:p-8 backdrop-blur-xl">
-          <h2 className="text-2xl font-bold text-cyan-300 tracking-tight">
+        <section className="rounded-[2rem]
+          border border-black/10 dark:border-white/10
+          bg-white dark:bg-white/[0.04]
+          shadow-sm dark:shadow-none p-6 sm:p-8 backdrop-blur-xl"
+        >
+          <h2 className="text-2xl font-bold text-cyan-700 dark:text-cyan-300 tracking-tight">
             Company Stats
           </h2>
 
@@ -133,12 +153,21 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-3xl border border-cyan-500/15 bg-black/30 p-6 text-center backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.06)] hover:scale-[1.02] transition-transform"
+                className="
+                  rounded-3xl
+                  border border-cyan-500/10 dark:border-cyan-500/15
+                  bg-black/[0.02] dark:bg-black/30
+                  p-6 text-center
+                  backdrop-blur-xl
+                  shadow-sm dark:shadow-[0_0_20px_rgba(6,182,212,0.06)]
+                  hover:scale-[1.02]
+                  transition-transform
+                "
               >
-                <p className="text-xs uppercase tracking-[0.2em] text-white/40">
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--text-dim)]">
                   {stat.label}
                 </p>
-                <h3 className="mt-3 text-2xl font-bold text-cyan-400">
+                <h3 className="mt-3 text-2xl font-bold text-cyan-700 dark:text-cyan-400">
                   {stat.value}
                 </h3>
               </div>
@@ -148,8 +177,12 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
 
         {/* Perks + Tech */}
         <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
-            <h2 className="text-2xl font-bold text-cyan-300 tracking-tight">
+          <div className="rounded-[2rem]
+            border border-black/10 dark:border-white/10
+            bg-white dark:bg-white/[0.04]
+            shadow-sm dark:shadow-none p-6 backdrop-blur-xl"
+          >
+            <h2 className="text-2xl font-bold text-cyan-700 dark:text-cyan-300 tracking-tight">
               Culture & Perks
             </h2>
 
@@ -157,7 +190,12 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
               {company.perks.map((perk) => (
                 <div
                   key={perk}
-                  className="flex items-center gap-2 rounded-2xl bg-white/5 px-4 py-3"
+                  className="
+                    flex items-center gap-2 rounded-2xl
+                    bg-black/[0.03] dark:bg-white/5
+                    px-4 py-3
+                    text-[var(--text-primary)]
+                  "
                 >
                   <CheckCircle2 size={16} className="text-cyan-400" />
                   {perk}
@@ -166,8 +204,12 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
-            <h2 className="text-2xl font-bold text-cyan-300 tracking-tight">
+          <div className="rounded-[2rem]
+            border border-black/10 dark:border-white/10
+            bg-white dark:bg-white/[0.04]
+            shadow-sm dark:shadow-none p-6 backdrop-blur-xl"
+          >
+            <h2 className="text-2xl font-bold text-cyan-700 dark:text-cyan-300 tracking-tight">
               Tech Stack
             </h2>
 
@@ -175,7 +217,11 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
               {skillsPool.map((skill) => (
                 <Badge
                   key={skill}
-                  className="bg-white/5 text-white border border-white/10"
+                  className="
+                    bg-black/[0.04] dark:bg-white/5
+                    text-[var(--text-primary)]
+                    border border-black/10 dark:border-white/10
+                  "
                 >
                   {skill}
                 </Badge>
@@ -185,8 +231,12 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
         </section>
 
         {/* Open Positions */}
-        <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
-          <h2 className="text-2xl font-bold text-cyan-300 tracking-tight">
+        <section className="rounded-[2rem]
+          border border-black/10 dark:border-white/10
+          bg-white dark:bg-white/[0.04]
+          shadow-sm dark:shadow-none p-6 backdrop-blur-xl"
+        >
+          <h2 className="text-2xl font-bold text-cyan-700 dark:text-cyan-300 tracking-tight">
             Open Positions
           </h2>
 
@@ -210,8 +260,12 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
           reviews={reviews}
         />
 
-        <section className="rounded-[2rem] border border-white/8 bg-white/[0.03] p-6 backdrop-blur-xl">
-          <h2 className="text-2xl font-bold text-cyan-300 tracking-tight">
+        <section className="rounded-[2rem]
+          border border-black/10 dark:border-white/10
+          bg-white dark:bg-white/[0.04]
+          shadow-sm dark:shadow-none p-6 backdrop-blur-xl"
+        >
+          <h2 className="text-2xl font-bold text-cyan-700 dark:text-cyan-300 tracking-tight">
             Meet the Team
           </h2>
 
@@ -219,7 +273,17 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
             {teamMembers.map((member) => (
               <div
                 key={member.id}
-                className="rounded-2xl border border-white/10 bg-black/25 backdrop-blur-xl shadow-[0_0_18px_rgba(6,182,212,0.04)] p-4 text-center hover:border-cyan-400/20 hover:-translate-y-1 transition-all duration-300"
+                className="
+                  rounded-2xl
+                  border border-black/10 dark:border-white/10
+                  bg-white dark:bg-black/25
+                  backdrop-blur-xl
+                  shadow-sm dark:shadow-[0_0_18px_rgba(6,182,212,0.04)]
+                  p-4 text-center
+                  hover:border-cyan-400/20
+                  hover:-translate-y-1
+                  transition-all duration-300
+                "
               >
                 <Image
                   src={`https://randomuser.me/api/portraits/${
@@ -237,7 +301,8 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
                 <h3 className="mt-3 text-sm font-semibold">
                   {member.name}
                 </h3>
-                <p className="text-xs text-gray-400">
+
+                <p className="text-xs text-[var(--text-secondary)]">
                   {member.role}
                 </p>
               </div>
@@ -246,8 +311,12 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
         </section>
 
         {/* Social */}
-        <section className="rounded-[2rem] border border-white/8 bg-white/[0.03] p-6 backdrop-blur-xl">
-          <h2 className="text-2xl font-bold text-cyan-300 tracking-tight">
+        <section className="rounded-[2rem]
+          border border-black/10 dark:border-white/10
+          bg-white dark:bg-white/[0.04]
+          shadow-sm dark:shadow-none p-6 backdrop-blur-xl"
+        >
+          <h2 className="text-2xl font-bold text-cyan-700 dark:text-cyan-300 tracking-tight">
             Connect
           </h2>
 
@@ -261,7 +330,18 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-2xl border border-white/10 bg-black/30 backdrop-blur-xl shadow-[0_0_14px_rgba(6,182,212,0.04)] px-4 py-3 hover:border-cyan-400/40"
+                  className="
+                    flex items-center gap-2
+                    rounded-2xl
+                    border border-black/10 dark:border-white/10
+                    bg-white dark:bg-black/30
+                    text-[var(--text-primary)]
+                    backdrop-blur-xl
+                    shadow-sm dark:shadow-[0_0_14px_rgba(6,182,212,0.04)]
+                    px-4 py-3
+                    hover:border-cyan-400/40
+                    transition
+                  "
                 >
                   <Icon size={16} className="text-cyan-500" />
                   {item.label}

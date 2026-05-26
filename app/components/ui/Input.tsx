@@ -23,7 +23,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           id={inputId}
           placeholder={label ? " " : props.placeholder}
           className={clsx(
-            "peer relative z-10 w-full rounded-lg bg-[#0A0A0F]/60 border border-white/10 px-4 pr-10 py-3 text-white outline-none transition-all duration-300",
+            "peer relative z-10 w-full rounded-lg bg-white/20 dark:bg-[#0A0A0F]/60 border border-zinc-300 dark:border-white/10 px-4 pr-10 py-3 text-black dark:text-white outline-none transition-all duration-300",
             "focus:border-[#06B6D4] focus:shadow-[0_0_10px_#06B6D4]",
             error
               ? "border-red-500 shadow-[0_0_10px_red] animate-[shake_0.3s_ease-in-out]"
@@ -43,8 +43,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={inputId}
             className={clsx(
-              "absolute left-3 top-1 text-xs text-gray-400 transition-all duration-200 pointer-events-none",
-              "peer-focus:text-[#06B6D4]",
+              "absolute left-3 top-1 text-xs text-zinc-500 dark:text-gray-400 transition-all duration-200 pointer-events-none",
+              "peer-focus:text-cyan-600",
+              "dark:peer-focus:text-[#06B6D4]",
               "peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-500",
               "font-mono"
             )}
