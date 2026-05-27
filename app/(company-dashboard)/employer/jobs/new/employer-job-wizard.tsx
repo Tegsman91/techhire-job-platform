@@ -86,7 +86,14 @@ function BulletInput({ value, onChange, placeholder }: BulletInputProps) {
           value={item}
           onChange={(e) => setItem(e.target.value)}
           placeholder={placeholder}
-          className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40 focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none"
+          className="w-full rounded-2xl  px-4 py-3 
+          border border-zinc-200
+          bg-white  text-zinc-900
+          placeholder:text-zinc-400 shadow-sm
+          dark:border-white/10 dark:bg-black/40
+          dark:text-white
+          dark:placeholder:text-white/40
+          backdrop-blur-xl focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
         />
 
         <button
@@ -96,7 +103,10 @@ function BulletInput({ value, onChange, placeholder }: BulletInputProps) {
             onChange([...(value || []), { id: nanoid(), text: item.trim() }]);
             setItem('');
           }}
-          className="rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 px-4 py-2 text-cyan-300 transition"
+          className="
+            rounded-xl bg-cyan-100 hover:bg-cyan-200 px-4 py-2
+            text-cyan-700 transition dark:bg-cyan-500/20 dark:hover:bg-cyan-500/30 dark:text-cyan-300
+          "
         >
           Add
         </button>
@@ -106,7 +116,12 @@ function BulletInput({ value, onChange, placeholder }: BulletInputProps) {
         {value?.map((v) => (
           <span
             key={v.id}
-            className="flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-sm text-cyan-200"
+            className="
+              flex items-center gap-2 rounded-full border border-cyan-200
+              bg-cyan-50 px-3 py-1 text-sm text-cyan-700
+              dark:border-cyan-500/20 dark:bg-cyan-500/10
+              dark:text-cyan-200
+            "
           >
             <span>{v.text}</span>
             <button
@@ -180,8 +195,15 @@ const EmployerJobWizard = () => {
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        class:
-          'prose prose-invert max-w-none focus:outline-none min-h-[180px]',
+        class: [
+          'prose',
+          'max-w-none',
+          'min-h-[180px]',
+          'focus:outline-none',
+          'text-zinc-800',
+          'dark:prose-invert',
+          'dark:text-white',
+        ].join(' '),
       },
     },
     onUpdate({ editor }) {
@@ -328,7 +350,13 @@ const EmployerJobWizard = () => {
   );
 
   return (
-    <main className="relative z-0 min-h-screen overflow-x-hidden bg-[#0A0A0F] px-3 py-5 sm:px-6 lg:px-8 text-white"
+    <main
+      className="
+        relative z-0 min-h-screen overflow-x-hidden
+        bg-gradient-to-br from-slate-50 via-white to-cyan-50/40
+        text-zinc-900 px-3 py-5 sm:px-6 lg:px-8 dark:bg-[#0A0A0F]
+        dark:text-white
+      "
     >
       <div
         className="absolute inset-0 -z-10 pointer-events-none"
@@ -340,27 +368,77 @@ const EmployerJobWizard = () => {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl space-y-8">
-        <section className="rounded-[2rem] border border-cyan-500/20 bg-white/[0.03] p-8 backdrop-blur-xl">
-          <h1 className="text-4xl font-extrabold neon-cyan">
-            {editId ? 'Edit Job' : 'Post a New Job'}
-          </h1>
-          <p className="mt-2 text-white/60">
-            {editId
-              ? 'Update your job listing details.'
-              : 'Create premium job listings in a guided flow.'
-            }
-          </p>
+        <section
+          className="
+            relative overflow-hidden rounded-[2rem] border border-zinc-200/80 bg-gradient-to-br from-white via-cyan-50/40
+            to-purple-50/30 p-8 sm:p-10
+            shadow-[0_10px_40px_rgba(15,23,42,0.06)]
+            dark:border-cyan-500/20 dark:from-white/[0.05]
+            dark:via-cyan-500/[0.04] dark:to-purple-500/[0.03]
+            dark:shadow-[0_0_40px_rgba(6,182,212,0.08)]
+          "
+        >
+          {/* Glow Effects */}
+          <div className="pointer-events-none absolute -top-24 right-0 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl dark:bg-cyan-500/10" />
+
+          <div className="pointer-events-none absolute -bottom-24 left-0 h-56 w-56 rounded-full bg-purple-400/10 blur-3xl dark:bg-purple-500/10" />
+
+          <div className="relative z-10">
+            <div
+              className="
+                inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-1.5
+                text-xs font-medium uppercase tracking-[0.18em]
+                text-cyan-700 dark:border-cyan-500/20
+                dark:bg-cyan-500/10 dark:text-cyan-300
+              "
+            >
+              {editId ? 'Editing Mode' : 'Hiring Workflow'}
+            </div>
+
+            <h1
+              className="
+                mt-5 text-4xl sm:text-5xl font-black tracking-tight
+                text-zinc-900 dark:bg-gradient-to-r
+                dark:from-cyan-200 dark:via-cyan-300
+                dark:to-purple-300 dark:bg-clip-text
+                dark:text-transparent
+              "
+            >
+              {editId ? 'Edit Job' : 'Post a New Job'}
+            </h1>
+
+            <p
+              className="
+                mt-4 max-w-2xl text-base sm:text-lg leading-relaxed
+                text-zinc-600 dark:text-white/60
+              "
+            >
+              {editId
+                ? 'Update your job listing details and optimize your hiring pipeline.'
+                : 'Create premium job listings with a guided workflow designed for modern recruiting teams.'
+              }
+            </p>
+          </div>
         </section>
 
         <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
           <aside className="
-            sticky top-6 h-fit
-            rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl
-            hidden lg:block"
+            sticky top-6 h-fit rounded-[2rem]
+            border border-zinc-200 bg-white/90 p-5
+            backdrop-blur-xl shadow-sm dark:border-white/10 dark:bg-white/[0.03] hidden lg:block"
           >
             {stepTitles.map((title, i) => (
               <div key={title} className="mb-5 flex items-center gap-3">
-                <div className={`h-10 w-10 rounded-full grid place-items-center ${step >= i ? 'bg-cyan-500/20 text-cyan-300' : 'bg-white/5 text-white/40'}`}>
+                <div
+                  className={`
+                    h-10 w-10 rounded-full grid place-items-center transition
+                    ${
+                      step >= i
+                        ? 'bg-cyan-100 text-cyan-700 dark:bg-cyan-500/20 dark:text-cyan-300'
+                        : 'bg-zinc-100 text-zinc-500 dark:bg-white/5 dark:text-white/40'
+                    }
+                  `}
+                >
                   {step > i ? <CheckCircle2 size={18} /> : i + 1}
                 </div>
                 <span>{title}</span>
@@ -369,8 +447,14 @@ const EmployerJobWizard = () => {
           </aside>
 
           {/* Mobile step indicator */}
-          <div className="lg:hidden flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-            <span className="text-sm text-white/60">
+          <div 
+            className="
+              lg:hidden flex items-center justify-between rounded-2xl
+              border border-zinc-200 bg-white/90 px-4 py-3
+              shadow-sm dark:border-white/10 dark:bg-white/[0.03]
+            "
+          >
+            <span className="text-sm text-zinc-500 dark:text-white/60">
               Step {step + 1} of {stepTitles.length}
             </span>
 
@@ -389,34 +473,49 @@ const EmployerJobWizard = () => {
           <form 
             onSubmit={handleSubmit(onPublish)} 
             className="
-            rounded-[2rem] border border-white/10 
-            bg-gradient-to-b from-white/[0.04] to-white/[0.02]
-            p-5 sm:p-8 
-            backdrop-blur-2xl 
-            shadow-[0_0_40px_rgba(6,182,212,0.05)]
-            space-y-6"
+            rounded-[2rem] border border-zinc-200
+            bg-gradient-to-b from-white to-slate-50/90
+            shadow-sm dark:border-white/10
+            dark:from-white/[0.04] dark:to-white/[0.02]
+            p-5 sm:p-8  backdrop-blur-2xl space-y-6"
           >
             {step === 0 && (
               <>
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wide text-white/40">
+                  <label className="text-xs uppercase tracking-wide text-zinc-500 dark:text-white/40">
                     Job Title
                   </label>
+
                   <input 
                     {...register('title')} 
                     placeholder="Job Title" 
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40 backdrop-blur-xl focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
+                    className="w-full rounded-2xl px-4 py-3 
+                    border border-zinc-200
+                    bg-white text-zinc-900
+                    placeholder:text-zinc-400 shadow-sm
+                    dark:border-white/10 dark:bg-black/40
+                    dark:text-white
+                    dark:placeholder:text-white/40
+                    backdrop-blur-xl focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wide text-white/40">
+                  <label className="text-xs uppercase tracking-wide text-zinc-500 dark:text-white/40">
                     Department / Category
                   </label>
+
                   <input 
                     {...register('category')}
                     placeholder="Department / Category" 
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40 backdrop-blur-xl focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
+                    className="w-full rounded-2xl px-4 py-3 
+                    border border-zinc-200
+                    bg-white  text-zinc-900
+                    placeholder:text-zinc-400 shadow-sm
+                    dark:border-white/10 dark:bg-black/40
+                    dark:text-white
+                    dark:placeholder:text-white/40
+                    backdrop-blur-xl focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
                   />
                 </div>
 
@@ -441,8 +540,14 @@ const EmployerJobWizard = () => {
                   <input 
                     {...register('city')}
                     placeholder="City (e.g. Lagos)"
-                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-white/40 backdrop-blur-xl focus:border-cyan-400/40 
-                    focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
+                    className="w-full rounded-2xl px-4 py-3 
+                    border border-zinc-200
+                    bg-white  text-zinc-900
+                    placeholder:text-zinc-400 shadow-sm
+                    dark:border-white/10 dark:bg-black/40
+                    dark:text-white
+                    dark:placeholder:text-white/40
+                    backdrop-blur-xl focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
                   />
                   
                 </div>
@@ -488,9 +593,19 @@ const EmployerJobWizard = () => {
 
             {step === 1 && (
               <>
-                <div className="rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl p-4 min-h-[220px] focus-within:border-cyan-400/30 focus-within:ring-1 focus-within:ring-cyan-500/20 transition"
+                <div
+                  className="
+                    rounded-2xl border
+                    border-zinc-200 bg-white
+                    dark:border-white/10 dark:bg-black/40
+                    backdrop-blur-xl p-4 min-h-[220px]
+                    focus-within:border-cyan-400/40
+                    focus-within:ring-1
+                    focus-within:ring-cyan-500/20
+                    transition
+                  "
                 >
-                  <div className="prose prose-invert max-w-none">
+                  <div className="prose max-w-none dark:prose-invert">
                     <EditorContent
                       editor={editor}
                       className="outline-none [&_.ProseMirror]:min-h-[180px]"
@@ -553,7 +668,11 @@ const EmployerJobWizard = () => {
                         {benefitsOptions.map((benefit) => (
                           <div
                             key={benefit}
-                            className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3 hover:border-cyan-400/30 transition"
+                            className="
+                              rounded-2xl border border-zinc-200 bg-white
+                              px-4 py-3 shadow-sm hover:border-cyan-300
+                              transition dark:border-white/10
+                              dark:bg-black/30 dark:hover:border-cyan-400/30"
                           >
                             <Checkbox
                               label={benefit}
@@ -572,14 +691,21 @@ const EmployerJobWizard = () => {
             {step === 3 && (
               <>
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-wide text-white/40">
+                  <label className="text-xs uppercase tracking-wide text-zinc-500 dark:text-white/40">
                     Application Deadline
                   </label>
+
                   <input
                     type="date"
                     {...register('deadline')}
-                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white 
-                    appearance-none focus:outline-none focus:ring-1 focus:ring-cyan-400 mt-2"
+                    className="w-full rounded-2xl px-4 py-3 
+                    border border-zinc-200
+                    bg-white  text-zinc-900
+                    placeholder:text-zinc-400 shadow-sm
+                    dark:border-white/10 dark:bg-black/40
+                    dark:text-white
+                    dark:placeholder:text-white/40
+                    backdrop-blur-xl focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
                   />
                 </div>
 
@@ -598,9 +724,10 @@ const EmployerJobWizard = () => {
                 type="button" 
                 onClick={() => setStep((s) => Math.max(0, s - 1))} 
                 className="flex items-center justify-center gap-2 
-                w-full sm:w-auto 
-                rounded-2xl border border-white/10 bg-white/5 
-                px-5 py-3 text-white/70 hover:bg-white/10 transition"
+                w-full sm:w-auto  rounded-2xl border border-zinc-200
+                bg-white px-5 py-3 text-zinc-700 hover:bg-zinc-100
+                shadow-sm dark:border-white/10 dark:bg-white/5
+                dark:text-white/70 dark:hover:bg-white/10 transition"
               >
                 <ArrowLeft size={18} />
                 <span className="sm:hidden">Back</span>
@@ -613,9 +740,12 @@ const EmployerJobWizard = () => {
                   type="button" 
                   onClick={saveDraft} 
                   className="flex items-center justify-center gap-2 
-                  w-full sm:w-auto 
-                  rounded-2xl border border-cyan-500/20 bg-cyan-500/10 
-                  px-5 py-3 text-cyan-300 hover:bg-cyan-500/20 transition"
+                  w-full sm:w-auto  rounded-2xl
+                  border border-cyan-200 bg-cyan-50
+                  px-5 py-3 text-cyan-700 hover:bg-cyan-100
+                  shadow-sm dark:border-cyan-500/20
+                  dark:bg-cyan-500/10 dark:text-cyan-300
+                  dark:hover:bg-cyan-500/20 transition"
                 >
                   <Save size={18} /> Save Draft
                 </button>
@@ -625,8 +755,18 @@ const EmployerJobWizard = () => {
                   onClick={() => setPreviewOpen(true)} 
                   className="flex items-center justify-center gap-2 
                   w-full sm:w-auto 
-                  rounded-2xl border border-purple-500/20 bg-purple-500/10 
-                  px-5 py-3 text-purple-300 hover:bg-purple-500/20 transition"
+                  rounded-2xl
+                  border border-purple-200
+                  bg-purple-100
+                  px-5 py-3
+                  text-purple-700
+                  hover:bg-purple-200
+                  shadow-sm
+                  dark:border-purple-500/20
+                  dark:bg-purple-500/10
+                  dark:text-purple-300
+                  dark:hover:bg-purple-500/20
+                  transition"
                 >
                   <Eye size={18} /> Preview
                 </button>
@@ -640,8 +780,12 @@ const EmployerJobWizard = () => {
                     }}
                     className="flex items-center justify-center gap-2 
                     w-full sm:w-auto 
-                    rounded-2xl border border-purple-500/20 bg-purple-500/10 
-                    px-5 py-3 text-purple-300 hover:bg-purple-500/20 transition"
+                    rounded-2xl border border-purple-200
+                    bg-purple-100 px-5 py-3 text-purple-700
+                    hover:bg-purple-200 shadow-sm
+                    dark:border-purple-500/20
+                    dark:bg-purple-500/10 dark:text-purple-300
+                    dark:hover:bg-purple-500/20 transition"
                   >
                     Next <ArrowRight size={18} />
                   </button>
@@ -650,9 +794,10 @@ const EmployerJobWizard = () => {
                     type="button" 
                     onClick={handleSubmit(onPublish)}
                     className="flex items-center justify-center gap-2 
-                    w-full sm:w-auto 
-                    rounded-2xl bg-gradient-to-r from-cyan-500/30 to-purple-500/20 
-                    px-6 py-3 text-white hover:opacity-90 transition"
+                    w-full sm:w-auto  rounded-2xl bg-gradient-to-r
+                    from-cyan-500 to-purple-500
+                    px-6 py-3 text-white
+                    shadow-lg hover:opacity-90 transition"
                   >
                     Publish Job
                   </button>
@@ -669,13 +814,13 @@ const EmployerJobWizard = () => {
 
           <div className="fixed inset-0 flex items-start sm:items-center justify-center p-4">
             <Dialog.Content
-              className="relative w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0A0A0F]/70 backdrop-blur-2xl shadow-[0_0_60px_rgba(6,182,212,0.15)]"
+              className="relative w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden rounded-3xl border border-zinc-200 dark:border-white/10 dark:bg-[#0A0A0F]/70 bg-white/95 backdrop-blur-2xl shadow-[0_0_60px_rgba(6,182,212,0.15)]"
             >
               <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.10),transparent_45%)]" />
 
               {/* HEADER */}
-              <div className="border-b border-white/10 px-6 py-5 shrink-0">
-                <Dialog.Title className="text-2xl md:text-3xl font-bold text-cyan-300">
+              <div className="border-b border-zinc-200 dark:border-white/10 px-6 py-5 shrink-0">
+                <Dialog.Title className="text-2xl md:text-3xl font-bold dark:text-cyan-300 text-cyan-600">
                   {values.title || 'Untitled Job'}
                 </Dialog.Title>
 
@@ -683,7 +828,7 @@ const EmployerJobWizard = () => {
                   Preview how your job listing will appear to candidates.
                 </Dialog.Description>
 
-                <p className="mt-2 text-sm text-white/60">
+                <p className="mt-2 text-sm text-zinc-500 dark:text-white/60">
                   {values.category} • {values.locationType} • {values.city}
                 </p>
               </div>
@@ -692,12 +837,15 @@ const EmployerJobWizard = () => {
               <div className="overflow-y-auto px-6 py-6 flex-1 space-y-8 pb-10 no-scrollbar">
                 {/* DESCRIPTION */}
                 <section>
-                  <h3 className="text-sm uppercase tracking-wider text-white/40 mb-3">
+                  <h3 className="mb-3 text-sm uppercase tracking-wider text-zinc-500 dark:text-white/40">
                     Description
                   </h3>
 
                   <div
-                    className="prose prose-invert max-w-none text-white/90"
+                    className="
+                      prose max-w-none text-zinc-700
+                      dark:prose-invert dark:text-white/90
+                    "
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(values.description || ''),
                     }}
@@ -707,7 +855,7 @@ const EmployerJobWizard = () => {
                 {/* RESPONSIBILITIES */}
                 {values.responsibilities?.length > 0 && (
                   <section>
-                    <h3 className="text-sm uppercase tracking-wider text-white/40 mb-3">
+                    <h3 className="mb-3 text-sm uppercase tracking-wider text-zinc-500 dark:text-white/40">
                       Responsibilities
                     </h3>
 
@@ -722,7 +870,7 @@ const EmployerJobWizard = () => {
                 {/* REQUIREMENTS */}
                 {values.requirements?.length > 0 && (
                   <section>
-                    <h3 className="text-sm uppercase tracking-wider text-white/40 mb-3">
+                    <h3 className="mb-3 text-sm uppercase tracking-wider text-zinc-500 dark:text-white/40">
                       Requirements
                     </h3>
 
@@ -737,7 +885,7 @@ const EmployerJobWizard = () => {
                 {/* BENEFITS */}
                 {values.benefits?.length > 0 && (
                   <section>
-                    <h3 className="text-sm uppercase tracking-wider text-white/40 mb-3">
+                    <h3 className="mb-3 text-sm uppercase tracking-wider text-zinc-500 dark:text-white/40">
                       Benefits
                     </h3>
 
@@ -746,10 +894,10 @@ const EmployerJobWizard = () => {
                         <span
                           key={b}
                           className="
-                            rounded-full
-                            border border-cyan-500/20
-                            bg-cyan-500/10
-                            px-3 py-1 text-sm text-cyan-200
+                            rounded-full border border-cyan-200
+                            bg-cyan-50 px-3 py-1 text-sm text-cyan-700
+                            dark:border-cyan-500/20 dark:bg-cyan-500/10
+                            dark:text-cyan-200
                           "
                         >
                           {b}
@@ -761,11 +909,11 @@ const EmployerJobWizard = () => {
 
                 {/* SALARY */}
                 <section>
-                  <h3 className="text-sm uppercase tracking-wider text-white/40 mb-3">
+                  <h3 className="mb-3 text-sm uppercase tracking-wider text-zinc-500 dark:text-white/40">
                     Compensation
                   </h3>
 
-                  <p className="text-white/90 text-lg font-semibold">
+                  <p className="text-zinc-900 dark:text-white/90text-lg font-semibold">
                     ₦{values.salaryMin?.toLocaleString()} — ₦{values.salaryMax?.toLocaleString()}
                   </p>
                 </section>
@@ -773,11 +921,11 @@ const EmployerJobWizard = () => {
                 {/* DEADLINE */}
                 {values.deadline && (
                   <section>
-                    <h3 className="text-sm uppercase tracking-wider text-white/40 mb-3">
+                    <h3 className="mb-3 text-sm uppercase tracking-wider text-zinc-500 dark:text-white/40">
                       Application Deadline
                     </h3>
 
-                    <p className="text-white/80">
+                    <p className="text-zinc-700 dark:text-white/80">
                       {new Date(values.deadline).toDateString()}
                     </p>
                   </section>
@@ -785,10 +933,16 @@ const EmployerJobWizard = () => {
               </div>
 
               {/* FOOTER */}
-              <div className="border-t border-white/5 px-6 py-4 shrink-0 flex justify-end backdrop-blur-xl">
+              <div className="border-t border-zinc-200 dark:border-white/5 px-6 py-4 shrink-0 flex justify-end backdrop-blur-xl">
                 <button
                   onClick={() => setPreviewOpen(false)}
-                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-white/70 hover:bg-white/10 transition"
+                  className="
+                    rounded-xl border border-zinc-300
+                    bg-zinc-100 px-4 py-2 text-zinc-700
+                    hover:bg-zinc-200 transition dark:border-white/10
+                    dark:bg-white/5 dark:text-white/70
+                    dark:hover:bg-white/10
+                  "
                 >
                   Close
                 </button>

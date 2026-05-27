@@ -87,21 +87,45 @@ const EmployerJobPage = () => {
   };
 
   return (
-    <main className="relative min-h-screen bg-[#0A0A0F] text-white p-4 md:p-6 overflow-hidden">
+    <main className="relative min-h-screen dark:bg-[#0A0A0F] dark:text-white bg-zinc-50 text-zinc-900 p-4 md:p-6 overflow-hidden">
 
       <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute top-[-20%] right-[-10%] h-[500px] w-[500px] bg-cyan-500/20 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-20%] left-[-10%] h-[500px] w-[500px] bg-purple-500/20 blur-[120px] rounded-full" />
+        <div
+          className="
+            absolute top-[-20%] right-[-10%]
+            h-[500px] w-[500px] rounded-full
+            bg-cyan-500/10 dark:bg-cyan-500/20
+            blur-[120px]
+          "
+        />
+
+        <div
+          className="
+            absolute bottom-[-20%] left-[-10%]
+            h-[500px] w-[500px] rounded-full
+            bg-purple-500/10 dark:bg-purple-500/20
+            blur-[120px]
+          "
+        />
       </div>
 
       <div className="mx-auto max-w-7xl space-y-6">
         {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
+            <h1
+              className="
+                text-3xl md:text-4xl font-bold
+                bg-gradient-to-r
+                from-cyan-600 to-purple-600
+                dark:from-cyan-300 dark:to-purple-400
+                bg-clip-text text-transparent
+              "
+            >
               Manage Jobs
             </h1>
-            <p className="text-white/50 mt-1">
+
+            <p className="mt-1 text-zinc-600 dark:text-white/50">
               Track, edit, and optimize your job listings
             </p>
           </div>
@@ -110,7 +134,12 @@ const EmployerJobPage = () => {
             placeholder="Search jobs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full md:w-80 rounded-xl bg-white/[0.04] border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-cyan-400/40 focus:ring-1 focus:ring-cyan-500/20 outline-none transition"
+            className="
+              w-full md:w-80 rounded-xl
+              bg-white border border-zinc-200 px-4 py-2.5 text-sm  placeholder:text-zinc-400 shadow-sm outline-none transition
+              focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/10 dark:bg-white/[0.04] dark:border-white/10 dark:text-white
+              dark:placeholder:text-white/40 dark:focus:border-cyan-400/40
+              dark:focus:ring-cyan-500/20"
           />
         </div>
 
@@ -123,8 +152,26 @@ const EmployerJobPage = () => {
               className={clsx(
                 "px-4 py-2 rounded-full text-sm border transition",
                 activeTab === tab
-                  ? "bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.2)]"
-                  : "border-white/10 text-white/60 hover:bg-white/5"
+                  ? `
+                    bg-cyan-50
+                    border-cyan-300
+                    text-cyan-700
+                    shadow-sm
+                    dark:bg-cyan-500/20
+                    dark:border-cyan-400
+                    dark:text-cyan-300
+                    dark:shadow-[0_0_12px_rgba(6,182,212,0.2)]
+                  `
+                  : `
+                    border-zinc-200
+                    bg-white
+                    text-zinc-600
+                    hover:bg-zinc-100
+                    dark:border-white/10
+                    dark:bg-transparent
+                    dark:text-white/60
+                    dark:hover:bg-white/5
+                  `
               )}
             >
               {tab}
@@ -133,7 +180,9 @@ const EmployerJobPage = () => {
         </div>
 
         {/* SORT + BULK */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-white/10 dark:bg-white/[0.03]
+        dark:backdrop-blur-xl"
+        >
           <CustomSelect
             value={sort}
             onValueChange={(value) =>
@@ -159,13 +208,33 @@ const EmployerJobPage = () => {
             <div className="flex gap-2">
               <button
                 onClick={closeSelected}
-                className="px-4 py-2 rounded-xl bg-red-500/20 text-red-300"
+                className="
+                  inline-flex items-center justify-center
+                  whitespace-nowrap
+                  px-6 py-2.5
+                  rounded-xl
+                  text-sm font-medium
+                  min-w-[160px]
+                  bg-red-50 text-red-600 border border-red-200
+                  hover:bg-red-100 transition
+                  dark:bg-red-500/20
+                  dark:text-red-300
+                  dark:border-red-500/20
+                "
               >
                 Close Selected
               </button>
+
               <button
                 onClick={deleteSelected}
-                className="px-4 py-2 rounded-xl bg-white/10"
+                className="
+                  px-4 py-2 rounded-xl
+                  bg-zinc-100 text-zinc-700 border border-zinc-200
+                  hover:bg-zinc-200 transition
+                  dark:bg-white/10
+                  dark:text-white
+                  dark:border-white/10
+                "
               >
                 Delete
               </button>
@@ -190,9 +259,12 @@ const EmployerJobPage = () => {
           ))}
 
           {filteredJobs.length === 0 && (
-            <div className="text-center py-16 text-white/40">
+            <div className="py-16 text-center text-zinc-500 dark:text-white/40">
               <p className="text-lg">No jobs found</p>
-              <p className="text-sm mt-1">Try adjusting filters or create a new job</p>
+
+              <p className="mt-1 text-sm">
+                Try adjusting filters or create a new job
+              </p>
             </div>
           )}
         </div>
@@ -221,14 +293,24 @@ function JobCard({
   return (
     <div
       className="
-        group relative rounded-2xl border border-white/10
-        bg-white/[0.03] p-4 sm:p-5
-        flex flex-col md:flex-row
-        md:items-center md:justify-between
-        gap-5 overflow-hidden
+        group relative overflow-hidden rounded-2xl
+        border border-zinc-200
+        bg-white shadow-sm
+        dark:border-white/10
+        dark:bg-white/[0.03]
+        p-4 sm:p-5 flex flex-col md:flex-row
+        md:items-center md:justify-between gap-5
       "
     >
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition pointer-events-none bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.15),transparent_60%)]" />
+      <div
+        className="
+          absolute inset-0 rounded-2xl
+          opacity-0 group-hover:opacity-100
+          transition pointer-events-none
+          bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.08),transparent_60%)]
+          dark:bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.15),transparent_60%)]
+        "
+      />
 
       {/* LEFT */}
       <div className="flex items-start md:items-center gap-3">
@@ -240,26 +322,52 @@ function JobCard({
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold break-words">
+          <h3 className="text-lg font-semibold break-words text-zinc-900 dark:text-white">
             {job.title}
           </h3>
 
           <span
             className={clsx(
-              "px-3 py-1 mt-1 rounded-full text-xs font-medium capitalize",
-              job.status === "published" && "bg-green-500/20 text-green-300",
-              job.status === "draft" && "bg-yellow-500/20 text-yellow-300",
-              job.status === "closed" && "bg-red-500/30 text-red-300"
+              "px-3 py-1 mt-1 rounded-full text-xs font-medium capitalize border",
+              job.status === "published" &&
+                `
+                  bg-green-50 text-green-700 border-green-200
+                  dark:bg-green-500/20
+                  dark:text-green-300
+                  dark:border-green-500/20
+                `,
+
+              job.status === "draft" &&
+                `
+                  bg-yellow-50 text-yellow-700 border-yellow-200
+                  dark:bg-yellow-500/20
+                  dark:text-yellow-300
+                  dark:border-yellow-500/20
+                `,
+
+              job.status === "closed" &&
+                `
+                  bg-red-50 text-red-700 border-red-200
+                  dark:bg-red-500/30
+                  dark:text-red-300
+                  dark:border-red-500/20
+                `
             )}
           >
             {job.status}
           </span>
 
-          <p className="text-sm text-white/50 mt-2">
+          <p className="text-sm mt-2 text-zinc-500 dark:text-white/50">
             Posted {new Date(job.createdAt).toDateString()}
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-white/50">
+          <div
+            className="
+              mt-2 flex flex-wrap items-center gap-3
+              text-xs text-zinc-500
+              dark:text-white/50
+            "
+          >
             <span>👁 {job.viewsCount} views</span>
             <span>📄 {job.applicationsCount} applications</span>
           </div>

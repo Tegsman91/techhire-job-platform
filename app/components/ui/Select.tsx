@@ -45,7 +45,7 @@ export default function CustomSelect({
           className="
             flex w-full items-center justify-between
             rounded-2xl
-            border border-[var(--border-primary)]
+            border border-slate-300
             bg-[var(--surface-primary)]
             px-4 py-3
             text-[var(--text-primary)]
