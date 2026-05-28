@@ -9,11 +9,27 @@ import QuickActions from '@/app/components/dashboard/quick-actions';
 
 const DashboardPage = () => {
   return (
-    <main className="relative min-h-screen bg-[#070B14] text-white">
+    <main className="relative min-h-screen text-zinc-900 bg-[#f5f7fb] dark:bg-[#070B14] dark:text-white">
       <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute left-[-10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-3xl" />
+        <div
+          className="
+            absolute left-[-10%] top-[-10%]
+            h-[500px] w-[500px] rounded-full
+            bg-cyan-500/10
+            blur-3xl
+            dark:bg-cyan-500/10
+          "
+        />
 
-        <div className="absolute bottom-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-purple-500/10 blur-3xl" />
+        <div
+          className="
+            absolute bottom-[-10%] right-[-10%]
+            h-[500px] w-[500px] rounded-full
+            bg-purple-500/10
+            blur-3xl
+            dark:bg-purple-500/10
+          "
+        />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 xl:py-10 space-y-7">

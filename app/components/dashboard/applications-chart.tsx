@@ -46,10 +46,42 @@ const ApplicationsChart = () => {
   ];
 
   return (
-    <section className="min-w-0 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
-      <h2 className="text-2xl font-bold">
-        Application Status
-      </h2>
+    <section
+      className="
+        min-w-0 rounded-[2rem]
+        border border-zinc-200
+        bg-white/90
+        p-6
+        shadow-sm
+        backdrop-blur-xl
+
+        dark:border-white/10
+        dark:bg-white/[0.04]
+      "
+    >
+      <div className="flex items-center justify-between">
+        <div>
+          <h2
+            className="
+              text-2xl font-bold
+              text-zinc-900
+              dark:text-white
+            "
+          >
+            Application Status
+          </h2>
+
+          <p
+            className="
+              mt-1 text-sm
+              text-zinc-500
+              dark:text-white/50
+            "
+          >
+            Track hiring pipeline performance
+          </p>
+        </div>
+      </div>
 
       <div className="min-w-0 overflow-hidden">
         <div className="mt-6 h-[280px] sm:h-[320px] w-full min-w-0">
@@ -63,19 +95,58 @@ const ApplicationsChart = () => {
                 dataKey="value"
                 nameKey="name"
                 outerRadius={110}
+                stroke="none"
               />
 
               <Tooltip
                 contentStyle={{
-                  background: '#0B1120',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  background:
+                    'rgba(255,255,255,0.96)',
+                  border:
+                    '1px solid rgba(228,228,231,1)',
                   borderRadius: '16px',
-                  color: 'white',
+                  color: '#18181b',
+                  boxShadow:
+                    '0 10px 30px rgba(0,0,0,0.08)',
+                }}
+                labelStyle={{
+                  color: '#71717a',
+                }}
+                itemStyle={{
+                  color: '#18181b',
                 }}
               />
             </PieChart>
           </ResponsiveContainer>
         </div>
+      </div>
+
+      {/* Legend */}
+      <div className="mt-4 flex flex-wrap gap-3">
+        {data.map((item) => (
+          <div
+            key={item.name}
+            className="
+              flex items-center gap-2
+              rounded-full
+              border border-zinc-200
+              bg-zinc-50
+              px-3 py-1.5
+              text-sm text-zinc-700
+
+              dark:border-white/10
+              dark:bg-white/[0.04]
+              dark:text-white/70
+            "
+          >
+            <span
+              className="h-2.5 w-2.5 rounded-full"
+              style={{ backgroundColor: item.fill }}
+            />
+
+            <span>{item.name}</span>
+          </div>
+        ))}
       </div>
     </section>
   );

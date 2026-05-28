@@ -357,9 +357,25 @@ const ResumePage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#0A0A0F] px-4 py-6 text-white lg:px-8 print:bg-white print:p-0">
+    <main
+      className="
+        min-h-screen px-4 py-6 lg:px-8 bg-gradient-to-br
+        from-slate-50 via-white to-cyan-50 text-slate-900
+        transition-colors duration-300 dark:from-[#0A0A0F] dark:via-[#0F172A] dark:to-[#0A0A0F] dark:text-white print:bg-white print:p-0
+      "
+    >
       <div className="mx-auto max-w-7xl">
-        <div className="relative mb-6 overflow-hidden rounded-[2rem] flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border border-cyan-500/20 bg-white/[0.03] p-6 sm:p-8 backdrop-blur-2xl shadow-[0_0_40px_rgba(34,211,238,0.08)] print:hidden">
+        <div 
+          className="
+            relative mb-6 overflow-hidden rounded-[2rem]
+            border border-cyan-200 bg-white/80 p-6 sm:p-8
+            shadow-xl shadow-cyan-100/50 backdrop-blur-2xl
+            flex flex-col gap-4
+            lg:flex-row lg:items-center lg:justify-between
+            dark:border-cyan-500/20 dark:bg-white/[0.03]
+            dark:shadow-[0_0_30px_rgba(34,211,238,0.08)] print:hidden
+          "
+        >
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
 
           <div>
@@ -367,7 +383,7 @@ const ResumePage = () => {
               Resume Builder
             </h1>
 
-            <p className="mt-2 text-white/60">
+            <p className="mt-2 text-slate-600 dark:text-white/60">
               Build a professional resume with
               live preview and PDF export.
             </p>
@@ -380,7 +396,15 @@ const ResumePage = () => {
                 e.preventDefault();
                 downloadPDF();
               }}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] transition duration-300 px-5 py-3 sm:w-auto"
+              className="
+                flex w-full items-center justify-center gap-2
+                rounded-2xl border border-slate-200
+                bg-white px-5 py-3
+                text-slate-700 transition duration-300
+                hover:bg-slate-50 dark:border-white/10
+                dark:bg-white/[0.03] dark:text-white
+                dark:hover:bg-white/[0.05] sm:w-auto
+              "
             >
               <Download size={18} />
               Download PDF
@@ -400,7 +424,14 @@ const ResumePage = () => {
           {/* LEFT */}
           <div className="space-y-6 print:hidden">
             {/* TEMPLATE */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5">
+            <section 
+              className="
+                rounded-[2rem] border border-slate-200
+                bg-white/80 p-5 shadow-sm
+                backdrop-blur-xl dark:border-white/10
+                dark:bg-white/[0.03] dark:shadow-none
+              "
+            >
               <h2 className="text-2xl font-bold">
                 Templates
               </h2>
@@ -418,8 +449,15 @@ const ResumePage = () => {
                     className={clsx(
                       'rounded-2xl border p-5 capitalize transition-all duration-300',
                       resume.template === template
-                        ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                        : 'border-white/10 bg-black/20'
+                        ? `
+                          border-cyan-400 bg-cyan-50 text-cyan-700
+                          dark:bg-cyan-400/10 dark:text-cyan-300
+                        `
+                        : `
+                          border-slate-200 bg-slate-50
+                          text-slate-700 dark:border-white/10
+                          dark:bg-black/20 dark:text-white
+                        `
                     )}
                   >
                     {template}
@@ -429,7 +467,14 @@ const ResumePage = () => {
             </section>
 
             {/* PERSONAL */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5">
+            <section 
+              className="
+                rounded-[2rem] border border-slate-200
+                bg-white/80 p-5 shadow-sm
+                backdrop-blur-xl dark:border-white/10
+                dark:bg-white/[0.03] dark:shadow-none
+              "
+            >
               <h2 className="text-2xl font-bold">
                 Personal Info
               </h2>
@@ -504,7 +549,14 @@ const ResumePage = () => {
             </section>
 
             {/* SUMMARY */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5">
+            <section 
+              className="
+                rounded-[2rem] border border-slate-200
+                bg-white/80 p-5 shadow-sm
+                backdrop-blur-xl dark:border-white/10
+                dark:bg-white/[0.03] dark:shadow-none
+              "
+            >
               <h2 className="text-2xl font-bold">
                 Professional Summary
               </h2>
@@ -517,7 +569,16 @@ const ResumePage = () => {
                     summary: e.target.value,
                   }))
                 }
-                className="mt-5 min-h-[150px] w-full text-base rounded-2xl border border-white/10 bg-black/20 p-4 outline-none resize-none"
+                className="
+                  mt-5 min-h-[150px] w-full
+                  rounded-2xl border border-slate-200 bg-slate-50
+                  p-4 text-base text-slate-900
+                  outline-none resize-none transition
+                  placeholder:text-slate-400 focus:border-cyan-400
+                  focus:bg-white dark:border-white/10
+                  dark:bg-black/20 dark:text-white
+                  dark:placeholder:text-white/40
+                "
               />
             </section>
 
@@ -543,7 +604,14 @@ const ResumePage = () => {
             <SkillsEditor />
 
             {/* DRAG SECTIONS */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5">
+            <section 
+              className="
+                rounded-[2rem] border border-slate-200
+                bg-white/80 p-5 shadow-sm
+                backdrop-blur-xl dark:border-white/10
+                dark:bg-white/[0.03] dark:shadow-none
+              "
+            >
               <div className="mb-5 flex items-center gap-3">
                 <GripVertical size={20} />
 
@@ -564,12 +632,23 @@ const ResumePage = () => {
             <div className="mb-4 flex items-center gap-2 print:hidden">
               <Eye size={18} />
 
-              <p className="font-medium">
+              <p className="font-medium text-slate-700 dark:text-white">
                 Live Preview
               </p>
             </div>
 
-            <div className="min-w-0 overflow-hidden">
+            <div
+              className="
+                min-w-0 overflow-hidden
+                rounded-[2rem]
+                border border-black/10
+                bg-[#f3f4f6] p-4
+                shadow-[0_10px_40px_rgba(0,0,0,0.08)]
+                dark:border-white/10
+                dark:bg-white/[0.03]
+                dark:shadow-[0_10px_40px_rgba(0,0,0,0.45)]
+              "
+            >
               {resume.template === 'modern' && (
                 <ModernTemplate resume={resume} />
               )}
@@ -611,7 +690,19 @@ function Input({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className="w-full min-w-0 rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-base outline-none"
+      className="
+        w-full min-w-0 rounded-2xl
+        border border-slate-200 bg-slate-50
+        px-4 py-3 text-base text-slate-900
+        outline-none transition
+        placeholder:text-slate-400
+        focus:border-cyan-400
+        focus:bg-white
+        dark:border-white/10
+        dark:bg-black/20
+        dark:text-white
+        dark:placeholder:text-white/40
+      "
     />
   );
 }

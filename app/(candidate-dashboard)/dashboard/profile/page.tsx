@@ -1,15 +1,18 @@
 'use client';
 
-import { useMemo, useState, } from 'react';
+import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Cropper from 'react-easy-crop';
 import { useDropzone } from 'react-dropzone';
-import { Camera, Save, Sparkles, } from 'lucide-react';
-import { CandidateProfile, useCandidateProfileStore, } from '@/lib/store';
+import { Camera, Save, Sparkles } from 'lucide-react';
+import {
+  CandidateProfile,
+  useCandidateProfileStore,
+} from '@/lib/store';
 import Image from 'next/image';
-import { UseFormRegisterReturn, } from 'react-hook-form';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import Checkbox from '@/app/components/ui/Checkbox';
 import CustomSelect from '@/app/components/ui/Select';
 
@@ -74,13 +77,18 @@ const allSkills = [
 ];
 
 const ProfilePage = () => {
-  const profile = useCandidateProfileStore( (state) => state.profile);
-
-  const updateProfile = useCandidateProfileStore(
-    (state) => state.updateProfile
+  const profile =
+    useCandidateProfileStore(
+      (state) => state.profile
     );
-  
-  const [skills, setSkills] = useState(profile.skills);
+
+  const updateProfile =
+    useCandidateProfileStore(
+      (state) => state.updateProfile
+    );
+
+  const [skills, setSkills] =
+    useState(profile.skills);
 
   const [crop, setCrop] = useState({
     x: 0,
@@ -89,8 +97,10 @@ const ProfilePage = () => {
 
   const [zoom, setZoom] = useState(1);
 
-  const [croppedAreaPixels, setCroppedAreaPixels] =
-  useState<{
+  const [
+    croppedAreaPixels,
+    setCroppedAreaPixels,
+  ] = useState<{
     x: number;
     y: number;
     width: number;
@@ -118,25 +128,25 @@ const ProfilePage = () => {
   };
 
   const saveCroppedImage =
-  async () => {
-    if (
-      !imageSrc ||
-      !croppedAreaPixels
-    )
-      return;
+    async () => {
+      if (
+        !imageSrc ||
+        !croppedAreaPixels
+      )
+        return;
 
-    const croppedImage =
-      await getCroppedImg(
-        imageSrc,
-        croppedAreaPixels
-      );
+      const croppedImage =
+        await getCroppedImg(
+          imageSrc,
+          croppedAreaPixels
+        );
 
-    if (!croppedImage) return;
+      if (!croppedImage) return;
 
-    setValue('avatar', croppedImage);
+      setValue('avatar', croppedImage);
 
-    setShowCropper(false);
-  };
+      setShowCropper(false);
+    };
 
   const {
     register,
@@ -169,55 +179,57 @@ const ProfilePage = () => {
     reader.readAsDataURL(file);
   };
 
-  const { getRootProps, getInputProps } =
-    useDropzone({
-      accept: {
-        'image/*': [],
-      },
-      multiple: false,
-      onDrop,
-    });
+  const {
+    getRootProps,
+    getInputProps,
+  } = useDropzone({
+    accept: {
+      'image/*': [],
+    },
+    multiple: false,
+    onDrop,
+  });
 
-const values = watch();
+  const values = watch();
 
-const completion = useMemo(() => {
-  const total = 10;
+  const completion = useMemo(() => {
+    const total = 10;
 
-  let completed = 0;
+    let completed = 0;
 
-  if (values.avatar) completed++;
+    if (values.avatar) completed++;
 
-  if (values.personal.name)
-    completed++;
+    if (values.personal.name)
+      completed++;
 
-  if (values.personal.email)
-    completed++;
+    if (values.personal.email)
+      completed++;
 
-  if (values.personal.phone)
-    completed++;
+    if (values.personal.phone)
+      completed++;
 
-  if (values.professionalTitle)
-    completed++;
+    if (values.professionalTitle)
+      completed++;
 
-  if (values.bio)
-    completed++;
+    if (values.bio)
+      completed++;
 
-  if (skills.length)
-    completed++;
+    if (skills.length)
+      completed++;
 
-  if (values.personal.linkedin)
-    completed++;
+    if (values.personal.linkedin)
+      completed++;
 
-  if (values.personal.github)
-    completed++;
+    if (values.personal.github)
+      completed++;
 
-  if (values.workAuthorization)
-    completed++;
+    if (values.workAuthorization)
+      completed++;
 
-  return Math.round(
-    (completed / total) * 100
-  );
-}, [values, skills]);
+    return Math.round(
+      (completed / total) * 100
+    );
+  }, [values, skills]);
 
   const onSubmit = (
     data: CandidateProfile
@@ -233,68 +245,157 @@ const completion = useMemo(() => {
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#070B14] px-4 py-6 text-white sm:px-6 lg:px-8">
+    <main
+      className="
+        relative min-h-screen overflow-hidden
+        bg-gradient-to-br
+        from-slate-50 via-white
+        to-cyan-50 px-4 py-6
+        text-slate-900 transition-colors
+        dark:from-[#070B14] dark:via-[#0B1120]
+        dark:to-[#070B14] dark:text-white
+        sm:px-6 lg:px-8
+      "
+    >
       {/* BACKGROUND */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute left-[-10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-3xl" />
+        <div
+          className="
+            absolute left-[-10%] top-[-10%]
+            h-[500px] w-[500px] rounded-full
+            bg-cyan-500/10 blur-3xl
+          "
+        />
 
-        <div className="absolute bottom-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-purple-500/10 blur-3xl" />
+        <div
+          className="
+            absolute bottom-[-10%] right-[-10%]
+            h-[500px] w-[500px]  rounded-full
+            bg-purple-500/10 blur-3xl
+          "
+        />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
         {/* HEADER */}
-        <div className="mb-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+        <div
+          className="
+            mb-8 rounded-[2rem]
+            border border-slate-200/70
+            bg-white/80 p-6
+            shadow-xl shadow-slate-200/40
+            backdrop-blur-xl dark:border-white/10
+            dark:bg-white/[0.04] dark:shadow-none
+          "
+        >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="flex items-center gap-3">
-                <Sparkles className="text-cyan-400" />
+                <Sparkles className="text-cyan-500 dark:text-cyan-400" />
 
-                <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">
+                <p
+                  className="
+                    text-sm uppercase tracking-[0.25em]
+                    text-cyan-600 dark:text-cyan-300
+                  "
+                >
                   Candidate Profile
                 </p>
               </div>
 
-              <h1 className="mt-4 text-3xl font-black sm:text-5xl">
+              <h1
+                className="
+                  mt-4 text-3xl font-black text-slate-900
+                  dark:text-white sm:text-5xl
+                "
+              >
                 Build Your Professional Identity
               </h1>
 
-              <p className="mt-3 max-w-2xl text-white/60">
-                Complete your profile to improve job matches and recruiter visibility.
+              <p
+                className="
+                  mt-3 max-w-2xl text-slate-600
+                  dark:text-white/60
+                "
+              >
+                Complete your profile to improve
+                job matches and recruiter
+                visibility.
               </p>
             </div>
 
-            <div className="w-full max-w-md rounded-[2rem] border border-cyan-400/20 bg-cyan-400/10 p-5">
+            <div
+              className="
+                w-full max-w-md rounded-[2rem]
+                border border-cyan-300/40 bg-cyan-500/10
+                p-5 dark:border-cyan-400/20
+              "
+            >
               <div className="flex items-center justify-between">
-                <p className="text-sm uppercase tracking-wider text-cyan-200">
+                <p
+                  className="
+                    text-sm uppercase tracking-wider
+                    text-cyan-700 dark:text-cyan-200
+                  "
+                >
                   Profile Completion
                 </p>
 
-                <p className="text-2xl font-black text-cyan-300">
+                <p
+                  className="
+                    text-2xl font-black text-cyan-700
+                    dark:text-cyan-300
+                  "
+                >
                   {completion}%
                 </p>
               </div>
 
-              <div className="mt-4 h-3 overflow-hidden rounded-full bg-black/30">
+              <div
+                className="
+                  mt-4 h-3 overflow-hidden rounded-full
+                  bg-slate-200 dark:bg-black/30
+                "
+              >
                 <div
                   style={{
                     width: `${completion}%`,
                   }}
-                  className="h-full rounded-full bg-cyan-400 transition-all duration-500"
+                  className="
+                    h-full rounded-full bg-cyan-500
+                    transition-all duration-500
+                  "
                 />
               </div>
             </div>
-          </div>         
+          </div>
         </div>
 
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(
+            onSubmit
+          )}
           className="grid gap-6 xl:grid-cols-[1fr_380px]"
         >
           {/* LEFT */}
           <div className="space-y-6">
             {/* PERSONAL */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:p-6">
-              <h2 className="text-2xl font-bold">
+            <section
+              className="
+                rounded-[2rem]
+                border border-gray-200 dark:border-white/10
+                bg-white dark:bg-white/[0.04] p-6
+                backdrop-blur-xl
+                shadow-sm dark:shadow-none
+              "
+            >
+              <h2
+                className="
+                  text-2xl font-bold
+                  text-zinc-900
+                  dark:text-white
+                "
+              >
                 Personal Information
               </h2>
 
@@ -351,8 +452,22 @@ const completion = useMemo(() => {
             </section>
 
             {/* PROFESSIONAL */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:p-6">
-              <h2 className="text-2xl font-bold">
+            <section
+              className="
+                rounded-[2rem]
+                border border-gray-200 dark:border-white/10
+                bg-white dark:bg-white/[0.04] p-6
+                backdrop-blur-xl
+                shadow-sm dark:shadow-none
+              "
+            >
+              <h2
+                className="
+                  text-2xl font-bold
+                  text-zinc-900
+                  dark:text-white
+                "
+              >
                 Professional Details
               </h2>
 
@@ -369,22 +484,40 @@ const completion = useMemo(() => {
                     maxLength={500}
                     placeholder="Professional bio..."
                     {...register('bio')}
-                    className="min-h-[180px] w-full rounded-[1.5rem] border border-white/10 bg-black/20 p-4 outline-none resize-none"
+                    className="
+                      min-h-[180px] w-full rounded-[1.5rem]
+                      border border-slate-200 bg-slate-50
+                      p-4 text-slate-900 outline-none resize-none
+                      transition placeholder:text-slate-400
+                      focus:border-cyan-400
+                      dark:border-white/10 dark:bg-black/20
+                      dark:text-white
+                      dark:placeholder:text-white/40
+                    "
                   />
 
-                  <div className="mt-2 text-right text-sm text-white/40">
+                  <div
+                    className="
+                      mt-2 text-right text-sm text-slate-500
+                      dark:text-white/40
+                    "
+                  >
                     {bio?.length || 0}/500
                   </div>
                 </div>
-                
+
                 <Controller
                   name="experienceLevel"
                   control={control}
                   render={({ field }) => (
                     <CustomSelect
                       value={field.value}
-                      onValueChange={(value) =>
-                        field.onChange(value)
+                      onValueChange={(
+                        value
+                      ) =>
+                        field.onChange(
+                          value
+                        )
                       }
                       placeholder="Select experience level"
                       options={[
@@ -410,16 +543,31 @@ const completion = useMemo(() => {
                 />
 
                 {errors.experienceLevel && (
-                  <p className="text-sm text-red-400">
-                    Experience level is required
+                  <p className="text-sm text-red-500">
+                    Experience level is
+                    required
                   </p>
                 )}
               </div>
             </section>
 
             {/* SKILLS */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:p-6">
-              <h2 className="text-2xl font-bold">
+            <section
+              className="
+                mt-8 rounded-[2rem]
+                border border-zinc-200
+                bg-white/90 p-6 shadow-sm
+                backdrop-blur-xl dark:border-white/10
+                dark:bg-white/[0.04]
+              "
+            >
+              <h2
+                className="
+                  text-2xl font-bold
+                  text-zinc-900
+                  dark:text-white
+                "
+              >
                 Skills
               </h2>
 
@@ -439,7 +587,11 @@ const completion = useMemo(() => {
                           setSkills(
                             active
                               ? skills.filter(
-                                  (s) => s !== skill
+                                  (
+                                    s
+                                  ) =>
+                                    s !==
+                                    skill
                                 )
                               : [
                                   ...skills,
@@ -447,11 +599,24 @@ const completion = useMemo(() => {
                                 ]
                           );
                         }}
-                        className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                          active
-                            ? 'bg-cyan-400 text-black'
-                            : 'border border-white/10 bg-white/[0.03] text-white/70'
-                        }`}
+                        className={`
+                          rounded-full px-4 py-2 text-sm font-medium
+                          transition-all
+                          ${
+                            active
+                              ? 'bg-cyan-500 text-white'
+                              : `
+                                border border-slate-200
+                                bg-slate-100
+                                text-slate-700
+                                hover:border-cyan-300
+                                hover:bg-cyan-50
+                                dark:border-white/10
+                                dark:bg-white/[0.03]
+                                dark:text-white/70
+                              `
+                          }
+                        `}
                       >
                         {skill}
                       </button>
@@ -465,18 +630,38 @@ const completion = useMemo(() => {
           {/* RIGHT */}
           <div className="space-y-6">
             {/* AVATAR */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:p-6">
-              <h2 className="text-2xl font-bold">
+            <section
+              className="
+                rounded-[2rem]
+                border border-zinc-200 bg-white/90 p-6
+                shadow-sm backdrop-blur-xl
+                dark:border-white/10 dark:bg-white/[0.04]
+              "
+            >
+              <h2
+                className="
+                  text-2xl font-bold
+                  text-zinc-900
+                  dark:text-white
+                "
+              >
                 Profile Photo
               </h2>
 
               <div
                 {...getRootProps()}
-                className="mt-6 flex cursor-pointer flex-col items-center justify-center rounded-[2rem] border border-dashed border-cyan-400/30 bg-black/20 p-8 text-center"
+                className="
+                  mt-6 flex cursor-pointer
+                  flex-col items-center justify-center
+                  rounded-[2rem]
+                  border border-dashed border-cyan-400/30
+                  bg-slate-50 p-8 text-center
+                  transition
+                  hover:bg-cyan-50
+                  dark:bg-black/20
+                "
               >
-                <input
-                  {...getInputProps()}
-                />
+                <input {...getInputProps()} />
 
                 {avatar ? (
                   <Image
@@ -492,10 +677,10 @@ const completion = useMemo(() => {
                   <>
                     <Camera
                       size={40}
-                      className="text-cyan-300"
+                      className="text-cyan-500 dark:text-cyan-300"
                     />
 
-                    <p className="mt-4 text-white/70">
+                    <p className="mt-4 text-slate-600 dark:text-white/70">
                       Upload avatar
                     </p>
                   </>
@@ -504,70 +689,88 @@ const completion = useMemo(() => {
             </section>
 
             {/* LOOKING FOR */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:p-6">
-              <h2 className="text-2xl font-bold">
+            <section
+              className="
+                rounded-[2rem]
+                border border-gray-200 dark:border-white/10
+                bg-white dark:bg-white/[0.04] p-6
+                backdrop-blur-xl
+                shadow-sm dark:shadow-none
+              "
+            >
+              <h2 
+                className="
+                  text-2xl font-bold
+                  text-zinc-900
+                  dark:text-white
+                "
+              >
                 Looking For
               </h2>
 
               <div className="mt-6 space-y-4">
-                <div className="rounded-2xl border border-white/10 bg-black/30 p-4 hover:border-cyan-400/30 transition">
-                  <Checkbox
-                    label="Remote"
-                    checked={watch('lookingFor.remote')}
-                    onCheckedChange={(checked) =>
-                      setValue(
-                        'lookingFor.remote',
+                {[
+                  {
+                    key: 'remote',
+                    label: 'Remote',
+                  },
+                  {
+                    key: 'fullTime',
+                    label: 'Full-Time',
+                  },
+                  {
+                    key: 'contract',
+                    label: 'Contract',
+                  },
+                  {
+                    key: 'internship',
+                    label: 'Internship',
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.key}
+                    className="
+                      rounded-2xl
+                      border border-slate-200
+                      bg-slate-50 p-4
+                      transition hover:border-cyan-300
+                      hover:bg-cyan-50 dark:border-white/10
+                      dark:bg-black/30 dark:hover:border-cyan-400/30
+                    "
+                  >
+                    <Checkbox
+                      label={item.label}
+                      checked={watch(
+                        `lookingFor.${item.key}` as
+                          | 'lookingFor.remote'
+                          | 'lookingFor.fullTime'
+                          | 'lookingFor.contract'
+                          | 'lookingFor.internship'
+                      )}
+                      onCheckedChange={(
                         checked
-                      )
-                    }
-                  />
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-black/30 p-4 hover:border-cyan-400/30 transition">
-                  <Checkbox
-                    label="Full-Time"
-                    checked={watch('lookingFor.fullTime')}
-                    onCheckedChange={(checked) =>
-                      setValue(
-                        'lookingFor.fullTime',
-                        checked
-                      )
-                    }
-                  />
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-black/30 p-4 hover:border-cyan-400/30 transition">
-                  <Checkbox
-                    label="Contract"
-                    checked={watch('lookingFor.contract')}
-                    onCheckedChange={(checked) =>
-                      setValue(
-                        'lookingFor.contract',
-                        checked
-                      )
-                    }
-                  />
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-black/30 p-4 hover:border-cyan-400/30 transition">
-                  <Checkbox
-                    label="Internship"
-                    checked={watch('lookingFor.internship')}
-                    onCheckedChange={(checked) =>
-                      setValue(
-                        'lookingFor.internship',
-                        checked
-                      )
-                    }
-                  />
-                </div>
+                      ) =>
+                        setValue(
+                          `lookingFor.${item.key}` as
+                            | 'lookingFor.remote'
+                            | 'lookingFor.fullTime'
+                            | 'lookingFor.contract'
+                            | 'lookingFor.internship',
+                          checked
+                        )
+                      }
+                    />
+                  </div>
+                ))}
 
                 <Input
                   type="number"
                   placeholder="Minimum Salary"
                   register={register(
                     'lookingFor.salaryMin',
-                    { valueAsNumber: true, }
+                    {
+                      valueAsNumber: true,
+                    }
                   )}
                 />
 
@@ -576,15 +779,29 @@ const completion = useMemo(() => {
                   placeholder="Maximum Salary"
                   register={register(
                     'lookingFor.salaryMax',
-                    { valueAsNumber: true, }
+                    {
+                      valueAsNumber: true,
+                    }
                   )}
                 />
               </div>
             </section>
 
             {/* AUTHORIZATION */}
-            <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:p-6">
-              <h2 className="text-2xl font-bold">
+            <section
+              className="
+                rounded-[2rem]
+                border border-gray-200 dark:border-white/10
+                bg-white dark:bg-white/[0.04] p-6
+                backdrop-blur-xl
+                shadow-sm dark:shadow-none
+              "
+            >
+              <h2 
+                className="
+                  text-2xl font-semibold text-zinc-900 dark:text-white
+                "
+              >
                 Work Authorization
               </h2>
 
@@ -595,19 +812,27 @@ const completion = useMemo(() => {
                   render={({ field }) => (
                     <CustomSelect
                       value={field.value}
-                      onValueChange={field.onChange}
+                      onValueChange={
+                        field.onChange
+                      }
                       options={[
                         {
-                          label: 'Authorized to work',
-                          value: 'Authorized to work',
+                          label:
+                            'Authorized to work',
+                          value:
+                            'Authorized to work',
                         },
                         {
-                          label: 'Requires sponsorship',
-                          value: 'Requires sponsorship',
+                          label:
+                            'Requires sponsorship',
+                          value:
+                            'Requires sponsorship',
                         },
                         {
-                          label: 'Open to relocation',
-                          value: 'Open to relocation',
+                          label:
+                            'Open to relocation',
+                          value:
+                            'Open to relocation',
                         },
                       ]}
                     />
@@ -618,7 +843,13 @@ const completion = useMemo(() => {
 
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-3 rounded-[2rem] bg-cyan-400 px-5 py-4 font-bold text-black transition-all duration-300 hover:scale-[1.02]"
+              className="
+                flex w-full items-center justify-center gap-3
+                rounded-[2rem] bg-cyan-500
+                px-5 py-4 font-bold text-white
+                transition-all duration-300
+                hover:scale-[1.02] hover:bg-cyan-600
+              "
             >
               <Save size={20} />
               Save Changes
@@ -629,12 +860,25 @@ const completion = useMemo(() => {
 
       {showCropper && imageSrc && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-6"
+          className="
+            fixed inset-0 z-50 flex items-center justify-center
+            bg-black/80 p-6
+          "
         >
           <div
-            className="w-full max-w-2xl rounded-[2rem] border border-white/10 bg-[#0B1120] p-6"
+            className="
+              w-full max-w-2xl
+              rounded-[2rem] border border-slate-200
+              bg-white p-6
+              dark:border-white/10 dark:bg-[#0B1120]
+            "
           >
-            <div className="relative h-[400px] w-full overflow-hidden rounded-2xl">
+            <div
+              className="
+                relative h-[400px] w-full
+                overflow-hidden rounded-2xl
+              "
+            >
               <Cropper
                 image={imageSrc}
                 crop={crop}
@@ -673,7 +917,11 @@ const completion = useMemo(() => {
                 onClick={() =>
                   setShowCropper(false)
                 }
-                className="rounded-2xl border border-white/10 px-5 py-3"
+                className="
+                  rounded-2xl border border-slate-200
+                  px-5 py-3 text-slate-700
+                  dark:border-white/10 dark:text-white
+                "
               >
                 Cancel
               </button>
@@ -682,8 +930,8 @@ const completion = useMemo(() => {
                 type="button"
                 onClick={saveCroppedImage}
                 className="
-                  rounded-2xl bg-cyan-400
-                  px-5 py-3 font-bold text-black
+                  rounded-2xl bg-cyan-500
+                  px-5 py-3 font-bold text-white
                 "
               >
                 Save Crop
@@ -693,10 +941,10 @@ const completion = useMemo(() => {
         </div>
       )}
     </main>
-  )
-}
+  );
+};
 
-export default ProfilePage
+export default ProfilePage;
 
 type InputProps = {
   placeholder: string;
@@ -714,7 +962,15 @@ function Input({
       type={type}
       placeholder={placeholder}
       {...register}
-      className="w-full rounded-[1.5rem] border border-white/10 bg-black/20 p-4 outline-none"
+      className="
+        w-full rounded-[1.5rem] border border-slate-200
+        bg-slate-50 p-4 text-slate-900
+        outline-none transition
+        placeholder:text-slate-400 focus:border-cyan-400
+        focus:bg-white dark:border-white/10
+        dark:bg-black/20 dark:text-white
+        dark:placeholder:text-white/40
+      "
     />
   );
 }

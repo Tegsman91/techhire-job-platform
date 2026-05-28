@@ -1,9 +1,23 @@
 'use client';
 
-import { Bell, Trash2, Pencil, Briefcase, } from 'lucide-react';
-import { Controller, useForm, } from 'react-hook-form';
-import { useState, } from 'react';
-import { JobAlert, useJobAlertsStore, } from '@/lib/store';
+import {
+  Bell,
+  Trash2,
+  Pencil,
+  Briefcase,
+} from 'lucide-react';
+
+import {
+  Controller,
+  useForm,
+} from 'react-hook-form';
+
+import { useState } from 'react';
+
+import {
+  JobAlert,
+  useJobAlertsStore,
+} from '@/lib/store';
 
 type FormValues = {
   keywords: string;
@@ -34,7 +48,8 @@ const AlertPage = () => {
     togglePushNotifications,
   } = useJobAlertsStore();
 
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingId, setEditingId] =
+    useState<string | null>(null);
 
   const {
     register,
@@ -53,7 +68,8 @@ const AlertPage = () => {
     },
   });
 
-  const salaryValue = watch('salaryRange');
+  const salaryValue =
+    watch('salaryRange');
 
   const onSubmit = (
     data: FormValues
@@ -65,9 +81,7 @@ const AlertPage = () => {
     } else {
       addAlert({
         id: crypto.randomUUID(),
-
         ...data,
-
         createdAt:
           new Date().toISOString(),
       });
@@ -103,42 +117,130 @@ const AlertPage = () => {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-[#070B14] px-4 py-6 text-white sm:px-6 lg:px-8">
+    <main
+      className="
+        relative min-h-screen overflow-x-hidden
+        bg-[#070B14] text-white
+        dark:bg-[#070B14]
+        dark:text-white
+        bg-zinc-50
+        text-zinc-900
+        px-4 py-6 sm:px-6 lg:px-8
+      "
+    >
       {/* BACKGROUND */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute left-[-10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-3xl" />
+        <div
+          className="
+            absolute left-[-10%] top-[-10%]
+            h-[500px] w-[500px]
+            rounded-full
+            bg-cyan-500/10
+            blur-3xl
+          "
+        />
 
-        <div className="absolute bottom-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-purple-500/5 blur-3xl" />
+        <div
+          className="
+            absolute bottom-[-10%] right-[-10%]
+            h-[500px] w-[500px]
+            rounded-full
+            bg-purple-500/5
+            blur-3xl
+          "
+        />
       </div>
 
       <div className="mx-auto max-w-7xl">
         {/* HERO */}
-        <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl sm:p-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <section
+          className="
+            rounded-[2rem]
+            border border-zinc-200
+            bg-white/90
+            p-6
+            shadow-sm
+            backdrop-blur-xl
+            dark:border-white/10
+            dark:bg-white/[0.04]
+            sm:p-8
+          "
+        >
+          <div
+            className="
+              flex flex-col gap-6
+              lg:flex-row
+              lg:items-center
+              lg:justify-between
+            "
+          >
             <div>
               <div className="flex items-center gap-3">
-                <Bell className="text-cyan-400" />
+                <Bell className="text-cyan-500 dark:text-cyan-400" />
 
-                <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">
+                <p
+                  className="
+                    text-sm uppercase tracking-[0.25em]
+                    text-cyan-600
+                    dark:text-cyan-300
+                  "
+                >
                   Job Alerts
                 </p>
               </div>
 
-              <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">
+              <h1
+                className="
+                  mt-4
+                  text-3xl font-black leading-tight
+                  text-zinc-900
+                  dark:text-white
+                  sm:text-5xl
+                "
+              >
                 Smart Job Notifications
               </h1>
 
-              <p className="mt-4 max-w-2xl text-white/60">
+              <p
+                className="
+                  mt-4 max-w-2xl
+                  text-zinc-600
+                  dark:text-white/60
+                "
+              >
                 Create custom alerts and receive notifications when jobs match your preferences.
               </p>
             </div>
 
-            <div className="w-full rounded-[2rem] border border-cyan-400/20 bg-cyan-400/10 p-6 text-center sm:w-fit sm:min-w-[180px]">
-              <p className="text-sm uppercase tracking-[0.25em] text-cyan-200">
+            <div
+              className="
+                w-full rounded-[2rem]
+                border border-cyan-200
+                bg-cyan-50
+                p-6 text-center
+                shadow-sm
+                dark:border-cyan-400/20
+                dark:bg-cyan-400/10
+                sm:w-fit sm:min-w-[180px]
+              "
+            >
+              <p
+                className="
+                  text-sm uppercase tracking-[0.25em]
+                  text-cyan-700
+                  dark:text-cyan-200
+                "
+              >
                 Active Alerts
               </p>
 
-              <h2 className="mt-3 text-5xl font-black text-cyan-300">
+              <h2
+                className="
+                  mt-3 text-5xl font-black
+                  text-cyan-600
+                  dark:text-cyan-300
+                "
+              >
                 {alerts.length}
               </h2>
             </div>
@@ -146,11 +248,27 @@ const AlertPage = () => {
         </section>
 
         {/* FORM */}
-        <section className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl">
+        <section
+          className="
+            mt-8 rounded-[2rem]
+            border border-zinc-200
+            bg-white/90
+            p-6 shadow-sm
+            backdrop-blur-xl
+            dark:border-white/10
+            dark:bg-white/[0.04]
+          "
+        >
           <div className="flex items-center gap-3">
-            <Briefcase className="text-cyan-400" />
+            <Briefcase className="text-cyan-500 dark:text-cyan-400" />
 
-            <h2 className="text-2xl font-bold">
+            <h2
+              className="
+                text-2xl font-bold
+                text-zinc-900
+                dark:text-white
+              "
+            >
               {editingId
                 ? 'Edit Alert'
                 : 'Create Alert'}
@@ -165,7 +283,13 @@ const AlertPage = () => {
           >
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
               <div>
-                <label className="mb-3 block text-sm font-medium text-white/70">
+                <label
+                  className="
+                    mb-3 block text-sm font-medium
+                    text-zinc-700
+                    dark:text-white/70
+                  "
+                >
                   Job Title / Keywords
                 </label>
 
@@ -174,12 +298,31 @@ const AlertPage = () => {
                     'keywords'
                   )}
                   placeholder="Frontend Engineer"
-                  className="w-full rounded-2xl border border-white/10 bg-black/20 px-5 py-4 outline-none transition focus:border-cyan-400"
+                  className="
+                    w-full rounded-2xl
+                    border border-zinc-200
+                    bg-white
+                    px-5 py-4
+                    text-zinc-900
+                    placeholder:text-zinc-400
+                    outline-none transition
+                    focus:border-cyan-400
+                    dark:border-white/10
+                    dark:bg-black/20
+                    dark:text-white
+                    dark:placeholder:text-white/40
+                  "
                 />
               </div>
 
               <div>
-                <label className="mb-3 block text-sm font-medium text-white/70">
+                <label
+                  className="
+                    mb-3 block text-sm font-medium
+                    text-zinc-700
+                    dark:text-white/70
+                  "
+                >
                   Location
                 </label>
 
@@ -188,14 +331,33 @@ const AlertPage = () => {
                     'location'
                   )}
                   placeholder="Remote or Lagos"
-                  className="w-full rounded-2xl border border-white/10 bg-black/20 px-5 py-4 outline-none transition focus:border-cyan-400"
+                  className="
+                    w-full rounded-2xl
+                    border border-zinc-200
+                    bg-white
+                    px-5 py-4
+                    text-zinc-900
+                    placeholder:text-zinc-400
+                    outline-none transition
+                    focus:border-cyan-400
+                    dark:border-white/10
+                    dark:bg-black/20
+                    dark:text-white
+                    dark:placeholder:text-white/40
+                  "
                 />
               </div>
             </div>
 
             {/* JOB TYPES */}
             <div className="space-y-3">
-              <p className="text-sm font-medium text-white">
+              <p
+                className="
+                  text-sm font-medium
+                  text-zinc-900
+                  dark:text-white
+                "
+              >
                 Job Types
               </p>
 
@@ -203,7 +365,16 @@ const AlertPage = () => {
                 {jobTypeOptions.map((type) => (
                   <label
                     key={type}
-                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/20 px-4 py-3 cursor-pointer"
+                    className="
+                      flex cursor-pointer items-center gap-3
+                      rounded-2xl
+                      border border-zinc-200
+                      bg-white
+                      px-4 py-3
+                      shadow-sm
+                      dark:border-white/10
+                      dark:bg-black/20
+                    "
                   >
                     <input
                       type="checkbox"
@@ -231,7 +402,13 @@ const AlertPage = () => {
                       className="h-4 w-4 accent-cyan-400"
                     />
 
-                    <span className="text-sm text-white">
+                    <span
+                      className="
+                        text-sm
+                        text-zinc-700
+                        dark:text-white
+                      "
+                    >
                       {type}
                     </span>
                   </label>
@@ -242,11 +419,23 @@ const AlertPage = () => {
             {/* SALARY */}
             <div>
               <div className="mb-4 flex items-center justify-between">
-                <label className="text-sm font-medium text-white/70">
+                <label
+                  className="
+                    text-sm font-medium
+                    text-zinc-700
+                    dark:text-white/70
+                  "
+                >
                   Salary Range
                 </label>
 
-                <span className="font-bold text-cyan-300">
+                <span
+                  className="
+                    font-bold
+                    text-cyan-600
+                    dark:text-cyan-300
+                  "
+                >
                   ₦
                   {salaryValue.toLocaleString()}
                 </span>
@@ -264,7 +453,10 @@ const AlertPage = () => {
                     max={5000000}
                     step={100000}
                     {...field}
-                    className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-cyan-400/20"
+                    className="
+                      h-2 w-full cursor-pointer appearance-none rounded-lg
+                      bg-cyan-400/20
+                    "
                   />
                 )}
               />
@@ -272,7 +464,13 @@ const AlertPage = () => {
 
             {/* FREQUENCY */}
             <div>
-              <label className="mb-4 block text-sm font-medium text-white/70">
+              <label
+                className="
+                  mb-4 block text-sm font-medium
+                  text-zinc-700
+                  dark:text-white/70
+                "
+              >
                 Frequency
               </label>
 
@@ -283,7 +481,16 @@ const AlertPage = () => {
                 ].map((freq) => (
                   <label
                     key={freq}
-                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/20 px-5 py-4"
+                    className="
+                      flex items-center gap-3
+                      rounded-2xl
+                      border border-zinc-200
+                      bg-white
+                      px-5 py-4
+                      shadow-sm
+                      dark:border-white/10
+                      dark:bg-black/20
+                    "
                   >
                     <input
                       type="radio"
@@ -293,7 +500,14 @@ const AlertPage = () => {
                       )}
                     />
 
-                    {freq}
+                    <span
+                      className="
+                        text-zinc-700
+                        dark:text-white
+                      "
+                    >
+                      {freq}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -306,17 +520,45 @@ const AlertPage = () => {
                 onClick={
                   toggleEmailNotifications
                 }
-                className={`rounded-[1.5rem] border px-6 py-5 text-left transition-all duration-300 ${
-                  emailNotifications
-                    ? 'border-cyan-400 bg-cyan-400/10'
-                    : 'border-white/10 bg-white/[0.04]'
-                }`}
+                className={`
+                  rounded-[1.5rem]
+                  border px-6 py-5
+                  text-left
+                  transition-all duration-300
+                  ${
+                    emailNotifications
+                      ? `
+                        border-cyan-300
+                        bg-cyan-50
+                        dark:border-cyan-400
+                        dark:bg-cyan-400/10
+                      `
+                      : `
+                        border-zinc-200
+                        bg-white
+                        dark:border-white/10
+                        dark:bg-white/[0.04]
+                      `
+                  }
+                `}
               >
-                <p className="font-bold">
+                <p
+                  className="
+                    font-bold
+                    text-zinc-900
+                    dark:text-white
+                  "
+                >
                   Email Notifications
                 </p>
 
-                <p className="mt-2 text-sm text-white/60">
+                <p
+                  className="
+                    mt-2 text-sm
+                    text-zinc-500
+                    dark:text-white/60
+                  "
+                >
                   {emailNotifications
                     ? 'Enabled'
                     : 'Disabled'}
@@ -328,17 +570,45 @@ const AlertPage = () => {
                 onClick={
                   togglePushNotifications
                 }
-                className={`rounded-[1.5rem] border px-6 py-5 text-left transition-all duration-300 ${
-                  pushNotifications
-                    ? 'border-cyan-400 bg-cyan-400/10'
-                    : 'border-white/10 bg-white/[0.04]'
-                }`}
+                className={`
+                  rounded-[1.5rem]
+                  border px-6 py-5
+                  text-left
+                  transition-all duration-300
+                  ${
+                    pushNotifications
+                      ? `
+                        border-cyan-300
+                        bg-cyan-50
+                        dark:border-cyan-400
+                        dark:bg-cyan-400/10
+                      `
+                      : `
+                        border-zinc-200
+                        bg-white
+                        dark:border-white/10
+                        dark:bg-white/[0.04]
+                      `
+                  }
+                `}
               >
-                <p className="font-bold">
+                <p
+                  className="
+                    font-bold
+                    text-zinc-900
+                    dark:text-white
+                  "
+                >
                   Push Notifications
                 </p>
 
-                <p className="mt-2 text-sm text-white/60">
+                <p
+                  className="
+                    mt-2 text-sm
+                    text-zinc-500
+                    dark:text-white/60
+                  "
+                >
                   {pushNotifications
                     ? 'Enabled'
                     : 'Disabled'}
@@ -349,7 +619,16 @@ const AlertPage = () => {
             {/* BUTTON */}
             <button
               type="submit"
-              className="w-full rounded-[1.5rem] bg-cyan-400 px-6 py-5 font-black text-black transition-all duration-300 hover:scale-[1.01]"
+              className="
+                w-full rounded-[1.5rem]
+                bg-cyan-500
+                px-6 py-5
+                font-black text-white
+                transition-all duration-300
+                hover:scale-[1.01]
+                dark:bg-cyan-400
+                dark:text-black
+              "
             >
               {editingId
                 ? 'Update Alert'
@@ -364,17 +643,44 @@ const AlertPage = () => {
             {alerts.map((alert) => (
               <div
                 key={alert.id}
-                className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl"
+                className="
+                  rounded-[2rem]
+                  border border-zinc-200
+                  bg-white/90
+                  p-6 shadow-sm
+                  backdrop-blur-xl
+                  dark:border-white/10
+                  dark:bg-white/[0.04]
+                "
               >
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div
+                  className="
+                    flex flex-col gap-6
+                    lg:flex-row
+                    lg:items-center
+                    lg:justify-between
+                  "
+                >
                   <div>
-                    <h3 className="text-2xl font-black">
+                    <h3
+                      className="
+                        text-2xl font-black
+                        text-zinc-900
+                        dark:text-white
+                      "
+                    >
                       {
                         alert.keywords
                       }
                     </h3>
 
-                    <p className="mt-2 text-white/60">
+                    <p
+                      className="
+                        mt-2
+                        text-zinc-500
+                        dark:text-white/60
+                      "
+                    >
                       {
                         alert.location
                       }
@@ -385,7 +691,14 @@ const AlertPage = () => {
                         (type) => (
                           <span
                             key={type}
-                            className="rounded-full bg-cyan-400/10 px-4 py-2 text-sm text-cyan-300"
+                            className="
+                              rounded-full
+                              bg-cyan-50
+                              px-4 py-2
+                              text-sm text-cyan-700
+                              dark:bg-cyan-400/10
+                              dark:text-cyan-300
+                            "
                           >
                             {type}
                           </span>
@@ -393,7 +706,13 @@ const AlertPage = () => {
                       )}
                     </div>
 
-                    <p className="mt-5 text-sm text-white/50">
+                    <p
+                      className="
+                        mt-5 text-sm
+                        text-zinc-500
+                        dark:text-white/50
+                      "
+                    >
                       Frequency:{' '}
                       {
                         alert.frequency
@@ -408,10 +727,22 @@ const AlertPage = () => {
                           alert
                         )
                       }
-                      className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-3 transition hover:border-cyan-400/40"
+                      className="
+                        flex items-center gap-2
+                        rounded-2xl
+                        border border-zinc-200
+                        bg-white
+                        px-5 py-3
+                        text-zinc-700
+                        shadow-sm
+                        transition
+                        hover:border-cyan-400/40
+                        dark:border-white/10
+                        dark:bg-white/[0.04]
+                        dark:text-white
+                      "
                     >
                       <Pencil size={18} />
-
                       Edit
                     </button>
 
@@ -421,10 +752,22 @@ const AlertPage = () => {
                           alert.id
                         )
                       }
-                      className="flex items-center gap-2 rounded-2xl border border-red-500/20 bg-red-500/10 px-5 py-3 text-red-300 transition hover:bg-red-500/20"
+                      className="
+                        flex items-center gap-2
+                        rounded-2xl
+                        border border-red-200
+                        bg-red-50
+                        px-5 py-3
+                        text-red-600
+                        transition
+                        hover:bg-red-100
+                        dark:border-red-500/20
+                        dark:bg-red-500/10
+                        dark:text-red-300
+                        dark:hover:bg-red-500/20
+                      "
                     >
                       <Trash2 size={18} />
-
                       Delete
                     </button>
                   </div>
@@ -434,12 +777,34 @@ const AlertPage = () => {
           </div>
 
           {alerts.length === 0 && (
-            <div className="mt-8 rounded-[2rem] border border-dashed border-white/10 bg-white/[0.03] p-10 text-center">
-              <h3 className="text-2xl font-black">
+            <div
+              className="
+                mt-8 rounded-[2rem]
+                border border-dashed border-zinc-300
+                bg-white/80
+                p-10 text-center
+                shadow-sm
+                dark:border-white/10
+                dark:bg-white/[0.03]
+              "
+            >
+              <h3
+                className="
+                  text-2xl font-black
+                  text-zinc-900
+                  dark:text-white
+                "
+              >
                 No alerts created yet
               </h3>
 
-              <p className="mt-3 text-white/60">
+              <p
+                className="
+                  mt-3
+                  text-zinc-500
+                  dark:text-white/60
+                "
+              >
                 Create your first alert to start receiving matching opportunities.
               </p>
             </div>
@@ -447,7 +812,7 @@ const AlertPage = () => {
         </section>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default AlertPage
+export default AlertPage;

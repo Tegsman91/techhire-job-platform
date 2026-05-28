@@ -1,7 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { Reorder } from 'framer-motion';
+import { Reorder, useDragControls } from 'framer-motion';
 import {
   Plus,
   Trash2,
@@ -59,17 +59,31 @@ const CertificationsEditor = ({
     ]);
   };
 
+  const controls = useDragControls();
+
   return (
-    <section className="min-w-0 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
+    <section
+      className="
+        min-w-0 rounded-[2rem] overflow-x-hidden
+        border border-slate-200 bg-white/80
+        p-4 sm:p-5 shadow-sm backdrop-blur-xl
+        dark:border-white/10 dark:bg-white/[0.03]
+        dark:shadow-none
+      "
+    >
       <div className="mb-5 flex items-center justify-between">
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white"
+        >
           Certifications
         </h2>
 
         <button
           type="button"
           onClick={addCertification}
-          className="rounded-xl bg-cyan-400 p-2 text-black"
+          className="
+            rounded-xl bg-cyan-500 p-2
+            text-white transition hover:bg-cyan-600
+          "
         >
           <Plus size={18} />
         </button>
@@ -85,13 +99,45 @@ const CertificationsEditor = ({
           <Reorder.Item
             key={item.id}
             value={item}
-            className="rounded-3xl border border-white/10 bg-black/20 p-5"
+            dragListener={false}
+            dragControls={controls}
+            className="
+              rounded-3xl
+              border border-slate-200
+              bg-slate-50/80 p-5
+              shadow-sm transition
+              touch-pan-y
+              dark:border-white/10
+              dark:bg-black/20
+              dark:shadow-none
+            "
           >
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <GripVertical size={18} />
+                <button
+                  type="button"
+                  onPointerDown={(e) =>
+                    controls.start(e)
+                  }
+                  className="
+                    cursor-grab
+                    touch-none
+                    active:cursor-grabbing
+                  "
+                >
+                  <GripVertical
+                    size={18}
+                    className="text-slate-400 dark:text-white/50"
+                  />
+                </button>
 
-                <p className="font-medium">
+                <p
+                  className="
+                    font-medium
+                    text-slate-700
+                    dark:text-white
+                  "
+                >
                   Certification {index + 1}
                 </p>
               </div>
@@ -105,7 +151,13 @@ const CertificationsEditor = ({
                     )
                   )
                 }
-                className="text-red-400"
+                className="
+                  text-red-500
+                  transition
+                  hover:text-red-600
+                  dark:text-red-400
+                  dark:hover:text-red-300
+                "
               >
                 <Trash2 size={18} />
               </button>
@@ -188,7 +240,19 @@ function Input({
       onChange={(e) =>
         onChange(e.target.value)
       }
-      className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
+      className="
+        w-full rounded-2xl
+        border border-slate-200 bg-white
+        px-4 py-3 text-slate-900
+        outline-none transition
+        placeholder:text-slate-400
+        focus:border-cyan-400
+        focus:bg-white
+        dark:border-white/10
+        dark:bg-black/20
+        dark:text-white
+        dark:placeholder:text-white/40
+      "
     />
   );
 }

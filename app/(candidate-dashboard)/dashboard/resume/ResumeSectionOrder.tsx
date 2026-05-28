@@ -4,6 +4,11 @@ import {
   DndContext,
   closestCenter,
   DragEndEvent,
+  PointerSensor,
+  TouchSensor,
+  MouseSensor,
+  useSensor,
+  useSensors,
 } from '@dnd-kit/core';
 
 import {
@@ -38,29 +43,69 @@ function SortableItem({ id }: { id: string }) {
     <div
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
       className="
-        flex cursor-grab flex-wrap items-center justify-between
-        rounded-2xl border border-white/10
-        bg-white/[0.03] p-4 text-white
+        flex flex-wrap items-center justify-between
+        rounded-2xl
+        border border-slate-200
+        bg-white/80 p-4
+        text-slate-900
+        shadow-sm backdrop-blur-xl
+        touch-pan-y
+        dark:border-white/10
+        dark:bg-white/[0.03]
+        dark:text-white
+        dark:shadow-none
       "
     >
-      <span className="capitalize">
+      <span
+        className="
+          capitalize font-medium
+          text-slate-800 dark:text-white
+        "
+      >
         {id.replaceAll('-', ' ')}
       </span>
 
-      <GripVertical size={18} className="text-white/40" />
+      <GripVertical
+        size={18}
+        {...attributes}
+        {...listeners}
+        className="
+          cursor-grab touch-none
+          text-slate-400
+          dark:text-white/40
+        "
+      />
     </div>
   );
 }
 
-export default function ResumeSectionOrder({
-  sectionOrder,
-  handleDragEnd,
+export default function ResumeSectionOrder({ sectionOrder, handleDragEnd,
 }: Props) {
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 150,
+        tolerance: 8,
+      },
+    }),
+
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    })
+  );
+
   return (
     <DndContext
+      sensors={sensors}
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >

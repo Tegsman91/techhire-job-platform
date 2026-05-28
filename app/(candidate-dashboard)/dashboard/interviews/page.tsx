@@ -75,8 +75,12 @@ const enrichedInterviews: EnrichedInterview[] = interviews.map((interview) => {
 });
 
 const InterviewsPage = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date("2026-04-01T00:00:00.000Z"));
+  const [currentMonth, setCurrentMonth] = useState(
+    new Date("2026-04-01T00:00:00.000Z")
+  );
+
   const [view, setView] = useState<'calendar' | 'list'>('calendar');
+
   const [reminder, setReminder] = useState({
     email: true,
     sms: false,
@@ -100,7 +104,8 @@ const InterviewsPage = () => {
       .filter((i) => new Date(i.date).getTime() > referenceTime)
       .sort(
         (a, b) =>
-          new Date(a.date).getTime() - new Date(b.date).getTime()
+          new Date(a.date).getTime() -
+          new Date(b.date).getTime()
       );
   }, [referenceTime]);
 
@@ -108,40 +113,75 @@ const InterviewsPage = () => {
 
   const countdown = nextInterview
     ? {
-        days: differenceInDays(new Date(nextInterview.date), new Date(referenceTime)),
-        hours: differenceInHours(
+        days: differenceInDays(
           new Date(nextInterview.date),
           new Date(referenceTime)
-        ) % 24,
+        ),
+        hours:
+          differenceInHours(
+            new Date(nextInterview.date),
+            new Date(referenceTime)
+          ) % 24,
       }
     : null;
 
   const hasInterviewOnDate = (date: Date) =>
-  upcomingInterviews.some((i) =>
-    isSameDay(new Date(i.date), date)
-  );
+    upcomingInterviews.some((i) =>
+      isSameDay(new Date(i.date), date)
+    );
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#0A0A0F] text-white px-4 py-8 sm:px-6">
-      <div className="mx-auto max-w-7xl space-y-8">
+    <div
+      className="
+        min-h-screen overflow-x-hidden
+        bg-[#0A0A0F] text-white
+        dark:bg-[#0A0A0F] dark:text-white
+        bg-zinc-50 text-zinc-900 px-4 py-8 sm:px-6
+      "
+    >
+      {/* BACKGROUND */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute left-[-10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-3xl" />
+
+        <div className="absolute bottom-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-purple-500/10 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl space-y-8">
         {/* Header */}
-        <section className="rounded-[2rem] overflow-hidden border border-cyan-500/20 bg-white/[0.04] p-6 sm:p-8 backdrop-blur-2xl">
+        <section
+          className="
+            relative overflow-hidden rounded-[2rem]
+            border border-zinc-200 bg-white/90
+            dark:border-cyan-500/20 dark:bg-white/[0.04]
+            p-6 sm:p-8 backdrop-blur-2xl
+            shadow-sm dark:shadow-none
+          "
+        >
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h1 className="text-3xl font-bold sm:text-4xl">
                 Upcoming Interviews
               </h1>
-              <p className="mt-2 text-gray-400">
+
+              <p className="mt-2 text-zinc-600 dark:text-gray-400">
                 Track schedules, prepare ahead, and never miss a step.
               </p>
             </div>
 
             {countdown && (
-              <div className="rounded-3xl border border-cyan-500/20 bg-cyan-500/10 px-6 py-4">
-                <p className="text-sm text-cyan-300">
+              <div
+                className="
+                  rounded-3xl
+                  border border-cyan-300/40 bg-cyan-500/10
+                  dark:border-cyan-500/20 px-6 py-4
+                "
+              >
+                <p className="text-sm text-cyan-700 dark:text-cyan-300">
                   Next interview in
                 </p>
+
                 <h3 className="text-2xl font-bold">
                   {countdown.days} days {countdown.hours} hours
                 </h3>
@@ -151,38 +191,51 @@ const InterviewsPage = () => {
         </section>
 
         {/* Controls */}
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"
-        >
-          <div className="relative grid w-[180px] grid-cols-2 rounded-2xl bg-white/5 p-1">
-            {/* Sliding background */}
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div
+            className="
+              relative grid w-[180px] grid-cols-2 rounded-2xl
+              bg-zinc-200 dark:bg-white/5
+              p-1
+            "
+          >
             <div
-              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-xl bg-cyan-500 transition-transform duration-300 ease-in-out ${
-                view === 'calendar'
-                  ? 'translate-x-0'
-                  : 'translate-x-full'
-              }`}
+              className={`
+                absolute top-1 bottom-1
+                w-[calc(50%-4px)] rounded-xl bg-cyan-500
+                transition-transform duration-300 ease-in-out
+                ${
+                  view === 'calendar'
+                    ? 'translate-x-0'
+                    : 'translate-x-full'
+                }
+              `}
             />
 
-            {/* Calendar */}
             <button
               onClick={() => setView('calendar')}
-              className={`relative z-10 rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 ${
-                view === 'calendar'
-                  ? 'text-black'
-                  : 'text-gray-400'
-              }`}
+              className={`
+                relative z-10 rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300
+                ${
+                  view === 'calendar'
+                    ? 'text-black'
+                    : 'text-zinc-500 dark:text-gray-400'
+                }
+              `}
             >
               Calendar
             </button>
 
-            {/* List */}
             <button
               onClick={() => setView('list')}
-              className={`relative z-10 rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300 ${
-                view === 'list'
-                  ? 'text-black'
-                  : 'text-gray-400'
-              }`}
+              className={`
+                relative z-10 rounded-xl px-4 py-2 text-sm font-medium transition-colors duration-300
+                ${
+                  view === 'list'
+                    ? 'text-black'
+                    : 'text-zinc-500 dark:text-gray-400'
+                }
+              `}
             >
               List
             </button>
@@ -199,6 +252,7 @@ const InterviewsPage = () => {
                 }))
               }
             />
+
             <ToggleCard
               label="SMS"
               active={reminder.sms}
@@ -214,77 +268,110 @@ const InterviewsPage = () => {
 
         {/* Main Content */}
         {view === 'calendar' ? (
-        <section className="w-full rounded-[2rem] border border-white/10 bg-white/[0.04] p-4 sm:p-6 backdrop-blur-xl">
-          <div className="mb-6 flex items-center justify-between">
-            <button
-              onClick={() => setCurrentMonth(addMonths(currentMonth, -1))}
-              className="rounded-2xl border border-white/10 bg-white/5 p-3"
-            >
-              <ChevronLeft />
-            </button>
+          <section
+            className="
+              w-full rounded-[2rem]
+              border border-zinc-200 bg-white/90
+              dark:border-white/10 dark:bg-white/[0.04]
+              p-4 sm:p-6 backdrop-blur-xl
+              shadow-sm dark:shadow-none
+            "
+          >
+            <div className="mb-6 flex items-center justify-between">
+              <button
+                onClick={() =>
+                  setCurrentMonth(addMonths(currentMonth, -1))
+                }
+                className="
+                  rounded-2xl border
+                  border-zinc-200 bg-zinc-100
+                  dark:border-white/10 dark:bg-white/5
+                  p-3 transition hover:bg-zinc-200
+                  dark:hover:bg-white/10
+                "
+              >
+                <ChevronLeft />
+              </button>
 
-            <h2 className="text-xl font-semibold">
-              {format(currentMonth, 'MMMM yyyy')}
-            </h2>
+              <h2 className="text-xl font-semibold">
+                {format(currentMonth, 'MMMM yyyy')}
+              </h2>
 
-            <button
-              onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-              className="rounded-2xl border border-white/10 bg-white/5 p-3"
-            >
-              <ChevronRight />
-            </button>
-          </div>
+              <button
+                onClick={() =>
+                  setCurrentMonth(addMonths(currentMonth, 1))
+                }
+                className="
+                  rounded-2xl border
+                  border-zinc-200 bg-zinc-100
+                  dark:border-white/10 dark:bg-white/5
+                  p-3 transition hover:bg-zinc-200
+                  dark:hover:bg-white/10
+                "
+              >
+                <ChevronRight />
+              </button>
+            </div>
 
-          <div className="overflow-x-auto">
-            <div className="min-w-[200px]">
-              <div className="w-full">
-                {/* Weekdays */}
-                <div className="grid grid-cols-7 w-full gap-2 mb-4">
-                  {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-                    <div
-                      key={day}
-                      className="flex items-center justify-center rounded-xl py-3 text-sm font-semibold text-gray-400"
-                    >
-                      {day}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Days */}
-                <div className="grid grid-cols-7 w-full gap-2">
-                  {calendarDays.map((day) => {
-                    const active = hasInterviewOnDate(day);
-
-                    return (
+            <div className="overflow-x-auto">
+              <div className="min-w-[200px]">
+                <div className="w-full">
+                  {/* Weekdays */}
+                  <div className="grid grid-cols-7 w-full gap-2 mb-4">
+                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
                       <div
-                        key={day.toISOString()}
-                        className={`
-                          flex h-10 sm:h-20 md:h-24 flex-col justify-between items-center sm:items-start rounded-xl border p-3
-                          ${
-                            active
-                              ? 'border-cyan-400/40 bg-cyan-500/10'
-                              : 'border-white/10 bg-white/[0.02]'
-                          }
-                          ${!isSameMonth(day, currentMonth) ? 'opacity-30' : ''}
-                        `}
+                        key={day}
+                        className="
+                          flex items-center justify-center rounded-xl py-3 text-sm font-semibold
+                          text-zinc-500 dark:text-gray-400
+                        "
                       >
-                        <span className="text-xs sm:text-sm font-semibold">
-                          {format(day, 'd')}
-                        </span>
-
-                        {active && (
-                          <span className="hidden sm:block text-[9px] sm:text-[11px] text-cyan-300">
-                            Interview
-                          </span>
-                        )}
+                        {day}
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
+
+                  {/* Days */}
+                  <div className="grid grid-cols-7 w-full gap-2">
+                    {calendarDays.map((day) => {
+                      const active = hasInterviewOnDate(day);
+
+                      return (
+                        <div
+                          key={day.toISOString()}
+                          className={`
+                            flex h-10 sm:h-20 md:h-24 flex-col justify-between
+                            items-center sm:items-start
+                            rounded-xl border p-3 transition
+                            ${
+                              active
+                                ? 'border-cyan-400/40 bg-cyan-500/10'
+                                : 'border-zinc-200 bg-zinc-100/70 dark:border-white/10 dark:bg-white/[0.02]'
+                            }
+                            ${
+                              !isSameMonth(day, currentMonth)
+                                ? 'opacity-30'
+                                : ''
+                            }
+                          `}
+                        >
+                          <span className="text-xs sm:text-sm font-semibold">
+                            {format(day, 'd')}
+                          </span>
+
+                          {active && (
+                            <span className="hidden sm:block text-[9px] sm:text-[11px] text-cyan-600 dark:text-cyan-300">
+                              Interview
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
         ) : (
           <div className="grid gap-5">
             {upcomingInterviews.map((interview) => (
@@ -297,10 +384,10 @@ const InterviewsPage = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default InterviewsPage
+export default InterviewsPage;
 
 function ToggleCard({
   label,
@@ -314,11 +401,14 @@ function ToggleCard({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 rounded-2xl px-4 py-3 ${
-        active
-          ? 'bg-cyan-500 text-black'
-          : 'bg-white/5 text-gray-300'
-      }`}
+      className={`
+        flex items-center gap-2 rounded-2xl px-4 py-3 transition-all
+        ${
+          active
+            ? 'bg-cyan-500 text-black'
+            : 'bg-zinc-200 text-zinc-700 dark:bg-white/5 dark:text-gray-300'
+        }
+      `}
     >
       <Bell size={16} />
       {label}
@@ -328,7 +418,15 @@ function ToggleCard({
 
 function InterviewCard({ interview }: InterviewCardProps) {
   return (
-    <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl">
+    <div
+      className="
+        rounded-[2rem]
+        border border-zinc-200 bg-white/90
+        dark:border-white/10 dark:bg-white/[0.04]
+        p-5 sm:p-6 backdrop-blur-xl
+        shadow-sm dark:shadow-none
+      "
+    >
       <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
         {/* Left Content */}
         <div className="flex-1">
@@ -336,20 +434,37 @@ function InterviewCard({ interview }: InterviewCardProps) {
             {interview.position}
           </h3>
 
-          <p className="mt-1 text-sm text-gray-400 sm:text-base">
+          <p className="mt-1 text-sm text-zinc-500 dark:text-gray-400 sm:text-base">
             {interview.company}
           </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
-            <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-300 sm:text-sm">
+            <span
+              className="
+                rounded-full bg-cyan-500/10
+                px-3 py-1 text-xs font-medium
+                text-cyan-700 dark:text-cyan-300
+                sm:text-sm
+              "
+            >
               {interview.type}
             </span>
 
-            <span className="rounded-full bg-white/5 px-3 py-1 text-xs sm:text-sm">
+            <span
+              className="
+                rounded-full bg-zinc-100 dark:bg-white/5
+                px-3 py-1 text-xs sm:text-sm
+              "
+            >
               {interview.mode}
             </span>
 
-            <span className="rounded-full bg-white/5 px-3 py-1 text-xs sm:text-sm">
+            <span
+              className="
+                rounded-full bg-zinc-100 dark:bg-white/5
+                px-3 py-1 text-xs sm:text-sm
+              "
+            >
               {format(new Date(interview.date), "PPP p")}
             </span>
           </div>
@@ -357,7 +472,13 @@ function InterviewCard({ interview }: InterviewCardProps) {
 
         {/* Right Actions */}
         <div className="flex w-full flex-col gap-3 sm:w-auto">
-          <button className="w-full rounded-2xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-black sm:w-auto">
+          <button
+            className="
+              w-full rounded-2xl bg-cyan-500
+              px-5 py-3 text-sm font-semibold text-black
+              transition hover:opacity-90 sm:w-auto
+            "
+          >
             {interview.mode === "Video" ? (
               <Video className="mr-2 inline" size={16} />
             ) : interview.mode === "Phone" ? (
@@ -368,7 +489,17 @@ function InterviewCard({ interview }: InterviewCardProps) {
             Join Interview
           </button>
 
-          <button className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm sm:w-auto">
+          <button
+            className="
+              w-full rounded-2xl border
+              border-zinc-200 bg-zinc-100
+              dark:border-white/10 dark:bg-white/5
+              px-5 py-3 text-sm
+              transition hover:bg-zinc-200
+              dark:hover:bg-white/10
+              sm:w-auto
+            "
+          >
             Reschedule
           </button>
         </div>

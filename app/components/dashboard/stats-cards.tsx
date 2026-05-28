@@ -49,28 +49,52 @@ const StatsCards = () => {
             key={stat.title}
             className="
               group relative overflow-hidden rounded-[2rem]
-              border border-white/10
-              bg-white/[0.04]
-              p-5
-              backdrop-blur-xl
-              transition-all duration-500
-              hover:-translate-y-1
-              hover:border-cyan-400/30"
+              border border-zinc-200 bg-white/90
+              p-5 shadow-sm transition-all duration-500
+              hover:-translate-y-1 hover:border-cyan-300
+              hover:shadow-lg dark:border-white/10
+              dark:bg-white/[0.04] dark:backdrop-blur-xl
+              dark:hover:border-cyan-400/30
+            "
           >
-            <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-gradient-to-br from-cyan-500/10 to-purple-500/10" />
+            <div
+              className="
+                absolute inset-0 opacity-0 transition-opacity duration-500
+                group-hover:opacity-100 bg-gradient-to-br
+                from-cyan-500/5 to-purple-500/5
+                dark:from-cyan-500/10 dark:to-purple-500/10
+              "
+            />
 
             <div className="relative z-10">
               <div className="flex items-center justify-between">
-                <p className="text-lg md:text-xs font-bold uppercase tracking-[0.2em] text-white/45">
+                <p
+                  className="
+                    text-lg md:text-xs font-bold uppercase tracking-[0.2em]
+                    text-zinc-500 dark:text-white/45
+                  "
+                >
                   {stat.title}
                 </p>
 
-                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 text-white/60">
+                <div
+                  className="
+                    rounded-xl border border-zinc-200
+                    bg-zinc-50  p-2.5 text-zinc-600
+                    dark:border-white/10 dark:bg-white/[0.03]
+                    dark:text-white/60
+                  "
+                >
                   <Icon size={20} />
                 </div>
               </div>
 
-              <h2 className="mt-8 text-5xl font-black tracking-tight text-white">
+              <h2
+                className="
+                  mt-8 text-5xl font-black tracking-tight
+                  text-zinc-900 dark:text-white
+                "
+              >
                 {stat.value}
               </h2>
             </div>
