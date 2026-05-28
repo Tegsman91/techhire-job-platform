@@ -35,6 +35,17 @@ export type Job = {
   openPositions: number;
 };
 
+export type EmployeeTestimonial = {
+  id: string;
+  name: string;
+  role: string;
+  avatar?: string;
+  rating: number;
+  review: string;
+  employmentType?: string;
+  pros?: string[];
+};
+
 export type Company = {
   id: string;
   name: string;
@@ -54,6 +65,8 @@ export type Company = {
     twitter: string;
     github: string;
   };
+
+  testimonials?: EmployeeTestimonial[];
 };
 
 export type Candidate = {
@@ -339,6 +352,75 @@ export const companies: Company[] = Array.from({ length: 50 }).map((_, i) => ({
     twitter: `https://twitter.com/techcorp${i + 1}`,
     github: `https://github.com/techcorp${i + 1}`,
   },
+  testimonials: [
+    {
+      id: `testimonial-${i + 1}-1`,
+
+      name: "Sarah Johnson",
+
+      role: "Frontend Engineer",
+
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=sarah-${i}`,
+
+      rating: 5,
+
+      review:
+        "Amazing engineering culture with supportive leadership and strong mentorship opportunities.",
+
+      employmentType: "Full-time",
+
+      pros: [
+        "Remote Friendly",
+        "Flexible Hours",
+        "Career Growth",
+      ],
+    },
+
+    {
+      id: `testimonial-${i + 1}-2`,
+
+      name: "David Kim",
+
+      role: "Product Designer",
+
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=david-${i}`,
+
+      rating: 4,
+
+      review:
+        "Great collaboration between design and engineering teams. Fast-paced but rewarding environment.",
+
+      employmentType: "Hybrid",
+
+      pros: [
+        "Collaborative Team",
+        "Inclusive Culture",
+      ],
+    },
+
+    {
+      id: `testimonial-${i + 1}-3`,
+
+      name: "Amara Okafor",
+
+      role: "Backend Engineer",
+
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=amara-${i}`,
+
+      rating: 5,
+
+      review:
+        "Excellent developer experience with modern tools and strong technical standards.",
+
+      employmentType: "Remote",
+
+      pros: [
+        "Modern Stack",
+        "Autonomy",
+        "Learning Budget",
+      ],
+    },
+  ]
 }));
 
 export const createJobs = (seed = defaultSeed): Job[] => {

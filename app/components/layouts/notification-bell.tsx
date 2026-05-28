@@ -24,14 +24,20 @@ const NotificationBell = () => {
           <button
             className="
               relative rounded-full
-              border border-white/10
-              bg-white/5
-              p-3
+              border border-black/10
+              bg-white p-3
               backdrop-blur-xl
-              transition hover:bg-white/10
+              shadow-sm
+              transition hover:bg-gray-100
+              dark:border-white/10
+              dark:bg-white/5
+              dark:hover:bg-white/10
             "
           >
-            <Bell size={18} className="text-white" />
+            <Bell
+              size={18}
+              className="text-slate-700 dark:text-white"
+            />
 
             {unreadCount > 0 && (
               <span
@@ -57,17 +63,23 @@ const NotificationBell = () => {
           <Popover.Content
             sideOffset={12}
             align="end"
-            className="z-50 w-[320px] rounded-2xl border border-white/10 bg-[#0A0A0F] p-4 shadow-2xl
-            data-[state=open]:animate-in
-            data-[state=closed]:animate-out
-            data-[state=closed]:fade-out-0
-            data-[state=open]:fade-in-0
-            data-[state=closed]:zoom-out-95
-            data-[state=open]:zoom-in-95
-            duration-200"
+            className="
+              z-50 w-[320px] rounded-2xl
+              border border-black/10
+              bg-white p-4 shadow-2xl
+              dark:border-white/10
+              dark:bg-[#0A0A0F]
+              data-[state=open]:animate-in
+              data-[state=closed]:animate-out
+              data-[state=closed]:fade-out-0
+              data-[state=open]:fade-in-0
+              data-[state=closed]:zoom-out-95
+              data-[state=open]:zoom-in-95
+              duration-200
+            "
           >
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="font-semibold text-white">
+              <h3 className="font-semibold text-slate-900 dark:text-white">
                 Notifications
               </h3>
 
@@ -83,7 +95,7 @@ const NotificationBell = () => {
 
             <div className="space-y-3">
               {notifications.length === 0 ? (
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-slate-500 dark:text-gray-500">
                   No notifications yet
                 </p>
               ) : (
@@ -107,11 +119,11 @@ const NotificationBell = () => {
                         "
                       />
                     )}
-                    <p className="text-sm font-medium text-white">
+                    <p className="text-sm font-medium text-slate-900 dark:text-white">
                       {notification.company}
                     </p>
 
-                    <p className="mt-1 text-xs text-gray-400">
+                    <p className="mt-1 text-xs text-slate-500 dark:text-gray-400">
                       {notification.message}
                     </p>
                   </div>

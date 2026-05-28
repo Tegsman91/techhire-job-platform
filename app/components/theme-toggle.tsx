@@ -17,13 +17,16 @@ function ThemeToggleInner() {
         )
       }
       className="
-        flex items-center justify-center
-        h-10 w-10 rounded-xl
-        border border-white/10
-        bg-white/5
-        text-white
-        backdrop-blur-xl
-        transition hover:bg-white/10
+        flex h-10 w-10 items-center justify-center
+        rounded-xl border border-black/10
+        bg-white text-slate-700
+        shadow-sm backdrop-blur-xl
+        transition-all duration-300
+        hover:bg-slate-100
+        dark:border-white/10
+        dark:bg-white/5
+        dark:text-white
+        dark:hover:bg-white/10
       "
     >
       {resolvedTheme === 'dark' ? (

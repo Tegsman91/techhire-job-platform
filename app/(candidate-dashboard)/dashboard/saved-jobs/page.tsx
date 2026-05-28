@@ -81,23 +81,64 @@ const SavedJobsPage = () => {
   ]);
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-[#070B14] px-4 py-6 text-white sm:px-6 lg:px-8">
+    <main 
+      className="
+        relative min-h-screen overflow-x-hidden
+        bg-[#F5F7FB]
+        px-4 py-6
+        text-slate-900
+        sm:px-6 lg:px-8
+        dark:bg-[#070B14]
+        dark:text-white
+      "
+    >
       {/* BACKGROUND */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute left-[-10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-3xl" />
+        <div 
+          className="
+            absolute left-[-10%] top-[-10%]
+            h-[500px] w-[500px]
+            rounded-full
+            bg-cyan-500/10 blur-3xl
+            dark:bg-cyan-500/10
+          "
+        />
 
-        <div className="absolute bottom-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-purple-500/10 blur-3xl" />
+        <div 
+          className="
+            absolute bottom-[-10%] right-[-10%]
+            h-[500px] w-[500px]
+            rounded-full
+            bg-purple-500/10 blur-3xl
+            dark:bg-purple-500/10
+          "
+        />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
         {/* HEADER */}
-        <section className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl sm:p-8">
+        <section 
+          className="
+            rounded-[2rem]
+            border border-black/10
+            bg-white/80 p-6 shadow-sm
+            backdrop-blur-xl sm:p-8
+            dark:border-white/10
+            dark:bg-white/[0.04]
+          "
+        >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="flex items-center gap-3">
                 <BookmarkCheck className="text-cyan-400" />
 
-                <p className="text-sm uppercase tracking-[0.25em] text-cyan-300">
+                <p 
+                  className="
+                    text-sm uppercase tracking-[0.25em]
+                    text-cyan-600
+                    dark:text-cyan-300
+                  "
+                >
                   Saved Jobs
                 </p>
               </div>
@@ -106,17 +147,26 @@ const SavedJobsPage = () => {
                 Your Saved Opportunities
               </h1>
 
-              <p className="mt-3 max-w-2xl text-white/60">
+              <p className="mt-3 max-w-2xl text-slate-600 dark:text-white/60">
                 Track jobs you want to apply for and revisit opportunities tailored to your career goals.
               </p>
             </div>
 
-            <div className="w-full rounded-[2rem] border border-cyan-400/20 bg-cyan-400/10 p-5 text-center backdrop-blur-xl sm:w-fit sm:min-w-[180px]">
-              <p className="text-sm uppercase tracking-[0.25em] text-cyan-200">
+            <div 
+              className="
+                w-full rounded-[2rem]
+                border border-cyan-500/20
+                bg-cyan-50  p-5 text-center
+                shadow-sm backdrop-blur-xl
+                sm:w-fit sm:min-w-[180px]
+                dark:bg-cyan-400/10
+              "
+            >
+              <p className="text-sm uppercase text-cyan-700 tracking-[0.25em] dark:text-cyan-200">
                 Total Saved
               </p>
 
-              <h2 className="mt-3 text-5xl font-black text-cyan-300">
+              <h2 className="mt-3 text-5xl font-black text-cyan-600 dark:text-cyan-300">
                 {savedJobs.length}
               </h2>
             </div>
@@ -124,7 +174,16 @@ const SavedJobsPage = () => {
         </section>
 
         {/* FILTERS */}
-        <section className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl sm:p-6">
+        <section 
+          className="
+            mt-8 rounded-[2rem]
+            border border-black/10
+            bg-white/80 p-5
+            shadow-sm backdrop-blur-xl sm:p-6
+            dark:border-white/10
+            dark:bg-white/[0.04]
+          "
+        >
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-3">
               <SlidersHorizontal className="text-cyan-400" />
@@ -213,7 +272,7 @@ const SavedJobsPage = () => {
               No saved jobs yet
             </h2>
 
-            <p className="mt-4 max-w-lg text-white/60">
+            <p className="mt-4 max-w-lg text-slate-600 dark:text-white/60">
               Start exploring opportunities and save jobs to quickly revisit them later.
             </p>
 

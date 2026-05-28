@@ -8,6 +8,7 @@ import JobCard from '@/app/components/jobs/job-card';
 import FollowButton from '@/app/components/company/follow-button';
 import Link from 'next/link';
 import EmployeeReviewsSection from '@/app/components/company/employee-reviews';
+import EmployeeTestimonialCard from '@/app/components/company/employee-testimonial-card';
 
 export async function generateMetadata({
   params,
@@ -259,6 +260,28 @@ const CompanyProfilePage = async ({ params }: CompanyProfileProps) => {
           companyId={company.id}
           reviews={reviews}
         />
+
+        <section
+          className="
+            rounded-[2rem]
+            border border-black/10 dark:border-white/10
+            bg-white dark:bg-white/[0.04]
+            p-6 backdrop-blur-xl
+          "
+        >
+          <h2 className="text-2xl font-bold text-cyan-700 dark:text-cyan-300 tracking-tight">
+            Employee Testimonials
+          </h2>
+
+          <div className="mt-6 grid gap-5 md:grid-cols-2">
+            {company.testimonials?.map((testimonial) => (
+              <EmployeeTestimonialCard
+                key={testimonial.id}
+                testimonial={testimonial}
+              />
+            ))}
+          </div>
+        </section>
 
         <section className="rounded-[2rem]
           border border-black/10 dark:border-white/10

@@ -117,12 +117,6 @@ const EmployeeReviewsSection = ({ companyId, reviews }: Props) => {
           'radial-gradient(circle at top left, rgba(6,182,212,0.16), transparent 35%), radial-gradient(circle at bottom right, rgba(168,85,247,0.14), transparent 40%)',
       }}
     >
-      {/* <div
-        className="
-          absolute inset-0 z-0 pointer-events-none hidden dark:block
-          bg-[radial-gradient(circle_at_top_left,rgba(6,182,212,0.18),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.16),transparent_45%)]
-        "
-      /> */}
 
       <div className="relative z-10 space-y-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -153,6 +147,7 @@ const EmployeeReviewsSection = ({ companyId, reviews }: Props) => {
             <Dialog.Trigger asChild>
               <Button>Write a Review</Button>
             </Dialog.Trigger>
+            
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm overflow-y-auto" />
 
