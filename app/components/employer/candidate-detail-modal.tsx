@@ -420,8 +420,7 @@ const CandidateDetailModal = ({
                       className="
                         w-full rounded-3xl
                         border border-zinc-200 dark:border-white/10
-                        bg-white dark:bg-black/20
-                        p-4
+                        bg-white dark:bg-black/20 p-4
                         text-zinc-900 dark:text-white
                         placeholder:text-zinc-400 dark:placeholder:text-white/40
                         outline-none transition resize-none

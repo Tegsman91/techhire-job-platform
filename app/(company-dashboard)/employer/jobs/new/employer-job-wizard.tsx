@@ -85,6 +85,23 @@ function BulletInput({ value, onChange, placeholder }: BulletInputProps) {
         <input
           value={item}
           onChange={(e) => setItem(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+
+              if (!item.trim()) return;
+
+              onChange([
+                ...(value || []),
+                {
+                  id: nanoid(),
+                  text: item.trim(),
+                },
+              ]);
+
+              setItem('');
+            }
+          }}
           placeholder={placeholder}
           className="w-full rounded-2xl  px-4 py-3 
           border border-zinc-200
@@ -353,8 +370,12 @@ const EmployerJobWizard = () => {
     <main
       className="
         relative z-0 min-h-screen overflow-x-hidden
-        bg-gradient-to-br from-slate-50 via-white to-cyan-50/40
-        text-zinc-900 px-3 py-5 sm:px-6 lg:px-8 dark:bg-[#0A0A0F]
+        bg-gradient-to-br
+        from-slate-50 via-white to-cyan-50/40
+        text-zinc-900
+        px-3 py-5 sm:px-6 lg:px-8
+        dark:bg-[#0A0A0F]
+        dark:bg-none
         dark:text-white
       "
     >
@@ -371,7 +392,7 @@ const EmployerJobWizard = () => {
         <section
           className="
             relative overflow-hidden rounded-[2rem] border border-zinc-200/80 bg-gradient-to-br from-white via-cyan-50/40
-            to-purple-50/30 p-8 sm:p-10
+            to-purple-50/30 p-6 sm:p-8
             shadow-[0_10px_40px_rgba(15,23,42,0.06)]
             dark:border-cyan-500/20 dark:from-white/[0.05]
             dark:via-cyan-500/[0.04] dark:to-purple-500/[0.03]
@@ -616,13 +637,23 @@ const EmployerJobWizard = () => {
                 <Controller 
                   name="responsibilities" 
                   control={control} 
-                  render={({ field }) => <BulletInput {...field} placeholder="Add responsibility" />} 
+                  render={({ field }) => 
+                    <BulletInput 
+                      {...field} 
+                      placeholder="Add responsibility" 
+                    />
+                  } 
                 />
 
                 <Controller 
                   name="requirements" 
                   control={control} 
-                  render={({ field }) => <BulletInput {...field} placeholder="Add requirement" />} 
+                  render={({ field }) => 
+                    <BulletInput 
+                      {...field} 
+                      placeholder="Add requirement" 
+                    />
+                  } 
                 />
               </>
             )}
@@ -698,14 +729,24 @@ const EmployerJobWizard = () => {
                   <input
                     type="date"
                     {...register('deadline')}
-                    className="w-full rounded-2xl px-4 py-3 
-                    border border-zinc-200
-                    bg-white  text-zinc-900
-                    placeholder:text-zinc-400 shadow-sm
-                    dark:border-white/10 dark:bg-black/40
-                    dark:text-white
-                    dark:placeholder:text-white/40
-                    backdrop-blur-xl focus:border-cyan-400/40 focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)] outline-none transition"
+                    className="
+                      w-full rounded-2xl px-4 py-3
+                      border border-zinc-200
+                      bg-white text-zinc-900
+                      placeholder:text-zinc-400
+                      shadow-sm outline-none transition
+                      [color-scheme:light]
+                      dark:border-white/10
+                      dark:bg-[#0F1117]
+                      dark:text-white
+                      dark:placeholder:text-white/40
+                      backdrop-blur-xl
+                      focus:border-cyan-400/40
+                      focus:shadow-[0_0_0_1px_rgba(6,182,212,0.25),0_0_10px_rgba(6,182,212,0.15)]
+                      [&::-webkit-calendar-picker-indicator]:cursor-pointer
+                      [&::-webkit-calendar-picker-indicator]:opacity-80
+                      hover:[&::-webkit-calendar-picker-indicator]:opacity-100
+                    "
                   />
                 </div>
 
@@ -790,14 +831,22 @@ const EmployerJobWizard = () => {
                     Next <ArrowRight size={18} />
                   </button>
                 ) : (
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={handleSubmit(onPublish)}
-                    className="flex items-center justify-center gap-2 
-                    w-full sm:w-auto  rounded-2xl bg-gradient-to-r
-                    from-cyan-500 to-purple-500
-                    px-6 py-3 text-white
-                    shadow-lg hover:opacity-90 transition"
+                    className="
+                      flex items-center justify-center gap-2
+                      w-full sm:w-auto rounded-2xl
+                      px-6 py-3 text-white
+                      transition-all duration-300
+                      bg-gradient-to-r
+                      from-cyan-500 to-purple-500
+                      hover:opacity-90 shadow-lg
+                      dark:from-cyan-600
+                      dark:to-violet-700
+                      dark:shadow-[0_0_20px_rgba(6,182,212,0.18)]
+                      dark:hover:brightness-110
+                    "
                   >
                     Publish Job
                   </button>
@@ -896,7 +945,8 @@ const EmployerJobWizard = () => {
                           className="
                             rounded-full border border-cyan-200
                             bg-cyan-50 px-3 py-1 text-sm text-cyan-700
-                            dark:border-cyan-500/20 dark:bg-cyan-500/10
+                            dark:border-cyan-500/20 
+                            dark:bg-cyan-500/10
                             dark:text-cyan-200
                           "
                         >
@@ -913,7 +963,7 @@ const EmployerJobWizard = () => {
                     Compensation
                   </h3>
 
-                  <p className="text-zinc-900 dark:text-white/90text-lg font-semibold">
+                  <p className="text-zinc-900 dark:text-white/90 text-lg font-semibold">
                     ₦{values.salaryMin?.toLocaleString()} — ₦{values.salaryMax?.toLocaleString()}
                   </p>
                 </section>

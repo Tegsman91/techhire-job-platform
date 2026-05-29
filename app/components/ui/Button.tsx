@@ -35,10 +35,10 @@ const variantStyles: Record<Variant, string> = {
     bg-slate-900 text-white
     hover:bg-slate-800
     hover:shadow-[0_10px_30px_rgba(15,23,42,0.15)]
-    dark:bg-[var(--color-primary)]
+    dark:bg-cyan-400
     dark:text-black
-    dark:hover:shadow-[0_0_20px_rgba(6,182,212,0.45)]
-    dark:shadow-neon
+    dark:hover:bg-cyan-300
+    dark:hover:shadow-[0_0_18px_rgba(6,182,212,0.22)]
   `,
 
   secondary: `
@@ -72,7 +72,6 @@ const variantStyles: Record<Variant, string> = {
     hover:border-cyan-500
     hover:text-cyan-600
     hover:bg-cyan-50
-
     dark:border-white/20
     dark:text-white
     dark:hover:border-cyan-400
@@ -106,26 +105,6 @@ const Button = ({
       disabled={disabled || loading}
       {...props}
     >
-      {/* Animated Glow */}
-      <motion.span
-        className="
-          absolute inset-0 rounded-xl
-          pointer-events-none
-          opacity-0 dark:opacity-0
-        "
-        initial={{ opacity: 0 }}
-        whileHover={disabled || loading ? undefined : { opacity: 1 }}
-        style={{
-          background:
-            "linear-gradient(90deg, #06B6D4, #A855F7, #EC4899, #06B6D4)",
-          backgroundSize: "300% 300%",
-        }}
-        animate={{
-          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-        }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
-
       {/* Content */}
       <span className="relative z-10 flex items-center gap-2">
         {loading ? (

@@ -251,22 +251,123 @@ const ApplicationDashboardPage = () => {
         {/* HERO */}
         <section
           className="
-            rounded-[2rem]
-            border border-zinc-200
-            bg-white/90 p-6
-            shadow-sm
-            backdrop-blur-xl
+            relative overflow-hidden
+            rounded-[2.5rem]
+            border border-zinc-200/70
+            bg-gradient-to-br
+            from-white
+            via-slate-50
+            to-cyan-50/50
+            p-6 sm:p-8 lg:p-8
+            shadow-[0_10px_50px_rgba(15,23,42,0.06)]
+            backdrop-blur-2xl
             dark:border-white/10
-            dark:bg-white/[0.04]
+            dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]
+            dark:from-transparent
+            dark:via-transparent
+            dark:to-transparent
           "
         >
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tight">
-            My Applications
-          </h1>
+          {/* LIGHT MODE GLOW */}
+          <div
+            className="
+              pointer-events-none absolute inset-0
+              bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.10),transparent_35%)]
+              dark:hidden
+            "
+          />
 
-          <p className="mt-3 text-zinc-600 dark:text-white/60">
-            Track your job applications in one place.
-          </p>
+          {/* DARK MODE GLOW */}
+          <div
+            className="
+              pointer-events-none absolute inset-0 hidden dark:block
+              bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.14),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.12),transparent_35%)]
+            "
+          />
+
+          {/* FLOATING BLURS */}
+          <div
+            className="
+              absolute -top-20 right-0
+              h-64 w-64 rounded-full
+              bg-cyan-400/20 blur-3xl
+              dark:bg-cyan-500/10
+            "
+          />
+
+          <div
+            className="
+              absolute -bottom-20 left-0
+              h-64 w-64 rounded-full
+              bg-purple-400/20 blur-3xl
+              dark:bg-purple-500/10
+            "
+          />
+
+          <div className="relative z-10">
+            {/* TOP BADGE */}
+            <div
+              className="
+                inline-flex items-center gap-2
+                rounded-full
+                border border-cyan-200
+                bg-cyan-50
+                px-4 py-1.5
+                text-xs font-semibold
+                uppercase tracking-[0.2em]
+                text-cyan-700
+
+                dark:border-cyan-500/20
+                dark:bg-cyan-500/10
+                dark:text-cyan-300
+              "
+            >
+              Career Tracker
+            </div>
+
+            {/* MAIN CONTENT */}
+            <div
+              className="
+                mt-6 flex flex-col gap-8
+                lg:flex-row lg:items-end lg:justify-between
+              "
+            >
+              <div className="max-w-3xl">
+                <h1
+                  className="
+                    text-4xl font-black tracking-tight
+                    text-zinc-900
+                    sm:text-5xl lg:text-6xl
+                    dark:text-white
+                  "
+                >
+                  Manage Your
+                  <span
+                    className="
+                      block bg-gradient-to-r
+                      from-cyan-500 via-sky-500 to-purple-500
+                      bg-clip-text text-transparent
+                    "
+                  >
+                    Job Applications
+                  </span>
+                </h1>
+
+                <p
+                  className="
+                    mt-5 max-w-2xl
+                    text-base leading-relaxed
+                    text-zinc-600
+                    sm:text-lg
+                    dark:text-white/60
+                  "
+                >
+                  Track application progress, monitor interviews,
+                  and stay organized throughout your hiring journey.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* STATS */}
@@ -306,33 +407,66 @@ const ApplicationDashboardPage = () => {
           />
         </div>
 
-        {/* TABS */}
-        <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() =>
-                setActiveTab(tab)
-              }
-              className={clsx(
-                `
-                  rounded-2xl border
-                  px-4 py-2
-                  text-sm font-medium
-                  transition-all
-                  whitespace-nowrap
-                `,
-                tabStyles[tab],
-                activeTab === tab &&
+        {/* TABS */}     
+        <div
+          className="
+            flex gap-2 overflow-x-auto pb-2
+            no-scrollbar
+          "
+        >
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab;
+
+            return (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={clsx(
                   `
-                    scale-[1.02]
-                    shadow-sm
-                  `
-              )}
-            >
-              {tab}
-            </button>
-          ))}
+                    relative shrink-0
+                    rounded-xl border
+                    px-4 sm:px-5
+                    py-2 sm:py-2.5
+                    text-xs sm:text-sm
+                    font-semibold
+                    whitespace-nowrap
+                    transition-all duration-200
+                  `,
+                  tabStyles[tab],
+
+                  // inactive
+                  !isActive &&
+                    `
+                      opacity-80
+                      hover:opacity-100
+                    `,
+
+                  // active
+                  isActive &&
+                    `
+                      shadow-lg
+                      border-transparent
+                      ring-1 ring-white/10
+                    `
+                )}
+              >
+                {/* active glow */}
+                {isActive && (
+                  <span
+                    className="
+                      absolute inset-0 rounded-xl
+                      bg-white/[0.06]
+                      pointer-events-none
+                    "
+                  />
+                )}
+
+                <span className="relative z-10">
+                  {tab}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
         {/* SORT */}
@@ -579,7 +713,7 @@ function StatCard({
 
       <div className="relative flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-zinc-500 dark:text-white/45">
+          <p className="text-sm uppercase tracking-[0.18em] font-semibold text-zinc-500 dark:text-white/45">
             {label}
           </p>
 

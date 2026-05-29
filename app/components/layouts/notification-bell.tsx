@@ -86,7 +86,8 @@ const NotificationBell = () => {
               <button
                 onClick={markAllAsRead}
                 className="
-                  text-xs text-cyan-400
+                  text-xs dark:text-cyan-400
+                  text-cyan-500
                 "
               >
                 Mark all read
@@ -105,9 +106,13 @@ const NotificationBell = () => {
                     className="
                       relative
                       rounded-xl
-                      border border-white/5
-                      bg-[#101522]
-                      p-3
+                      border border-slate-200
+                      bg-slate-50 p-3
+                      transition-colors
+                      hover:bg-slate-100
+                      dark:border-white/5
+                      dark:bg-[#101522]
+                      dark:hover:bg-[#151B2B]
                     "
                   >
                     {!notification.read && (

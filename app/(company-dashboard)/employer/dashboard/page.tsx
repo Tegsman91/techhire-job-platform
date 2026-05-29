@@ -163,7 +163,19 @@ const EmployerDashboardPage = () => {
     <main className="relative min-h-screen overflow-x-hidden bg-slate-50 text-slate-900 px-3 py-5 sm:px-6 lg:px-8 dark:bg-[#0A0A0F] dark:text-white">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* Header */}
-        <section className="rounded-[2rem] overflow-hidden border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 sm:p-8 backdrop-blur-2xl shadow-[0_10px_40px_rgba(15,23,42,0.06)] dark:border-cyan-500/20 dark:bg-white/[0.03] dark:shadow-[0_0_40px_rgba(6,182,212,0.08)]">
+        <section
+          className="
+            relative overflow-hidden rounded-[2rem]
+            border border-slate-200
+            bg-gradient-to-br from-white to-slate-50
+            p-6 sm:p-8 backdrop-blur-2xl
+            shadow-[0_10px_40px_rgba(15,23,42,0.06)]
+            dark:border-cyan-500/20
+            dark:bg-[#0A0A0F]
+            dark:bg-none
+            dark:shadow-[0_0_40px_rgba(6,182,212,0.08)]
+          "
+        >
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-transparent" />
 
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-cyan-300">

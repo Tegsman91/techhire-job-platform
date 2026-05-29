@@ -733,9 +733,13 @@ const ProfilePage = () => {
                       rounded-2xl
                       border border-slate-200
                       bg-slate-50 p-4
-                      transition hover:border-cyan-300
-                      hover:bg-cyan-50 dark:border-white/10
-                      dark:bg-black/30 dark:hover:border-cyan-400/30
+                      transition-all duration-300
+                      hover:border-cyan-300
+                      hover:bg-cyan-50
+                      dark:border-white/10
+                      dark:bg-black/30
+                      dark:hover:border-cyan-400/20
+                      dark:hover:bg-cyan-500/[0.03]
                     "
                   >
                     <Checkbox
@@ -845,10 +849,21 @@ const ProfilePage = () => {
               type="submit"
               className="
                 flex w-full items-center justify-center gap-3
-                rounded-[2rem] bg-cyan-500
-                px-5 py-4 font-bold text-white
+                rounded-[1.4rem] px-5 py-4
+                font-semibold text-white bg-cyan-600
+                shadow-[0_10px_25px_rgba(6,182,212,0.18)]
                 transition-all duration-300
-                hover:scale-[1.02] hover:bg-cyan-600
+                hover:-translate-y-0.5 hover:bg-cyan-700
+                hover:shadow-[0_14px_30px_rgba(6,182,212,0.22)]
+                active:scale-[0.98]
+                dark:bg-cyan-500 dark:text-black
+                dark:shadow-[0_0_25px_rgba(6,182,212,0.32)]
+                dark:hover:bg-cyan-400
+                dark:hover:shadow-[0_0_35px_rgba(6,182,212,0.45)]
+                focus:outline-none focus:ring-2
+                focus:ring-cyan-400/40
+                focus:ring-offset-2
+                dark:focus:ring-offset-[#0A0A0F]
               "
             >
               <Save size={20} />
@@ -967,7 +982,7 @@ function Input({
         bg-slate-50 p-4 text-slate-900
         outline-none transition
         placeholder:text-slate-400 focus:border-cyan-400
-        focus:bg-white dark:border-white/10
+        dark:border-white/10
         dark:bg-black/20 dark:text-white
         dark:placeholder:text-white/40
       "
