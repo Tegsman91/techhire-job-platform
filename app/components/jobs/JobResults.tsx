@@ -49,6 +49,7 @@ const JobResults = () => {
 
     const qLoc = searchParams.get("loc") || "";
     const qSort = searchParams.get("sort") || "recent";
+    const qCategories = searchParams.getAll("category");
 
     if (qLoc && qLoc !== filters.location) {
       setFilter("location", qLoc);
@@ -56,6 +57,10 @@ const JobResults = () => {
 
     if (qSort && qSort !== filters.sort) {
       setFilter("sort", qSort);
+    }
+
+    if (qCategories.length) {
+      setFilter("category", qCategories);
     }
 
     hydratedRef.current = true;
@@ -66,6 +71,14 @@ const JobResults = () => {
     return jobs.filter((job) => {
       // Job Type
       if (filters.jobType.length && !filters.jobType.includes(job.jobType)) {
+        return false;
+      }
+
+      // Category
+      if (
+        filters.category.length &&
+        !filters.category.includes(job.category)
+      ) {
         return false;
       }
 
@@ -187,6 +200,7 @@ const JobResults = () => {
 
     params.delete("skills");
     params.delete("type");
+    params.delete("category");
     params.delete("employment");
     params.delete("experience");
     params.delete("posted");
@@ -196,6 +210,7 @@ const JobResults = () => {
 
     filters.skills.forEach((s) => params.append("skills", s));
     filters.jobType.forEach((j) => params.append("type", j));
+    filters.category.forEach((c) => params.append("category", c));
     filters.employment.forEach((e) => params.append("employment", e));
     filters.experience.forEach((ex) => params.append("experience", ex));
 
@@ -291,6 +306,11 @@ const JobResults = () => {
               ...filters.jobType.map((item) => ({
                 value: item,
                 type: "jobType" as const,
+              })),
+
+              ...filters.category.map((item) => ({
+                value: item,
+                type: "category" as const,
               })),
 
               ...filters.experience.map((item) => ({

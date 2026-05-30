@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 
 export type Filters = {
   jobType: string[];
+  category: string[];
   experience: string[];
   employment: string[];
   salary: [number, number];
@@ -21,6 +22,7 @@ type JobFilterStore = {
 
 const initialFilters: Filters = {
   jobType: [],
+  category: [],
   experience: [],
   employment: [],
   salary: [0, 50000000],
@@ -463,18 +465,13 @@ export type CompanyProfile = {
   companySize: string;
   foundedYear: string;
   website: string;
-
   about: string;
-
   logo: string | null;
-
   perks: string[];
   techStack: string[];
-
   linkedin: string;
   twitter: string;
   github: string;
-
   gallery: string[];
 };
 
@@ -546,7 +543,7 @@ export const useCompanyProfileStore =
 
 /* ================= RESUME STORE ================= */
 
-  export type ResumeTemplate =
+export type ResumeTemplate =
   | 'modern'
   | 'classic'
   | 'tech'

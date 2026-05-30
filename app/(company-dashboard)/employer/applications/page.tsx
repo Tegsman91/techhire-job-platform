@@ -351,7 +351,7 @@ const EmployerApplicationsPage = () => {
                           className="
                             cursor-grab rounded-3xl
                             border border-zinc-200 dark:border-white/10
-                            bg-white dark:bg-black/30 p-4 sm:p-5
+                            bg-white shadow-xl dark:shadow-none dark:bg-black/30 p-4 sm:p-5
                             transition hover:border-cyan-500/20
                             active:cursor-grabbing
                           "

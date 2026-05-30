@@ -71,6 +71,73 @@ const JobFilters = () => {
         ))}
       </div>
 
+      {/* Category */}
+      <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
+        <p
+          className="
+            text-xs uppercase tracking-wider
+            font-semibold text-[var(--text-secondary)] mb-2
+          "
+        >
+          Category
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          {[
+            "Frontend",
+            "Backend",
+            "Full-Stack",
+            "DevOps",
+            "Data Science",
+            "UI/UX Design",
+          ].map((category) => {
+            const active =
+              filters.category.includes(category);
+
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() =>
+                  toggleArrayValue(
+                    "category",
+                    category
+                  )
+                }
+                className={`
+                  rounded-xl border px-3 py-2
+                  text-xs font-medium transition-all
+
+                  ${
+                    active
+                      ? `
+                          border-cyan-500
+                          bg-cyan-500
+                          text-black
+                          shadow-[0_0_12px_rgba(34,211,238,0.35)]
+                        `
+                      : `
+                          border-black/10
+                          bg-black/[0.03]
+                          text-zinc-700
+                          hover:border-cyan-400/40
+                          hover:bg-cyan-50
+
+                          dark:border-white/10
+                          dark:bg-white/[0.03]
+                          dark:text-white/70
+                          dark:hover:bg-cyan-500/10
+                        `
+                  }
+                `}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Experience */}
       <div className="space-y-3 border-b border-black/10 dark:border-white/5 pb-4">
         <p className="text-xs uppercase tracking-wider font-semibold text-[var(--text-secondary)] mb-2"
